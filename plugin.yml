@@ -1,0 +1,6 @@
+name: WoolTrees
+main: haveric.woolTrees.WoolTrees
+version: 1
+description: >
+             Create wool trees.
+commands:
