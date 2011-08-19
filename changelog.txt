@@ -3,6 +3,8 @@ Version 1.1 (Not released yet)
     TODO: In game commands to adjust percentages.
     anything else I can think of before those get completed..
 
+Version 1.0.2 (8/18/11)
+    Fixed black dye(ink sacs). Bonemeal should now act normally.
 Version 1.0.1 (8/18/11)
     Chance for Multicolored trees to be created.
     Config file to adjust the following (all from 0-100):
