@@ -18,7 +18,6 @@ public class WTPlayerInteract extends PlayerListener{
 		plugin = wt;
 	}
 	
-	
 	public void onPlayerInteract(PlayerInteractEvent event) {
 		Player player = event.getPlayer();
 		
@@ -37,26 +36,27 @@ public class WTPlayerInteract extends PlayerListener{
 				int color = 15-dur;
 				
 				if (color > -1 && color < 15){ // not bonemeal(15) or invalid
-					
 					int woodType = event.getClickedBlock().getData();
 	
 					int blockX = block.getX();
 					int blockY = block.getY();
 					int blockZ = block.getZ();
 					
+					int makeTree = 1+(int)(Math.random()*100);
+					if (makeTree <= plugin.treeSpawnPercentage){
 					
-					
-					int makeTree = (int) (Math.random()*100);
-					if (makeTree < 20){
-					
-						int typeOfTree = (int) (Math.random()*100);
-						if (typeOfTree < 80){
-							makeNormalTree(world,woodType,color,blockX,blockY,blockZ);
-						} else {
-							makeBigTree(world,woodType,color,blockX,blockY,blockZ);
+						int multiColor = 1+(int)(Math.random()*100);
+						if (multiColor <= plugin.multiChance){
+							color = -1;
 						}
-						
+						int typeOfTree = 1+(int)(Math.random()*100);
+						if (typeOfTree <= plugin.bigChance){
+							makeBigTree(world,woodType,color,blockX,blockY,blockZ);
+						} else {
+							makeNormalTree(world,woodType,color,blockX,blockY,blockZ);
+						}
 					}
+					
 					int amt = holding.getAmount();
 					if (amt > 1){
 						holding.setAmount(--amt);
@@ -117,8 +117,11 @@ public class WTPlayerInteract extends PlayerListener{
 	}
 	
 	private void setColoredBlock(Block block, int color){
-		int wool = (int) (Math.random() * 100);
-		if(wool < 90 && block.getType() == Material.AIR){
+		int wool = 1+(int)(Math.random() * 100);
+		if(wool < plugin.woolSpawnPercentage && block.getType() == Material.AIR){
+			if (color == -1){
+				color = (int)(Math.random()*16); // 0-15
+			}
 			block.setType(Material.WOOL);
 			block.setData((byte)color);
 		}
