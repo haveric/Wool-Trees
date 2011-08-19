@@ -35,7 +35,7 @@ public class WTPlayerInteract extends PlayerListener{
 				int dur=holding.getDurability();
 				int color = 15-dur;
 				
-				if (color > -1 && color < 15){ // not bonemeal(15) or invalid
+				if ((color > 0 && color < 16) || color == -1){ // not bonemeal(15) or invalid
 					int woodType = event.getClickedBlock().getData();
 	
 					int blockX = block.getX();
