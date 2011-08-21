@@ -1,2 +1,0 @@
-- woolTrees.plant
-    Allows a user to plant wool trees with dye.
