@@ -14,6 +14,7 @@ PERMISSIONS: --------------------------------------------------------
         </wooltrees,/wt> multi [0-100]  % of trees that become multicolored.
         </wooltrees,/wt> cost  [0+]     Cost to plant a tree. [iConomy]
 
+
 CHANGE LOG:  --------------------------------------------------------
 Version 1.1 (Not released yet)
     TODO: Add checks for normal tree conditions (lighting/height) - May be Optional/Customizable
@@ -28,6 +29,7 @@ Version 1.0.3 (8/21/11)
         
 Version 1.0.2 (8/18/11)
     Fixed black dye(ink sacs). Bonemeal should now act normally.
+    
 Version 1.0.1 (8/18/11)
     Chance for Multicolored trees to be created.
     Config file to adjust the following (all from 0-100):
@@ -35,7 +37,6 @@ Version 1.0.1 (8/18/11)
         Tree Spawn %: Chance of a tree spawning in the first place.
         Wool Spawn %: Chance that each block of wool in the tree will be wool instead of air.
         Multicolored Tree Spawn %: Chance that a tree will be random colors.
-        
         
 Version 1 (8/17/11)
     Created the plugin.
