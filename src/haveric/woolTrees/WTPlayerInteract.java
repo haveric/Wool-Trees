@@ -41,17 +41,22 @@ public class WTPlayerInteract extends PlayerListener{
                 if (holding.getType() == Material.INK_SACK ){
                     int dur=holding.getDurability();
                     color = 15-dur;
+                    if (color == 0){
+                    	canMakeTree = false; // bonemeal
+                    }
                 } else if (holding.getType() == Material.SUGAR){
                     color = 0;
                 }
-                if ((plugin).permissionHandler == null || ((plugin).permissionHandler != null && ((plugin).permissionHandler.has(player, "wooltrees.ignorecost") || (plugin).permissionHandler.has(player, "woolTrees.ignorecost")))){
-                    // no cost
-                } else if ((plugin.iConomy != null && plugin.iConomy.isEnabled() && iConomy.hasAccount(player.getName()) && plugin.cost > 0)){
-                    Holdings balance = iConomy.getAccount(player.getName()).getHoldings();
-                    if (!balance.hasEnough(plugin.cost)){
-                        canMakeTree = false;
-                        player.sendMessage(ChatColor.RED + "Not enough money to plant a wool tree. Need " + plugin.cost);
-                    }
+                if (canMakeTree){
+	                if ((plugin).permissionHandler == null || ((plugin).permissionHandler != null && ((plugin).permissionHandler.has(player, "wooltrees.ignorecost") || (plugin).permissionHandler.has(player, "woolTrees.ignorecost")))){
+	                    // no cost
+	                } else if ((plugin.iConomy != null && plugin.iConomy.isEnabled() && iConomy.hasAccount(player.getName()) && plugin.cost > 0)){
+	                    Holdings balance = iConomy.getAccount(player.getName()).getHoldings();
+	                    if (!balance.hasEnough(plugin.cost)){
+	                        canMakeTree = false;
+	                        player.sendMessage(ChatColor.RED + "Not enough money to plant a wool tree. Need " + plugin.cost);
+	                    }
+	                }
                 }
                 
                 
