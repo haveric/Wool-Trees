@@ -1,4 +1,4 @@
-Wool Trees v1.0.3
+Wool Trees v1.0.4
 
 
 PERMISSIONS: --------------------------------------------------------
@@ -21,6 +21,13 @@ Version 1.1 (Not released yet)
     TODO: "pattern" trees. Pick two colors?  Add a color until it is successful, allowing multiple colors?.. not sure yet.
     anything else I can think of before those get completed..
 
+Version 1.0.4 (8/22/11)
+    Permissions now support camelCase (ex: - woolTrees.plant and - wooltrees.plant both work)
+    New permission:
+        - woolTrees.ignorecost (Allows a user or group to always have free trees)
+    Fixed the hooks for Permissions and iConomy so the plugin works without them as it was intended to.
+        If you don't have iConomy, all trees are free.
+        If you don't have Permissions, in-game commands are disabled so only the op can change variables.
 Version 1.0.3 (8/21/11)
     iConomy support
         -cost variable added to config (initial value of 1000)

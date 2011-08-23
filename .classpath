@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/Ryan/Desktop/Craftbukkit/plugins/Permissions.jar"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/Ryan/Desktop/Craftbukkit/craftbukkit-0.0.1-SNAPSHOT.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Ryan/Desktop/Craftbukkit/plugins/iConomy.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ryan/Desktop/Eclipse build/craftbukkit-0.0.1-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ryan/Desktop/Eclipse build/iConomy.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Ryan/Desktop/Eclipse build/Permissions.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

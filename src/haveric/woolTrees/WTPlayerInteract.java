@@ -1,8 +1,6 @@
 package haveric.woolTrees;
 
 
-import java.awt.Color;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -35,7 +33,7 @@ public class WTPlayerInteract extends PlayerListener{
 		ItemStack holding = player.getItemInHand();
 
 		boolean canMakeTree = true;
-		if((plugin).permissionHandler.has(player, "wooltrees.plant")){
+		if((plugin).permissionHandler == null || ((plugin).permissionHandler != null && ((plugin).permissionHandler.has(player, "wooltrees.plant") || (plugin).permissionHandler.has(player, "woolTrees.plant")))){
 			if (event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getClickedBlock().getType() == Material.SAPLING
 				&& holding.getType() == Material.INK_SACK || holding.getType() == Material.SUGAR){
 				
@@ -46,15 +44,17 @@ public class WTPlayerInteract extends PlayerListener{
 				} else if (holding.getType() == Material.SUGAR){
 					color = 0;
 				}
-
-				if (plugin.iConomy.isEnabled() && iConomy.hasAccount(player.getName()) && plugin.cost > 0){
+				if ((plugin).permissionHandler == null || ((plugin).permissionHandler != null && ((plugin).permissionHandler.has(player, "wooltrees.ignorecost") || (plugin).permissionHandler.has(player, "woolTrees.ignorecost")))){
+					// no cost
+				} else if ((plugin.iConomy != null && plugin.iConomy.isEnabled() && iConomy.hasAccount(player.getName()) && plugin.cost > 0)){
 					Holdings balance = iConomy.getAccount(player.getName()).getHoldings();
 					if (!balance.hasEnough(plugin.cost)){
 						canMakeTree = false;
 						player.sendMessage(ChatColor.RED + "Not enough money to plant a wool tree. Need " + plugin.cost);
 					}
 				}
-
+				
+				
 				if (canMakeTree){
 					// -1 = multi
 					// 0 = sugar = white wool
@@ -80,8 +80,10 @@ public class WTPlayerInteract extends PlayerListener{
 							} else {
 								makeNormalTree(world,woodType,color,blockX,blockY,blockZ);
 							}
-
-							if (plugin.iConomy.isEnabled()){
+							if ((plugin).permissionHandler != null && ((plugin).permissionHandler.has(player, "wooltrees.ignorecost") || (plugin).permissionHandler.has(player, "woolTrees.ignorecost"))){
+								// cost nothing
+							} else if (plugin.iConomy != null && plugin.iConomy.isEnabled()){
+									
 								Holdings balance = iConomy.getAccount(player.getName()).getHoldings();
 								balance.subtract(plugin.cost);
 							}

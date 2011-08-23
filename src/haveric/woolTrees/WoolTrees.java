@@ -10,20 +10,20 @@ import org.bukkit.event.Event;
 import org.bukkit.event.Event.Priority;
 import org.bukkit.event.Event.Type;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.config.Configuration;
 
-import com.nijiko.permissions.PermissionHandler;
-import com.nijikokun.bukkit.Permissions.Permissions;
 
 import com.iConomy.*;
+import com.nijiko.permissions.PermissionHandler;
+import com.nijikokun.bukkit.Permissions.Permissions;
 
 public class WoolTrees extends JavaPlugin{
 	private static final Logger log = Logger.getLogger("Minecraft");
 	private final WTPlayerInteract playerInteract = new WTPlayerInteract(this);
 	
+	// Permissions
 	public PermissionHandler permissionHandler;
 	
 	// Config variables
@@ -69,7 +69,7 @@ public class WoolTrees extends JavaPlugin{
 	}
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args){
-		if(permissionHandler.has((Player)sender, "wooltrees.adjust")){
+		if(permissionHandler != null && (permissionHandler.has((Player)sender, "wooltrees.adjust") || permissionHandler.has((Player)sender, "woolTrees.adjust"))){
 			if (commandLabel.equalsIgnoreCase("wooltrees") || commandLabel.equalsIgnoreCase("wt")){
 				if(args.length == 0 || (args.length == 1 && args[0].equalsIgnoreCase("help"))){
 					sender.sendMessage(ChatColor.DARK_AQUA + "[" + ChatColor.GRAY + "WoolTrees" + ChatColor.DARK_AQUA + "] Command List, [optional]");
