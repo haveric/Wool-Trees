@@ -1,9 +1,11 @@
-Wool Trees v1.0.4
+Wool Trees v1.0.5
 
 
 PERMISSIONS: --------------------------------------------------------
 - woolTrees.plant
     Allows a user to plant wool trees with dye.
+- woolTrees.ignoreCost
+    Allow a user to plant for free no matter what the cost is.
 - woolTrees.adjust
     Allows in-game commands to adjust config values
     Leave the number empty and it will get the current value, otherwise it will set it to the value entered.
@@ -21,6 +23,10 @@ Version 1.1 (Not released yet)
     TODO: "pattern" trees. Pick two colors?  Add a color until it is successful, allowing multiple colors?.. not sure yet.
     anything else I can think of before those get completed..
 
+Version 1.0.5 (8/23/11)
+    Fixed bonemeal again.
+    Permission .ignorecost now works as both (.ignorecost and .ignoreCost)
+    Initial code cleanup.  More will come when I have free time.
 Version 1.0.4 (8/22/11)
     Permissions now support camelCase (ex: - woolTrees.plant and - wooltrees.plant both work)
     New permission:

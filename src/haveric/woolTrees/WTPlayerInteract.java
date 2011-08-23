@@ -14,6 +14,7 @@ import org.bukkit.inventory.ItemStack;
 
 import com.iConomy.iConomy;
 import com.iConomy.system.Holdings;
+import com.nijiko.permissions.PermissionHandler;
 
 public class WTPlayerInteract extends PlayerListener{
 
@@ -26,82 +27,80 @@ public class WTPlayerInteract extends PlayerListener{
     public void onPlayerInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
 
-        Inventory playerInventory = player.getInventory();
+        Inventory inventory = player.getInventory();
         World world = player.getWorld();
         Block block = event.getClickedBlock();
 
         ItemStack holding = player.getItemInHand();
+        
+        PermissionHandler permHandler = null;
+        boolean permsEnabled = (plugin).permHandler != null;
+        if (permsEnabled){
+        	permHandler = (plugin).permHandler;
+        }
+        
+        boolean iconEnabled = plugin.iConomy != null && plugin.iConomy.isEnabled() && iConomy.hasAccount(player.getName()) && plugin.cost > 0;
+        Holdings balance = null;
+        
+        
+        if(!permsEnabled || (permsEnabled && (permHandler.has(player, "wooltrees.plant") || permHandler.has(player, "woolTrees.plant")))){
+            if (event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getClickedBlock().getType() == Material.SAPLING){
 
-        boolean canMakeTree = true;
-        if((plugin).permissionHandler == null || ((plugin).permissionHandler != null && ((plugin).permissionHandler.has(player, "wooltrees.plant") || (plugin).permissionHandler.has(player, "woolTrees.plant")))){
-            if (event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getClickedBlock().getType() == Material.SAPLING
-                && holding.getType() == Material.INK_SACK || holding.getType() == Material.SUGAR){
-                
+                if (iconEnabled){
+                	balance = iConomy.getAccount(player.getName()).getHoldings();
+                	if (!permsEnabled || (permsEnabled && (permHandler.has(player, "wooltrees.ignorecost") || permHandler.has(player, "woolTrees.ignorecost")
+                									    || permHandler.has(player, "wooltrees.ignoreCost") || permHandler.has(player, "woolTrees.ignoreCost")))){
+                		iconEnabled = false; // doesn't cost anything so we don't need icon.
+                	} else if (!balance.hasEnough(plugin.cost)){
+                		player.sendMessage(ChatColor.RED + "Not enough money to plant a wool tree. Need " + plugin.cost);
+                		return;
+                	}
+                }
                 int color = 0;
                 if (holding.getType() == Material.INK_SACK ){
                     int dur=holding.getDurability();
-                    color = 15-dur;
-                    if (color == 0){
-                    	canMakeTree = false; // bonemeal
+                    if (dur == 15){
+                    	return; // bonemeal should do nothing!
+                    } else {
+                    	color = 15-dur;
                     }
                 } else if (holding.getType() == Material.SUGAR){
                     color = 0;
-                }
-                if (canMakeTree){
-	                if ((plugin).permissionHandler == null || ((plugin).permissionHandler != null && ((plugin).permissionHandler.has(player, "wooltrees.ignorecost") || (plugin).permissionHandler.has(player, "woolTrees.ignorecost")))){
-	                    // no cost
-	                } else if ((plugin.iConomy != null && plugin.iConomy.isEnabled() && iConomy.hasAccount(player.getName()) && plugin.cost > 0)){
-	                    Holdings balance = iConomy.getAccount(player.getName()).getHoldings();
-	                    if (!balance.hasEnough(plugin.cost)){
-	                        canMakeTree = false;
-	                        player.sendMessage(ChatColor.RED + "Not enough money to plant a wool tree. Need " + plugin.cost);
-	                    }
-	                }
+                } else {
+                	return; // Any other items should not work.
                 }
                 
+                if (random(100) <= plugin.multiChance){
+                	color = -1;
+                }
                 
-                if (canMakeTree){
-                    // -1 = multi
-                    // 0 = sugar = white wool
-                    // 1-15 = normal colors
-                    if ((color > -1 && color < 16) || color == -1){
-                        int woodType = event.getClickedBlock().getData();
+                // -1 = multi
+                // 0 = sugar = white wool
+                // 1-15 = normal colors
+                if (color > -2 && color < 16){
+                    if (random(100) <= plugin.treeSpawnPercentage){
+                    	int woodType = event.getClickedBlock().getData();
 
-                        int makeTree = 1+(int)(Math.random()*100);
-                        if (makeTree <= plugin.treeSpawnPercentage){
+                        int blockX = block.getX();
+                        int blockY = block.getY();
+                        int blockZ = block.getZ();
 
-                            int blockX = block.getX();
-                            int blockY = block.getY();
-                            int blockZ = block.getZ();
-
-                            int multiColor = 1+(int)(Math.random()*100);
-                            if (multiColor <= plugin.multiChance){
-                                color = -1;
-                            }
-
-                            int typeOfTree = 1+(int)(Math.random()*100);
-                            if (typeOfTree <= plugin.bigChance){
-                                makeBigTree(world,woodType,color,blockX,blockY,blockZ);
-                            } else {
-                                makeNormalTree(world,woodType,color,blockX,blockY,blockZ);
-                            }
-                            if ((plugin).permissionHandler != null && ((plugin).permissionHandler.has(player, "wooltrees.ignorecost") || (plugin).permissionHandler.has(player, "woolTrees.ignorecost"))){
-                                // cost nothing
-                            } else if (plugin.iConomy != null && plugin.iConomy.isEnabled()){
-                                    
-                                Holdings balance = iConomy.getAccount(player.getName()).getHoldings();
-                                balance.subtract(plugin.cost);
-                            }
+                        if (random(100) <= plugin.bigChance){
+                            makeBigTree(world,woodType,color,blockX,blockY,blockZ);
+                        } else {
+                            makeNormalTree(world,woodType,color,blockX,blockY,blockZ);
+                        }
+                        if (iconEnabled){
+                            balance.subtract(plugin.cost);
                         }
                     }
-
-                    // Removes one item from your hand 
-                    int amt = holding.getAmount();
-                    if (amt > 1){
-                        holding.setAmount(--amt);
-                    } else {
-                        playerInventory.remove(holding);
-                    }
+                }
+                // Remove item from hand
+                int amt = holding.getAmount();
+                if (amt > 1){
+                    holding.setAmount(--amt);
+                } else {
+                    inventory.remove(holding);
                 }
             }
         }
@@ -165,10 +164,15 @@ public class WTPlayerInteract extends PlayerListener{
             block.setData((byte)color);
         }
     }
+    
     private void setLog(Block block, int type){
         if(block.getType() == Material.AIR || block.getType() == Material.SAPLING){
             block.setType(Material.LOG);
             block.setData((byte)type);
         }
+    }
+    
+    private int random(int num){
+    	return 1+(int)(Math.random()*num);
     }
 }
