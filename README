@@ -1,5 +1,5 @@
-Wool Trees v1.0.5
-
+Wool Trees v1.1
+PLUGIN REQUIREMENTS: Vault
 
 PERMISSIONS: --------------------------------------------------------
 - woolTrees.plant
@@ -9,20 +9,29 @@ PERMISSIONS: --------------------------------------------------------
 - woolTrees.adjust
     Allows in-game commands to adjust config values
     Leave the number empty and it will get the current value, otherwise it will set it to the value entered.
-        </wooltrees,/wt,/wt help>       Brings up the help menu with the commands.
-        </wooltrees,/wt> tree  [0-100]  % of a wool tree spawning.
-        </wooltrees,/wt> wool  [0-100]  % of wool blocks not replaced with air.
-        </wooltrees,/wt> big   [0-100]  % of trees that become big trees.
-        </wooltrees,/wt> multi [0-100]  % of trees that become multicolored.
-        </wooltrees,/wt> cost  [0+]     Cost to plant a tree. [iConomy]
+        </wooltrees,/wt,/wt help>       	Brings up the help menu with the commands.
+        </wooltrees,/wt> tree  [0-100]  	% of a wool tree spawning.
+        </wooltrees,/wt> wool  [0-100]  	% of wool blocks not replaced with air.
+        </wooltrees,/wt> big   [0-100]  	% of trees that become big trees.
+        </wooltrees,/wt> cost  [0+]     	Cost to plant a tree.
+        </wooltrees,/wt> check [true,false] Height Check. (Checks if the trunk is blocked)
+        </wooltrees,/wt> light [0-15] 		Light Level needed for a tree to spawn.
 
+TODO:
+	+ Integrate with actual tree creation
 
 CHANGE LOG:  --------------------------------------------------------
-Version 1.1 (Not released yet)
-    TODO: Add checks for normal tree conditions (lighting/height) - May be Optional/Customizable
-    TODO: "pattern" trees. Pick two colors?  Add a color until it is successful, allowing multiple colors?.. not sure yet.
-    anything else I can think of before those get completed..
-
+Version 1.1 (12/12/11)
+	* Updated to use Vault for permissions and economy
+	+ Added optional check for block height (6 for normal trees, 9 for large)
+	+ Added check for light level (0-15)
+	+ Added "pattern" trees. Add multiple colors to a sapling to create multicolored trees
+	/ Altered fully random "multicolored" trees.  Now are created with three specific colors. 
+	- Removed versions folders from jar file.. no wonder they were so big
+	 
+Version 1.0.6 (9/29/11)
+    Op should now have adjust perms always.
+    Support for more economy plugins(Register): Tested with iConomy 5, others that should work: iConomy 6, BOSEconomy, Essentials, and Multiple Currency
 Version 1.0.5 (8/23/11)
     Fixed bonemeal again.
     Permission .ignorecost now works as both (.ignorecost and .ignoreCost)

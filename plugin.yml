@@ -1,6 +1,6 @@
 name: WoolTrees
 main: haveric.woolTrees.WoolTrees
-version: 1.0.5
+version: 1.1
 description: >
              Create wool trees by dyeing saplings.
 commands:
