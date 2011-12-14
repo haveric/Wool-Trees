@@ -1,4 +1,4 @@
-Wool Trees v1.1
+Wool Trees v1.1.1
 PLUGIN REQUIREMENTS: Vault (http://dev.bukkit.org/server-mods/vault/)
 
 PERMISSIONS: --------------------------------------------------------
@@ -21,14 +21,18 @@ TODO:
 	+ Integrate with actual tree creation
 
 CHANGE LOG:  --------------------------------------------------------
+Version 1.1.1 (12/14/11)
+	* Fixed dependency on Vault
+	* Fixed a case when econ was null and still trying to withdraw money
+
 Version 1.1 (12/12/11)
 	* Updated to use Vault for permissions and economy
 	+ Added optional check for block height (6 for normal trees, 9 for large)
 	+ Added check for light level (0-15)
 	+ Added "pattern" trees. Add multiple colors to a sapling to create multicolored trees
-	/ Altered fully random "multicolored" trees.  Now are created with three specific colors. 
+	/ Altered fully random "multicolored" trees.  Now are created with three specific colors.
 	- Removed versions folders from jar file.. no wonder they were so big
-	 
+
 Version 1.0.6 (9/29/11)
     Op should now have adjust perms always.
     Support for more economy plugins(Register): Tested with iConomy 5, others that should work: iConomy 6, BOSEconomy, Essentials, and Multiple Currency
@@ -48,10 +52,10 @@ Version 1.0.3 (8/21/11)
         -cost variable added to config (initial value of 1000)
     Added in-game commands
     White wool trees are now possible with sugar (don't ask how sugar makes wool..)
-        
+
 Version 1.0.2 (8/18/11)
     Fixed black dye(ink sacs). Bonemeal should now act normally.
-    
+
 Version 1.0.1 (8/18/11)
     Chance for Multicolored trees to be created.
     Config file to adjust the following (all from 0-100):
@@ -59,8 +63,7 @@ Version 1.0.1 (8/18/11)
         Tree Spawn %: Chance of a tree spawning in the first place.
         Wool Spawn %: Chance that each block of wool in the tree will be wool instead of air.
         Multicolored Tree Spawn %: Chance that a tree will be random colors.
-        
+
 Version 1 (8/17/11)
     Created the plugin.
     Supports the use of Permissions
-    
