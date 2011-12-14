@@ -58,6 +58,8 @@ public class WTPlayerInteract extends PlayerListener{
                 		player.sendMessage(ChatColor.RED + "Not enough money to plant a wool tree. Need " + plugin.cost);
                 		return;
                 	}
+                } else {
+                	currencyEnabled = false;
                 }
                 int color = 0;
                 if (holding.getType() == Material.INK_SACK ){
