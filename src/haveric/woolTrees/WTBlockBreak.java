@@ -23,7 +23,7 @@ public class WTBlockBreak extends BlockListener{
 	    	int bY = block.getY();
 	    	int bZ = block.getZ();
 	    	
-        	if (plugin.patternConfig.get(world.getName()+":"+bX+","+bY+","+bZ) != null){
+        	if (plugin.getPatternConfig(world.getName()+":"+bX+","+bY+","+bZ) != null){
         		plugin.setPatternConfig(world.getName()+":"+bX+","+bY+","+bZ, null);
         	}
 	    }

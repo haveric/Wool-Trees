@@ -23,12 +23,12 @@ public class WTPlayerInteract extends PlayerListener{
     public static WoolTrees plugin;
 
     public WTPlayerInteract(WoolTrees wt) {
-        plugin = wt;
+        plugin = wt;       
     }
 
     public void onPlayerInteract(PlayerInteractEvent event) {
-    	Permission perm = plugin.perm;
-    	Economy econ = plugin.econ;
+    	Permission perm = plugin.getPerm();
+    	Economy econ = plugin.getEcon();
         Player player = event.getPlayer();
         
         Inventory inventory = player.getInventory();
@@ -38,7 +38,7 @@ public class WTPlayerInteract extends PlayerListener{
         ItemStack holding = player.getItemInHand();
         
         boolean currencyEnabled = true;
-        if(perm == null || (perm != null && (perm.has(player, "wooltrees.plant") || perm.has(player, "woolTrees.plant")))){
+        if(perm == null || (perm != null && (perm.has(player, plugin.permPlant) || perm.has(player, plugin.permPlantAlt)))){
             if (event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getClickedBlock().getType() == Material.SAPLING){
             	
                 int blockX = block.getX();
@@ -46,16 +46,16 @@ public class WTPlayerInteract extends PlayerListener{
                 int blockZ = block.getZ();
                 
 
-            	if (world.getBlockAt(blockX, blockY+1, blockZ).getLightLevel() < plugin.lightLevel){
+            	if (world.getBlockAt(blockX, blockY+1, blockZ).getLightLevel() < plugin.getConfigLight()){
             		player.sendMessage(ChatColor.RED + "The block above the sapling is too dark.");
             		return;
             	}
                 if (econ != null){
-                	if (perm == null || (perm != null && (perm.has(player, "wooltrees.ignorecost") || perm.has(player, "woolTrees.ignorecost")
-                									    || perm.has(player, "wooltrees.ignoreCost") || perm.has(player, "woolTrees.ignoreCost")))){
+                	if (perm == null || (perm != null && (perm.has(player, plugin.permIC) || perm.has(player, plugin.permICAlt)
+                									    || perm.has(player, plugin.permICAlt2) || perm.has(player, plugin.permICAlt3)))){
                 		currencyEnabled = false; // doesn't cost anything so we don't need economy.
-                	} else if (!econ.has(player.getName(), plugin.cost)){
-                		player.sendMessage(ChatColor.RED + "Not enough money to plant a wool tree. Need " + plugin.cost);
+                	} else if (!econ.has(player.getName(), plugin.getConfigCost())){
+                		player.sendMessage(ChatColor.RED + "Not enough money to plant a wool tree. Need " + plugin.getConfigCost());
                 		return;
                 	}
                 } else {
@@ -75,7 +75,7 @@ public class WTPlayerInteract extends PlayerListener{
                 	return; // Any other items should not work.
                 }
                 
-                boolean bigTree = (random(100) <= plugin.bigChance);
+                boolean bigTree = (random(100) <= plugin.getConfigBig());
                 
 
                 // colors
@@ -84,11 +84,11 @@ public class WTPlayerInteract extends PlayerListener{
                 // 1-15 = normal colors
 
                 // if not blocked
-                if (!plugin.heightCheck || (bigTree && !treeBlocked(world,player, blockX,blockY,blockZ, 10)) 
+                if (!plugin.getConfigHeight() || (bigTree && !treeBlocked(world,player, blockX,blockY,blockZ, 10)) 
             		|| (!bigTree && !treeBlocked(world,player, blockX,blockY,blockZ, 6))) {
 
                 	// if a tree will spawn
-	                if (random(100) <= plugin.treeSpawnPercentage){
+	                if (random(100) <= plugin.getConfigTree()){
 	                	int woodType = event.getClickedBlock().getData();
 	                	
 	
@@ -103,7 +103,7 @@ public class WTPlayerInteract extends PlayerListener{
 	                	plugin.setPatternConfig(world.getName()+":"+blockX+","+blockY+","+blockZ, null);
 	                	
 	                	if (currencyEnabled){
-	                    	econ.withdrawPlayer(player.getName(), plugin.cost);
+	                    	econ.withdrawPlayer(player.getName(), plugin.getConfigCost());
 	                    }
 	                	
 	                    // Remove item from hand
@@ -131,7 +131,7 @@ public class WTPlayerInteract extends PlayerListener{
     }    
     
     private void addPattern(World w, int color, int blockX, int blockY, int blockZ){
-    	String colors = plugin.patternConfig.getString(w.getName()+":"+blockX+","+blockY+","+blockZ);
+    	String colors = plugin.getPatternConfig(w.getName()+":"+blockX+","+blockY+","+blockZ);
     	
     	if (colors != null && !colors.contains("("+color + ")")){
     		colors += "(" + color + ")";
@@ -155,7 +155,7 @@ public class WTPlayerInteract extends PlayerListener{
     }
     
     private void makeNormalTree(World w, int wood, int x, int y, int z){
-    	String colors = plugin.patternConfig.getString(w.getName()+":"+x+","+y+","+z);
+    	String colors = plugin.getPatternConfig(w.getName()+":"+x+","+y+","+z);
     	ArrayList<Integer> colorArray = new ArrayList<Integer>();
     	for(int i = -2; i <= 15; i ++){
     		if (colors.contains("(" + i + ")")){
@@ -185,7 +185,7 @@ public class WTPlayerInteract extends PlayerListener{
     }
     
     private void makeBigTree(World w, int wood, int x, int y, int z){
-    	String colors = plugin.patternConfig.getString(w.getName()+":"+x+","+y+","+z);
+    	String colors = plugin.getPatternConfig(w.getName()+":"+x+","+y+","+z);
     	ArrayList<Integer> colorArray = new ArrayList<Integer>();
     	for(int i = -2; i <= 15; i ++){
     		if (colors.contains("(" + i + ")")){
@@ -222,7 +222,7 @@ public class WTPlayerInteract extends PlayerListener{
 
     private void setColoredBlock(Block block, int color){
         int wool = 1+(int)(Math.random() * 100);
-        if(wool < plugin.woolSpawnPercentage && block.getType() == Material.AIR){
+        if(wool < plugin.getConfigWool() && block.getType() == Material.AIR){
             if (color == -1){
                 color = (int)(Math.random()*16); // 0-15
             }

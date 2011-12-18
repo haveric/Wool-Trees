@@ -18,7 +18,7 @@ public class WTStructureGrow extends WorldListener{
     	int bZ = event.getLocation().getBlockZ();
     	World world = event.getWorld();
     	
-    	if (plugin.patternConfig.get(world.getName()+":"+bX+","+bY+","+bZ) != null){
+    	if (plugin.getPatternConfig(world.getName()+":"+bX+","+bY+","+bZ) != null){
     		plugin.setPatternConfig(world.getName()+":"+bX+","+bY+","+bZ, null);
     	}
     }
