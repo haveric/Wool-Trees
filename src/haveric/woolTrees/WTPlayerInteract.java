@@ -38,7 +38,7 @@ public class WTPlayerInteract extends PlayerListener{
         ItemStack holding = player.getItemInHand();
         
         boolean currencyEnabled = true;
-        if(perm == null || (perm != null && (perm.has(player, plugin.permPlant) || perm.has(player, plugin.permPlantAlt)))){
+        if(perm == null || perm.has(player, plugin.permPlant) || perm.has(player, plugin.permPlantAlt)){
             if (event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getClickedBlock().getType() == Material.SAPLING){
             	
                 int blockX = block.getX();
@@ -50,17 +50,15 @@ public class WTPlayerInteract extends PlayerListener{
             		player.sendMessage(ChatColor.RED + "The block above the sapling is too dark.");
             		return;
             	}
-                if (econ != null){
-                	if (perm == null || (perm != null && (perm.has(player, plugin.permIC) || perm.has(player, plugin.permICAlt)
-                									    || perm.has(player, plugin.permICAlt2) || perm.has(player, plugin.permICAlt3)))){
-                		currencyEnabled = false; // doesn't cost anything so we don't need economy.
-                	} else if (!econ.has(player.getName(), plugin.getConfigCost())){
-                		player.sendMessage(ChatColor.RED + "Not enough money to plant a wool tree. Need " + plugin.getConfigCost());
-                		return;
-                	}
-                } else {
-                	currencyEnabled = false;
-                }
+            	
+            	if (econ == null || perm == null || perm.has(player, plugin.permIC) || perm.has(player, plugin.permICAlt)
+            					 || perm.has(player, plugin.permICAlt2) || perm.has(player, plugin.permICAlt3)){
+            		currencyEnabled = false; // doesn't cost anything so we don't need economy.
+            	} else if (!econ.has(player.getName(), plugin.getConfigCost())){
+            		player.sendMessage(ChatColor.RED + "Not enough money to plant a wool tree. Need " + plugin.getConfigCost());
+            		return;
+            	}
+                
                 int color = 0;
                 if (holding.getType() == Material.INK_SACK ){
                     int dur=holding.getDurability();

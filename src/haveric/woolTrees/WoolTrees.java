@@ -73,14 +73,14 @@ public class WoolTrees extends JavaPlugin{
     private String cfgLight  = "Light Level";
     //private String cfgPattern;
     
-    public static final double TREE_DEFAULT = 20.0;
-    public static final double WOOL_DEFAULT = 90.0;
-    public static final double BIG_DEFAULT = 10.0;
-    public static final double COST_DEFAULT = 1000.0;
-    public static final boolean HEIGHT_CHECK_DEFAULT = true;
-    public static final int LIGHT_LEVEL_DEFAULT = 9;
+    private static final double TREE_DEFAULT = 20.0;
+    private static final double WOOL_DEFAULT = 90.0;
+    private static final double BIG_DEFAULT = 10.0;
+    private static final double COST_DEFAULT = 1000.0;
+    private static final boolean HEIGHT_CHECK_DEFAULT = true;
+    private static final int LIGHT_LEVEL_DEFAULT = 9;
 
-    public static final boolean PATTERN_TREES_DEFAULT = true;
+    private static final boolean PATTERN_TREES_DEFAULT = true;
     
     
     @Override
