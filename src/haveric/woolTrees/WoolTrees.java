@@ -13,7 +13,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Event;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -85,13 +84,13 @@ public class WoolTrees extends JavaPlugin{
     
     @Override
     public void onEnable(){
-        PluginManager pm = getServer().getPluginManager();
-        pm.registerEvent(Event.Type.PLAYER_INTERACT, playerInteract, Event.Priority.Normal, this);
-        pm.registerEvent(Event.Type.BLOCK_BREAK, blockBreak, Event.Priority.Normal, this);
-        pm.registerEvent(Event.Type.STRUCTURE_GROW, structureGrow, Event.Priority.Normal, this);
-        
-
-        // create a new config file
+    	PluginManager pm = getServer().getPluginManager();
+    	pm.registerEvents(playerInteract, this);
+    	pm.registerEvents(blockBreak, this);
+    	pm.registerEvents(structureGrow, this);
+    	
+    	
+    	// create a new config file
         configFile = new File(getDataFolder() + "/config.yml");
         patternConfigFile = new File(getDataFolder() + "/patterns.yml");
         

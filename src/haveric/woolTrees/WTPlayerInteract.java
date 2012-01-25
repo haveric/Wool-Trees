@@ -11,21 +11,23 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerListener;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 
-public class WTPlayerInteract extends PlayerListener{
+public class WTPlayerInteract implements Listener{
 
     public static WoolTrees plugin;
 
     public WTPlayerInteract(WoolTrees wt) {
-        plugin = wt;       
+        plugin = wt;
     }
-
+    
+    @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
     	Permission perm = plugin.getPerm();
     	Economy econ = plugin.getEcon();

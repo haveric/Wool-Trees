@@ -1,10 +1,11 @@
 package haveric.woolTrees;
 
 import org.bukkit.World;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.world.StructureGrowEvent;
-import org.bukkit.event.world.WorldListener;
 
-public class WTStructureGrow extends WorldListener{
+public class WTStructureGrow implements Listener{
 
     public static WoolTrees plugin;
 
@@ -12,6 +13,7 @@ public class WTStructureGrow extends WorldListener{
         plugin = wt;
     }
     
+    @EventHandler
     public void onStructureGrow(StructureGrowEvent event){
     	int bX = event.getLocation().getBlockX();
     	int bY = event.getLocation().getBlockY();

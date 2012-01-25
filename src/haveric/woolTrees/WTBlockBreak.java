@@ -3,10 +3,11 @@ package haveric.woolTrees;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockListener;
 
-public class WTBlockBreak extends BlockListener{
+public class WTBlockBreak implements Listener{
 
     public static WoolTrees plugin;
 
@@ -14,6 +15,7 @@ public class WTBlockBreak extends BlockListener{
         plugin = wt;
     }
     
+    @EventHandler
     public void onBlockBreak(BlockBreakEvent event){
     	Block block = event.getBlock();   	
     	World world = block.getWorld();
