@@ -70,7 +70,7 @@ public class WoolTrees extends JavaPlugin{
     private String cfgCost   = "Cost to plant";
     private String cfgHeight = "Height Check";
     private String cfgLight  = "Light Level";
-    //private String cfgPattern;
+    //private String cfgPattern = "Pattern Trees";
     
     private static final double TREE_DEFAULT = 20.0;
     private static final double WOOL_DEFAULT = 90.0;
@@ -79,7 +79,7 @@ public class WoolTrees extends JavaPlugin{
     private static final boolean HEIGHT_CHECK_DEFAULT = true;
     private static final int LIGHT_LEVEL_DEFAULT = 9;
 
-    private static final boolean PATTERN_TREES_DEFAULT = true;
+    //private static final boolean PATTERN_TREES_DEFAULT = true;
     
     
     @Override
@@ -110,7 +110,8 @@ public class WoolTrees extends JavaPlugin{
     
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args){
     	ChatColor msgColor = ChatColor.DARK_AQUA;
-    	
+    	ChatColor valColor = ChatColor.GOLD; // TODO: display get values in messages instead of commands
+    	ChatColor defColor = ChatColor.WHITE; 
     	String wtTitle = msgColor + "[" + ChatColor.GRAY + "WoolTrees" + msgColor + "] ";
     	
         if(sender.isOp() || (perm != null && (perm.has((Player)sender, permAdjust) || perm.has((Player)sender, permAdjustAlt)))){
@@ -118,46 +119,14 @@ public class WoolTrees extends JavaPlugin{
             	
             	
                 if(args.length == 0 || (args.length == 1 && args[0].equalsIgnoreCase(cmdHelp))){
-                    sender.sendMessage(wtTitle + "Command List, [optional]");
-                    sender.sendMessage("/" + cmdMain + " " + cmdTree  + " [0-100] - " + msgColor + "% of a wool tree spawning.");
-                    sender.sendMessage("/" + cmdMain + " " + cmdWool  + " [0-100] - " + msgColor + "% of wool blocks not replaced with air.");
-                    sender.sendMessage("/" + cmdMain + " " + cmdBig   + " [0-100] - " + msgColor + "% of trees that become big trees.");
-                    sender.sendMessage("/" + cmdMain + " " + cmdCost  + " [0+] - " + msgColor + "Cost to plant a tree.");
-                    sender.sendMessage("/" + cmdMain + " " + cmdCheck + " [true,false] - " + msgColor + "Height Check.");
-                    sender.sendMessage("/" + cmdMain + " " + cmdLight + " [0-15] - " + msgColor + "Light Level.");
-                } else if (args.length == 1){
-                    String msg = "";
-                    String val = "";
-                    
-                    if (args[0].equalsIgnoreCase(cmdTree)){
-                        msg = "Tree Spawn % is ";
-                        val += config.get(cfgTree);
-                    } else if (args[0].equalsIgnoreCase(cmdWool)){
-                        msg = "Wool Spawn % is ";
-                        val += config.get(cfgWool);
-                    } else if (args[0].equalsIgnoreCase(cmdBig)){
-                        msg = "Big Tree Spawn % is ";
-                        val += config.get(cfgBig);
-                    } else if (args[0].equalsIgnoreCase(cmdCost)){
-                        msg = "Cost to plant a tree is ";
-                        val += config.get(cfgCost);
-                    } else if (args[0].equalsIgnoreCase(cmdCheck)){
-                    	msg = "Height Check: ";
-                    	val += config.get(cfgHeight);
-                    } else if (args[0].equalsIgnoreCase(cmdLight)){
-                    	msg = "Light Level: ";
-                    	val += config.get(cfgLight);
-                    }
-                    
-                    try {
-            			config.save(configFile);
-            		} catch (IOException e) {
-            			e.printStackTrace();
-            		}
-                    
-                    if (msg != ""){
-                        sender.sendMessage(wtTitle + ChatColor.WHITE + msg + msgColor + val);
-                    }
+                    sender.sendMessage(wtTitle + "github.com/haveric/wool-trees - v" + getDescription().getVersion());
+                    sender.sendMessage("/" + cmdMain + " " + cmdTree  + " [0-100] (" + valColor + config.get(cfgTree) + defColor + ") - " + msgColor + "% of a wool tree spawning.");
+                    sender.sendMessage("/" + cmdMain + " " + cmdWool  + " [0-100] (" + valColor + config.get(cfgWool) + defColor + ") - " + msgColor + "% wool blocks kept.");
+                    sender.sendMessage("/" + cmdMain + " " + cmdBig   + " [0-100] (" + valColor + config.get(cfgBig) + defColor + ") - " + msgColor + "% big trees.");
+                    sender.sendMessage("/" + cmdMain + " " + cmdCost  + " [0+] ("    + valColor + config.get(cfgCost) + defColor + ") - " + msgColor + "Cost to plant a tree.");
+                    sender.sendMessage("/" + cmdMain + " " + cmdCheck + " [true,false] (" + valColor + config.get(cfgHeight) + defColor + ") - " + msgColor + "Height Check.");
+                    sender.sendMessage("/" + cmdMain + " " + cmdLight + " [0-15] ("  + valColor + config.get(cfgLight) + defColor + ") - " + msgColor + "Light Level.");
+                
                 } else if (args.length == 2){
                 	Double val;
                     String msg = "";
@@ -323,7 +292,15 @@ public class WoolTrees extends JavaPlugin{
         } else {
         	config.set(cfgLight, lightLevel);
         }
-        
+        /* TODO: Reconfigure WTPlayerInteract for this
+        boolean patternTrees = config.getBoolean(cfgPattern, PATTERN_TREES_DEFAULT);
+        if (patternTrees != true && patternTrees != false){
+        	config.set(cfgPattern, PATTERN_TREES_DEFAULT);
+        	log.info(warn+"Pattern trees not true or false. Defaulting to true");
+        } else {
+        	config.set(cfgPattern, patternTrees);
+        }
+        */
         try {
 			config.save(configFile);
 		} catch (IOException e) {
