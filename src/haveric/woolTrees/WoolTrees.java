@@ -70,7 +70,7 @@ public class WoolTrees extends JavaPlugin{
     private String cfgCost   = "Cost to plant";
     private String cfgHeight = "Height Check";
     private String cfgLight  = "Light Level";
-    //private String cfgPattern = "Pattern Trees";
+    private String cfgPattern = "Pattern Trees";
     
     private static final double TREE_DEFAULT = 20.0;
     private static final double WOOL_DEFAULT = 90.0;
@@ -78,8 +78,7 @@ public class WoolTrees extends JavaPlugin{
     private static final double COST_DEFAULT = 1000.0;
     private static final boolean HEIGHT_CHECK_DEFAULT = true;
     private static final int LIGHT_LEVEL_DEFAULT = 9;
-
-    //private static final boolean PATTERN_TREES_DEFAULT = true;
+    private static final boolean PATTERN_TREES_DEFAULT = true;
     
     
     @Override
@@ -212,7 +211,7 @@ public class WoolTrees extends JavaPlugin{
         return false;
     }
 
-    public void setupVault() {       
+    private void setupVault() {       
         RegisteredServiceProvider<Permission> permProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.permission.Permission.class);
         if (permProvider != null) {
             perm = permProvider.getProvider();
@@ -292,7 +291,7 @@ public class WoolTrees extends JavaPlugin{
         } else {
         	config.set(cfgLight, lightLevel);
         }
-        /* TODO: Reconfigure WTPlayerInteract for this
+        
         boolean patternTrees = config.getBoolean(cfgPattern, PATTERN_TREES_DEFAULT);
         if (patternTrees != true && patternTrees != false){
         	config.set(cfgPattern, PATTERN_TREES_DEFAULT);
@@ -300,7 +299,7 @@ public class WoolTrees extends JavaPlugin{
         } else {
         	config.set(cfgPattern, patternTrees);
         }
-        */
+        
         try {
 			config.save(configFile);
 		} catch (IOException e) {
@@ -363,7 +362,6 @@ public class WoolTrees extends JavaPlugin{
     }
     
     public boolean getConfigPattern(){
-    	// TODO: implement
-    	return false;
+    	return config.getBoolean(cfgPattern);
     }
 }

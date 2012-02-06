@@ -15,8 +15,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 
 
 public class WTPlayerInteract implements Listener{
@@ -33,7 +33,7 @@ public class WTPlayerInteract implements Listener{
     	Economy econ = plugin.getEcon();
         Player player = event.getPlayer();
 
-        Inventory inventory = player.getInventory();
+        PlayerInventory inventory = player.getInventory();
         World world = player.getWorld();
         Block block = event.getClickedBlock();
 
@@ -41,6 +41,7 @@ public class WTPlayerInteract implements Listener{
 
         boolean currencyEnabled = true;
 
+        boolean patternsEnabled = plugin.getConfigPattern();
 
         if(perm == null || perm.has(player, plugin.permPlant) || perm.has(player, plugin.permPlantAlt)){
             if (event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getClickedBlock().getType() == Material.SAPLING){
@@ -94,18 +95,19 @@ public class WTPlayerInteract implements Listener{
 	                if (random(100) <= plugin.getConfigTree()){
 	                	int woodType = event.getClickedBlock().getData();
 
-	                	// TODO: if patterns enabled
-	                	addPattern(world, color, blockX, blockY, blockZ);
-
+	                	if (patternsEnabled){
+	                		addPattern(world, color, blockX, blockY, blockZ);
+	                	}
+	                	
 	                	if (bigTree){
 	                		makeBigTree(world,woodType,blockX,blockY,blockZ);
 	                	} else {
 	                		makeNormalTree(world,woodType,blockX,blockY,blockZ);
 	                	}
 
-	                	// TODO: if patterns enabled
-	                	plugin.setPatternConfig(world.getName()+":"+blockX+","+blockY+","+blockZ, null);
-
+	                	if (patternsEnabled){
+	                		plugin.setPatternConfig(world.getName()+":"+blockX+","+blockY+","+blockZ, null);
+	                	}
 	                	if (currencyEnabled){
 	                    	econ.withdrawPlayer(player.getName(), plugin.getConfigCost());
 	                    }
@@ -116,7 +118,7 @@ public class WTPlayerInteract implements Listener{
 	                    if (amt > 1){
 	                        holding.setAmount(--amt);
 	                    } else {
-	                        inventory.remove(holding);
+	                    	inventory.setItemInHand(null);
 	                    }
 
 	                } else {
@@ -127,7 +129,7 @@ public class WTPlayerInteract implements Listener{
 	                    if (amt > 1){
 	                        holding.setAmount(--amt);
 	                    } else {
-	                        inventory.remove(holding);
+	                    	inventory.setItemInHand(null);
 	                    }
 	            	}
                 }
