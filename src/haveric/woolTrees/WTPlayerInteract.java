@@ -56,9 +56,8 @@ public class WTPlayerInteract implements Listener{
             		return;
             	}
 
-            	// TODO: Is the check for perm == null correct?
-            	if (econ == null || perm == null || perm.has(player, plugin.permIC) || perm.has(player, plugin.permICAlt)
-            					 || perm.has(player, plugin.permICAlt2) || perm.has(player, plugin.permICAlt3)){
+            	if (econ == null || (perm != null && (perm.has(player, plugin.permIC) || perm.has(player, plugin.permICAlt)
+            					 || perm.has(player, plugin.permICAlt2) || perm.has(player, plugin.permICAlt3)))){
             		currencyEnabled = false; // doesn't cost anything so we don't need economy.
             	} else if (!econ.has(player.getName(), plugin.getConfigCost())){
             		player.sendMessage(ChatColor.RED + "Not enough money to plant a wool tree. Need " + plugin.getConfigCost());
@@ -100,9 +99,9 @@ public class WTPlayerInteract implements Listener{
 	                	}
 	                	
 	                	if (bigTree){
-	                		makeBigTree(world,woodType,blockX,blockY,blockZ);
+	                		makeBigTree(world, woodType, color, blockX, blockY, blockZ, null, -1);
 	                	} else {
-	                		makeNormalTree(world,woodType,blockX,blockY,blockZ);
+	                		makeNormalTree(world, woodType, color, blockX, blockY, blockZ, null, -1);
 	                	}
 
 	                	if (patternsEnabled){
@@ -161,19 +160,25 @@ public class WTPlayerInteract implements Listener{
         return blocked;
     }
 
-    private void makeNormalTree(World w, int wood, int x, int y, int z){
-    	// TODO: if patterns enabled
-    	String colors = plugin.getPatternConfig(w.getName()+":"+x+","+y+","+z);
-
-    	ArrayList<Integer> colorArray = new ArrayList<Integer>();
-
-    	// TODO: if patterns enabled
-    	for(int i = -2; i <= 15; i ++){
-    		if (colors.contains("(" + i + ")")){
-    			colorArray.add(i);
-    		}
+    public static void makeNormalTree(World w, int wood, int color, int x, int y, int z, ArrayList<Integer> colorArray, double leaves){
+    	if (colorArray == null){
+	    	colorArray = new ArrayList<Integer>();
+	    	
+	    	// if patterns enabled
+	    	if (plugin.getConfigPattern()){
+	    		String colors = plugin.getPatternConfig(w.getName()+":"+x+","+y+","+z);
+	    	
+	    		
+	
+		    	for(int i = -2; i <= 15; i ++){
+		    		if (colors.contains("(" + i + ")")){
+		    			colorArray.add(i);
+		    		}
+		    	}
+	    	} else {
+	    		colorArray.add(color);
+	    	}
     	}
-
     	for (int i = 0; i < 6; i ++){
             setLog(w.getBlockAt(x,y+i,z),wood);
         }
@@ -184,27 +189,35 @@ public class WTPlayerInteract implements Listener{
                 if (i == 0 && j == 0){
                     // trunk is here
                 } else {
-                    setColoredBlock(w.getBlockAt(x+i, y+3, z+j),getRandomColor(colorArray));
-                    setColoredBlock(w.getBlockAt(x+i, y+4, z+j),getRandomColor(colorArray));
+                    setColoredBlock(w.getBlockAt(x+i, y+3, z+j),getRandomColor(colorArray), leaves);
+                    setColoredBlock(w.getBlockAt(x+i, y+4, z+j),getRandomColor(colorArray), leaves);
                     // TODO: restructure to be an else if?
                     if (i != 2 && i != -2 && j != 2 && j != -2){
-                        setColoredBlock(w.getBlockAt(x+i,y+5,z+j),getRandomColor(colorArray));
+                        setColoredBlock(w.getBlockAt(x+i,y+5,z+j),getRandomColor(colorArray), leaves);
                     }
                 }
             }
         }
-        setColoredBlock(w.getBlockAt(x,y+6,z),getRandomColor(colorArray));
+        setColoredBlock(w.getBlockAt(x,y+6,z),getRandomColor(colorArray), leaves);
     }
 
-    private void makeBigTree(World w, int wood, int x, int y, int z){
-    	String colors = plugin.getPatternConfig(w.getName()+":"+x+","+y+","+z);
-    	ArrayList<Integer> colorArray = new ArrayList<Integer>();
-    	for(int i = -2; i <= 15; i ++){
-    		if (colors.contains("(" + i + ")")){
-    			colorArray.add(i);
-    		}
+    public static void makeBigTree(World w, int wood, int color, int x, int y, int z, ArrayList<Integer> colorArray, double leaves){
+    	if (colorArray == null){
+	    	colorArray = new ArrayList<Integer>();
+	    	
+	    	// if patterns enabled
+	    	if (plugin.getConfigPattern()){
+		    	String colors = plugin.getPatternConfig(w.getName()+":"+x+","+y+","+z);
+		    	
+		    	for(int i = -2; i <= 15; i ++){
+		    		if (colors.contains("(" + i + ")")){
+		    			colorArray.add(i);
+		    		}
+		    	}
+	    	} else {
+	    		colorArray.add(color);
+	    	}
     	}
-
         for (int i = 0; i < 10; i ++){
             setLog(w.getBlockAt(x,y+i,z),wood);
         }
@@ -213,19 +226,19 @@ public class WTPlayerInteract implements Listener{
                 if (i == 0 && j == 0){
                     // trunk is here
                 } else {
-                    setColoredBlock(w.getBlockAt(x+i, y+6, z+j),getRandomColor(colorArray));
-                    setColoredBlock(w.getBlockAt(x+i, y+7, z+j),getRandomColor(colorArray));
-                    setColoredBlock(w.getBlockAt(x+i, y+8, z+j),getRandomColor(colorArray));
+                    setColoredBlock(w.getBlockAt(x+i, y+6, z+j),getRandomColor(colorArray), leaves);
+                    setColoredBlock(w.getBlockAt(x+i, y+7, z+j),getRandomColor(colorArray), leaves);
+                    setColoredBlock(w.getBlockAt(x+i, y+8, z+j),getRandomColor(colorArray), leaves);
                     // TODO: structure into an else if?
                     if ((i == 2 && j == 2) || (i == 2 && j == -2) || (i == -2 && j == 2) || (i == -2 && j == -2)){
                         // 5x5 corners
                     } else {
-                        setColoredBlock(w.getBlockAt(x+i,y+5,z+j),getRandomColor(colorArray));
-                        setColoredBlock(w.getBlockAt(x+i,y+9,z+j),getRandomColor(colorArray));
+                        setColoredBlock(w.getBlockAt(x+i,y+5,z+j),getRandomColor(colorArray), leaves);
+                        setColoredBlock(w.getBlockAt(x+i,y+9,z+j),getRandomColor(colorArray), leaves);
                     }
                     if (i != 2 && i != -2 && j != 2 && j != -2){ // 3x3
-                        setColoredBlock(w.getBlockAt(x+i,y+4,z+j),getRandomColor(colorArray));
-                        setColoredBlock(w.getBlockAt(x+i,y+10,z+j),getRandomColor(colorArray));
+                        setColoredBlock(w.getBlockAt(x+i,y+4,z+j),getRandomColor(colorArray), leaves);
+                        setColoredBlock(w.getBlockAt(x+i,y+10,z+j),getRandomColor(colorArray), leaves);
                     }
                 }
             }
@@ -233,10 +246,17 @@ public class WTPlayerInteract implements Listener{
     }
 
 
-    private void setColoredBlock(Block block, int color){
-        int wool = 1+(int)(Math.random() * 100); // TODO: is there a reason i'm not calling helper method random()?
-
-        if(wool < plugin.getConfigWool() && block.getType() == Material.AIR){
+    private static void setColoredBlock(Block block, int color, double leaves){
+        int wool = random(100);
+        if (leaves == -1){
+	        if(wool < plugin.getConfigWool() && block.getType() == Material.AIR){
+	            if (color == -1){
+	                color = (int)(Math.random()*16); // 0-15
+	            }
+	            block.setType(Material.WOOL);
+	            block.setData((byte)color);
+	        }
+        } else if (wool < leaves && block.getType() == Material.AIR){
             if (color == -1){
                 color = (int)(Math.random()*16); // 0-15
             }
@@ -245,19 +265,23 @@ public class WTPlayerInteract implements Listener{
         }
     }
 
-    private void setLog(Block block, int type){
+    private static void setLog(Block block, int type){
         if(block.getType() == Material.AIR || block.getType() == Material.SAPLING){
-            block.setType(Material.LOG);
-            block.setData((byte)type);
+        	if (plugin.getWoolTrunks()){
+        		block.setType(Material.WOOL);
+        		block.setData((byte)12);
+        	} else {
+	            block.setType(Material.LOG);
+	            block.setData((byte)type);
+        	}
         }
     }
 
-    private int random(int num){
+    private static int random(int num){
     	return 1+(int)(Math.random()*num);
     }
 
-    // TODO: Call something else for patterns...
-    private int getRandomColor(ArrayList<Integer> array){
+    private static int getRandomColor(ArrayList<Integer> array){
     	int color = 0;
     	if (array.contains(0) && array.contains(15) && array.contains(7)){
     		color = -1;

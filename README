@@ -1,4 +1,4 @@
-Wool Trees v1.1.1
+Wool Trees v1.2
 PLUGIN REQUIREMENTS: Vault (http://dev.bukkit.org/server-mods/vault/)
 
 PERMISSIONS: --------------------------------------------------------
@@ -8,19 +8,34 @@ PERMISSIONS: --------------------------------------------------------
     Allow a user to plant for free no matter what the cost is.
 - woolTrees.adjust
     Allows in-game commands to adjust config values
-    Leave the number empty and it will get the current value, otherwise it will set it to the value entered.
         </wooltrees,/wt,/wt help>       	Brings up the help menu with the commands.
-        </wooltrees,/wt> tree  [0-100]  	% of a wool tree spawning.
-        </wooltrees,/wt> wool  [0-100]  	% of wool blocks not replaced with air.
-        </wooltrees,/wt> big   [0-100]  	% of trees that become big trees.
-        </wooltrees,/wt> cost  [0+]     	Cost to plant a tree.
-        </wooltrees,/wt> check [true,false] Height Check. (Checks if the trunk is blocked)
-        </wooltrees,/wt> light [0-15] 		Light Level needed for a tree to spawn.
+        </wooltrees,/wt> tree  <0-100>  	% of a wool tree spawning.
+        </wooltrees,/wt> wool  <0-100>  	% of wool blocks not replaced with air.
+        </wooltrees,/wt> big   <0-100>  	% of trees that become big trees.
+        </wooltrees,/wt> cost  <0+>     	Cost to plant a tree.
+        </wooltrees,/wt> check <true,false> Height Check. (Checks if the trunk is blocked)
+        </wooltrees,/wt> light <0-15> 		Light Level needed for a tree to spawn.
+        </wooltrees,/wt> pattern <true,false> Pattern Trees.
+        </wooltrees,/wt> trunk <true,false> Wool Trunks.
+        </wooltrees,/wt> here [wool%] [big] [color(s)]
 
-TODO:
+TODO/IDEAS:
 	+ Integrate with actual tree creation
+	+ Add /wt remove [id]
+	+ Add /wt adjust/shift/move/rotate
 
 CHANGE LOG:  --------------------------------------------------------
+
+Version 1.2 (2/18/12)
+	* Updated to new Events system
+	* Fixed a bug that removed all single stacks of a dye when dying a tree
+	/ Modified commands to remove getters (current values are now shown in /wt)
+	+ Added option for wool trunks.
+	/ Made pattern trees optional
+	+ Added /wt here [wool% 0-100] [big] [color]  (all optional, order doesn't matter)
+	  Uses: /wt here 50 blue green big = big blue/green tree with 50% leaves
+	      : /wt here = small white tree with 100% leaves
+	
 Version 1.1.1 (12/14/11)
 	* Fixed dependency on Vault
 	* Fixed a case when econ was null and still trying to withdraw money
