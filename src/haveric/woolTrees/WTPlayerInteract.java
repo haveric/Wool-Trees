@@ -7,6 +7,7 @@ import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
@@ -113,23 +114,27 @@ public class WTPlayerInteract implements Listener{
 
 	                	// TODO: move to helper method?
 	                    // Remove item from hand
-	                    int amt = holding.getAmount();
-	                    if (amt > 1){
-	                        holding.setAmount(--amt);
-	                    } else {
-	                    	inventory.setItemInHand(null);
-	                    }
+	                	if (player.getGameMode() == GameMode.SURVIVAL){
+		                    int amt = holding.getAmount();
+		                    if (amt > 1){
+		                        holding.setAmount(--amt);
+		                    } else {
+		                    	inventory.setItemInHand(null);
+		                    }
+	                	}
 
 	                } else {
 	                	addPattern(world, color, blockX, blockY, blockZ);
 
 	                    // Remove item from hand
-	                    int amt = holding.getAmount();
-	                    if (amt > 1){
-	                        holding.setAmount(--amt);
-	                    } else {
-	                    	inventory.setItemInHand(null);
-	                    }
+	                	if (player.getGameMode() == GameMode.SURVIVAL){
+		                    int amt = holding.getAmount();
+		                    if (amt > 1){
+		                        holding.setAmount(--amt);
+		                    } else {
+		                    	inventory.setItemInHand(null);
+		                    }
+	                	}
 	            	}
                 }
             }

@@ -23,8 +23,13 @@ TODO/IDEAS:
 	+ Integrate with actual tree creation
 	+ Add /wt remove [id]
 	+ Add /wt adjust/shift/move/rotate
+	* Look into mixed case permissions (Don't work with PermissionsEx)
 
 CHANGE LOG:  --------------------------------------------------------
+
+Coming soon (???)
+	+ Added dev-url
+	* Fixed items being used in creative mode
 
 Version 1.2 (2/18/12)
 	* Updated to new Events system

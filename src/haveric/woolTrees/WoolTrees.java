@@ -39,7 +39,7 @@ public class WoolTrees extends JavaPlugin{
     
     // plant a tree
     public String permPlant    = "wooltrees.plant";
-    public String permPlantAlt = "woolTrees.plant";
+	public String permPlantAlt = "woolTrees.plant";
     
     // ignore cost
     public String permIC     = "wooltrees.ignorecost";
