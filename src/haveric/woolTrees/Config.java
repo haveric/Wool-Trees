@@ -34,11 +34,8 @@ public class Config {
     private static final boolean PATTERN_TREES_DEFAULT = true;
     private static final boolean WOOL_TRUNKS_DEFAULT = true;
     
-    public Config(WoolTrees wt){
+    public static void init(WoolTrees wt){
     	plugin = wt;
-    }
-    
-    public static void init(){
     	configFile = new File(plugin.getDataFolder() + "/config.yml");
         patternConfigFile = new File(plugin.getDataFolder() + "/patterns.yml");
     }
@@ -177,7 +174,7 @@ public class Config {
     	return config.getDouble(cfgCost);
     }
     
-    public static boolean getHeight(){
+    public static boolean isHeightEnabled(){
     	return config.getBoolean(cfgHeight);
     }
     
@@ -189,7 +186,7 @@ public class Config {
     	return config.getBoolean(cfgPattern);
     }
     
-    public static boolean getWoolTrunks(){
+    public static boolean isWoolTrunksEnabled(){
     	return config.getBoolean(cfgWoolTrunk);
     }
 

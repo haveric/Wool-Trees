@@ -30,6 +30,7 @@ CHANGE LOG:  --------------------------------------------------------
 Coming soon (???)
 	+ Added dev-url
 	* Fixed items being used in creative mode
+	* Made Vault an optional dependency.  If you don't have it, everyone can plant trees, but only op's can adjust values.
 
 Version 1.2 (2/18/12)
 	* Updated to new Events system

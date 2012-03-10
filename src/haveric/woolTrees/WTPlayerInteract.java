@@ -4,8 +4,6 @@ package haveric.woolTrees;
 import java.util.ArrayList;
 
 import net.milkbowl.vault.economy.Economy;
-import net.milkbowl.vault.permission.Permission;
-
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -30,7 +28,6 @@ public class WTPlayerInteract implements Listener{
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
-    	Permission perm = plugin.getPerm();
     	Economy econ = plugin.getEcon();
         Player player = event.getPlayer();
 
@@ -44,7 +41,8 @@ public class WTPlayerInteract implements Listener{
 
         boolean patternsEnabled = Config.isPatternEnabled();
 
-        if(perm == null || perm.has(player, plugin.permPlant) || perm.has(player, plugin.permPlantAlt)){
+        // enabled for everyone unless permissions are enabled
+        if(!Perms.permEnabled() || Perms.hasPlant(player)){
             if (event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getClickedBlock().getType() == Material.SAPLING){
 
                 int blockX = block.getX();
@@ -57,8 +55,7 @@ public class WTPlayerInteract implements Listener{
             		return;
             	}
 
-            	if (econ == null || (perm != null && (perm.has(player, plugin.permIC) || perm.has(player, plugin.permICAlt)
-            					 || perm.has(player, plugin.permICAlt2) || perm.has(player, plugin.permICAlt3)))){
+            	if (econ == null || Perms.hasIC(player)){
             		currencyEnabled = false; // doesn't cost anything so we don't need economy.
             	} else if (!econ.has(player.getName(), Config.getCost())){
             		player.sendMessage(ChatColor.RED + "Not enough money to plant a wool tree. Need " + Config.getCost());
@@ -67,7 +64,7 @@ public class WTPlayerInteract implements Listener{
 
                 int color = 0;
                 if (holding.getType() == Material.INK_SACK ){
-                    int dur=holding.getDurability();
+                    int dur = holding.getDurability();
                     if (dur == 15){
                     	return; // bonemeal should do nothing!
                     } else {
@@ -88,7 +85,7 @@ public class WTPlayerInteract implements Listener{
                 // 1-15 = normal colors
 
                 // if not blocked
-                if (!Config.getHeight() || (bigTree && !treeBlocked(world,player, blockX,blockY,blockZ, 10))
+                if (!Config.isHeightEnabled() || (bigTree && !treeBlocked(world,player, blockX,blockY,blockZ, 10))
             		|| (!bigTree && !treeBlocked(world,player, blockX,blockY,blockZ, 6))) {
 
                 	// if a tree will spawn
@@ -272,7 +269,7 @@ public class WTPlayerInteract implements Listener{
 
     private static void setLog(Block block, int type){
         if(block.getType() == Material.AIR || block.getType() == Material.SAPLING){
-        	if (Config.getWoolTrunks()){
+        	if (Config.isWoolTrunksEnabled()){
         		block.setType(Material.WOOL);
         		block.setData((byte)12);
         	} else {

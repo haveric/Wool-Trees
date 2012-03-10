@@ -2,8 +2,6 @@ package haveric.woolTrees;
 
 import java.util.ArrayList;
 
-import net.milkbowl.vault.permission.Permission;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -42,8 +40,8 @@ public class Commands implements CommandExecutor{
     	ChatColor defColor = ChatColor.WHITE;
     	String wtTitle = msgColor + "[" + ChatColor.GRAY + "WoolTrees" + msgColor + "] ";
     	
-    	Permission perm = plugin.getPerm();
-        if(sender.isOp() || (perm != null && (perm.has((Player)sender, plugin.permAdjust) || perm.has((Player)sender, plugin.permAdjustAlt)))){
+    	
+        if(sender.isOp() || Perms.hasAdjust((Player)sender)){
             if (commandLabel.equalsIgnoreCase(cmdMain) || commandLabel.equalsIgnoreCase(cmdMainAlt)){
             	            	
                 if(args.length == 0 || (args.length == 1 && args[0].equalsIgnoreCase(cmdHelp))){
@@ -52,10 +50,10 @@ public class Commands implements CommandExecutor{
                     sender.sendMessage("/" + cmdMain + " " + cmdWool  + " <0-100> (" + valColor + Config.getWool() + defColor + ") - " + msgColor + "% wool blocks kept.");
                     sender.sendMessage("/" + cmdMain + " " + cmdBig   + " <0-100> (" + valColor + Config.getBig() + defColor + ") - " + msgColor + "% big trees.");
                     sender.sendMessage("/" + cmdMain + " " + cmdCost  + " <0+> ("    + valColor + Config.getCost() + defColor + ") - " + msgColor + "Cost to plant a tree.");
-                    sender.sendMessage("/" + cmdMain + " " + cmdCheck + " <true,false> (" + valColor + Config.getHeight() + defColor + ") - " + msgColor + "Height Check.");
+                    sender.sendMessage("/" + cmdMain + " " + cmdCheck + " <true,false> (" + valColor + Config.isHeightEnabled() + defColor + ") - " + msgColor + "Height Check.");
                     sender.sendMessage("/" + cmdMain + " " + cmdLight + " <0-15> ("  + valColor + Config.getLight() + defColor + ") - " + msgColor + "Light Level.");
                     sender.sendMessage("/" + cmdMain + " " + cmdPattern + " <true,false> (" + valColor + Config.isPatternEnabled() + defColor + ") - " + msgColor + "Pattern Trees.");
-                    sender.sendMessage("/" + cmdMain + " " + cmdWoolTrunk + " <true,false> (" + valColor + Config.getWoolTrunks() + defColor + ") - " + msgColor + "Wool Trunks.");
+                    sender.sendMessage("/" + cmdMain + " " + cmdWoolTrunk + " <true,false> (" + valColor + Config.isWoolTrunksEnabled() + defColor + ") - " + msgColor + "Wool Trunks.");
                     sender.sendMessage("/" + cmdMain + " " + cmdHere + " [wool%] [big] [color]" + defColor + " - " + msgColor + "Create Tree at Mouse.");
                 } else if (args.length >= 1 && args[0].equalsIgnoreCase(cmdHere)){
                 	boolean big = false;
@@ -224,8 +222,7 @@ public class Commands implements CommandExecutor{
                 sender.sendMessage("Each sapling has a " + valColor + Config.getTree() + "% " + defColor + "chance to spawn");
                 sender.sendMessage("Each tree will have " + valColor + Config.getWool() + "% " + defColor + "wool leaves");
                 if (plugin.getEcon() != null){
-                	if (perm != null && (perm.has(sender, plugin.permIC) || perm.has(sender, plugin.permICAlt)
-       					 || perm.has(sender, plugin.permICAlt2) || perm.has(sender, plugin.permICAlt3))){
+                	if (Perms.hasIC((Player)sender)){
                 		sender.sendMessage("Each successful tree costs " + valColor + "nothing!");
                 	} else {
                 		sender.sendMessage("Each successful tree costs " + valColor + Config.getCost());

@@ -21,29 +21,7 @@ public class WoolTrees extends JavaPlugin{
     private final WTStructureGrow structureGrow = new WTStructureGrow(this);
     
     // Vault  
-    private Economy econ;
-    private Permission perm;
-    
-    // Perms
-    // adjust values
-    public String permAdjust    = "wooltrees.adjust";
-    public String permAdjustAlt = "woolTrees.adjust";
-    
-    // plant a tree
-    public String permPlant    = "wooltrees.plant";
-	public String permPlantAlt = "woolTrees.plant";
-    
-    // ignore cost
-    public String permIC     = "wooltrees.ignorecost";
-    public String permICAlt  = "woolTrees.ignorecost";
-    public String permICAlt2 = "wooltrees.ignoreCost";
-    public String permICAlt3 = "woolTrees.ignoreCost";
-    
-
-    
-    
-
-    
+    private Economy econ = null;
     
     @Override
     public void onEnable(){
@@ -54,7 +32,7 @@ public class WoolTrees extends JavaPlugin{
     	
     	
     	// create a new config file
-    	Config.init();
+    	Config.init(this);
         
         
         // Vault
@@ -74,10 +52,15 @@ public class WoolTrees extends JavaPlugin{
     
     
 
-    private void setupVault() {       
+    private void setupVault() {
+    	if(getServer().getPluginManager().getPlugin("Vault") == null){
+    		log.info(String.format("[%s] Vault not found. Permissions and Economy disabled.",getDescription().getName()));
+    		return;
+    	}
+    	
         RegisteredServiceProvider<Permission> permProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.permission.Permission.class);
         if (permProvider != null) {
-            perm = permProvider.getProvider();
+            Perms.setPerm(permProvider.getProvider());
         }
              
         RegisteredServiceProvider<Economy> econProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
@@ -85,17 +68,8 @@ public class WoolTrees extends JavaPlugin{
             econ = econProvider.getProvider();
         }
     }
-    
-    
-
-    
-    public Permission getPerm(){
-    	return perm;
-    }
-    
+        
     public Economy getEcon(){
     	return econ;
     }
-    
-
 }
