@@ -42,7 +42,7 @@ public class WTPlayerInteract implements Listener{
 
         boolean currencyEnabled = true;
 
-        boolean patternsEnabled = plugin.getConfigPattern();
+        boolean patternsEnabled = Config.isPatternEnabled();
 
         if(perm == null || perm.has(player, plugin.permPlant) || perm.has(player, plugin.permPlantAlt)){
             if (event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getClickedBlock().getType() == Material.SAPLING){
@@ -52,7 +52,7 @@ public class WTPlayerInteract implements Listener{
                 int blockZ = block.getZ();
 
 
-            	if (world.getBlockAt(blockX, blockY+1, blockZ).getLightLevel() < plugin.getConfigLight()){
+            	if (world.getBlockAt(blockX, blockY+1, blockZ).getLightLevel() < Config.getLight()){
             		player.sendMessage(ChatColor.RED + "The block above the sapling is too dark.");
             		return;
             	}
@@ -60,8 +60,8 @@ public class WTPlayerInteract implements Listener{
             	if (econ == null || (perm != null && (perm.has(player, plugin.permIC) || perm.has(player, plugin.permICAlt)
             					 || perm.has(player, plugin.permICAlt2) || perm.has(player, plugin.permICAlt3)))){
             		currencyEnabled = false; // doesn't cost anything so we don't need economy.
-            	} else if (!econ.has(player.getName(), plugin.getConfigCost())){
-            		player.sendMessage(ChatColor.RED + "Not enough money to plant a wool tree. Need " + plugin.getConfigCost());
+            	} else if (!econ.has(player.getName(), Config.getCost())){
+            		player.sendMessage(ChatColor.RED + "Not enough money to plant a wool tree. Need " + Config.getCost());
             		return;
             	}
 
@@ -79,7 +79,7 @@ public class WTPlayerInteract implements Listener{
                 	return; // Any other items should not work.
                 }
 
-                boolean bigTree = (random(100) <= plugin.getConfigBig());
+                boolean bigTree = (random(100) <= Config.getBig());
 
 
                 // colors
@@ -88,11 +88,11 @@ public class WTPlayerInteract implements Listener{
                 // 1-15 = normal colors
 
                 // if not blocked
-                if (!plugin.getConfigHeight() || (bigTree && !treeBlocked(world,player, blockX,blockY,blockZ, 10))
+                if (!Config.getHeight() || (bigTree && !treeBlocked(world,player, blockX,blockY,blockZ, 10))
             		|| (!bigTree && !treeBlocked(world,player, blockX,blockY,blockZ, 6))) {
 
                 	// if a tree will spawn
-	                if (random(100) <= plugin.getConfigTree()){
+	                if (random(100) <= Config.getTree()){
 	                	int woodType = event.getClickedBlock().getData();
 
 	                	if (patternsEnabled){
@@ -106,10 +106,10 @@ public class WTPlayerInteract implements Listener{
 	                	}
 
 	                	if (patternsEnabled){
-	                		plugin.setPatternConfig(world.getName()+":"+blockX+","+blockY+","+blockZ, null);
+	                		Config.setPattern(world.getName()+":"+blockX+","+blockY+","+blockZ, null);
 	                	}
 	                	if (currencyEnabled){
-	                    	econ.withdrawPlayer(player.getName(), plugin.getConfigCost());
+	                    	econ.withdrawPlayer(player.getName(), Config.getCost());
 	                    }
 
 	                	// TODO: move to helper method?
@@ -142,14 +142,14 @@ public class WTPlayerInteract implements Listener{
     }
 
     private void addPattern(World w, int color, int blockX, int blockY, int blockZ){
-    	String colors = plugin.getPatternConfig(w.getName()+":"+blockX+","+blockY+","+blockZ);
+    	String colors = Config.getPattern(w.getName()+":"+blockX+","+blockY+","+blockZ);
 
     	if (colors != null && !colors.contains("("+color + ")")){
     		colors += "(" + color + ")";
-    		plugin.setPatternConfig(w.getName()+":"+blockX+","+blockY+","+blockZ, colors);
+    		Config.setPattern(w.getName()+":"+blockX+","+blockY+","+blockZ, colors);
     	} else if (colors == null){
     		colors = "(" + color + ")";
-    		plugin.setPatternConfig(w.getName()+":"+blockX+","+blockY+","+blockZ, colors);
+    		Config.setPattern(w.getName()+":"+blockX+","+blockY+","+blockZ, colors);
     	}
     }
 
@@ -170,8 +170,8 @@ public class WTPlayerInteract implements Listener{
 	    	colorArray = new ArrayList<Integer>();
 	    	
 	    	// if patterns enabled
-	    	if (plugin.getConfigPattern()){
-	    		String colors = plugin.getPatternConfig(w.getName()+":"+x+","+y+","+z);
+	    	if (Config.isPatternEnabled()){
+	    		String colors = Config.getPattern(w.getName()+":"+x+","+y+","+z);
 	    	
 	    		
 	
@@ -211,8 +211,8 @@ public class WTPlayerInteract implements Listener{
 	    	colorArray = new ArrayList<Integer>();
 	    	
 	    	// if patterns enabled
-	    	if (plugin.getConfigPattern()){
-		    	String colors = plugin.getPatternConfig(w.getName()+":"+x+","+y+","+z);
+	    	if (Config.isPatternEnabled()){
+		    	String colors = Config.getPattern(w.getName()+":"+x+","+y+","+z);
 		    	
 		    	for(int i = -2; i <= 15; i ++){
 		    		if (colors.contains("(" + i + ")")){
@@ -254,7 +254,7 @@ public class WTPlayerInteract implements Listener{
     private static void setColoredBlock(Block block, int color, double leaves){
         int wool = random(100);
         if (leaves == -1){
-	        if(wool < plugin.getConfigWool() && block.getType() == Material.AIR){
+	        if(wool < Config.getWool() && block.getType() == Material.AIR){
 	            if (color == -1){
 	                color = (int)(Math.random()*16); // 0-15
 	            }
@@ -272,7 +272,7 @@ public class WTPlayerInteract implements Listener{
 
     private static void setLog(Block block, int type){
         if(block.getType() == Material.AIR || block.getType() == Material.SAPLING){
-        	if (plugin.getWoolTrunks()){
+        	if (Config.getWoolTrunks()){
         		block.setType(Material.WOOL);
         		block.setData((byte)12);
         	} else {

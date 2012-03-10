@@ -18,8 +18,8 @@ public class WTStructureGrow implements Listener{
     	Location l = event.getLocation();
 
     	String patternConfig = event.getWorld().getName() + ":" + l.getBlockX() + "," + l.getBlockY() + "," + l.getBlockZ();
-    	if (plugin.getPatternConfig(patternConfig) != null){
-    		plugin.setPatternConfig(patternConfig, null);
+    	if (Config.getPattern(patternConfig) != null){
+    		Config.setPattern(patternConfig, null);
     	}
     }
 
