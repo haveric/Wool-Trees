@@ -1,5 +1,5 @@
-Wool Trees v1.2
-PLUGIN REQUIREMENTS: Vault (http://dev.bukkit.org/server-mods/vault/)
+Wool Trees v1.2.1
+Vault is required for Permissions, but is now OPTIONAL.  You can find it here: (http://dev.bukkit.org/server-mods/vault/)
 
 PERMISSIONS: --------------------------------------------------------
 - woolTrees.plant
@@ -27,7 +27,7 @@ TODO/IDEAS:
 
 CHANGE LOG:  --------------------------------------------------------
 
-Coming soon (???)
+Version 1.2.1 (3/13/2012)
 	+ Added dev-url
 	* Fixed items being used in creative mode
 	* Made Vault an optional dependency.  If you don't have it, everyone can plant trees, but only op's can adjust values.

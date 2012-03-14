@@ -7,16 +7,16 @@ import org.bukkit.entity.Player;
 public class Perms {
     static Permission perm = null;
     
-    public static String permAdjust    = "wooltrees.adjust";
-    public static String permAdjustAlt = "woolTrees.adjust";
+    public static final String permAdjust    = "wooltrees.adjust";
+    public static final String permAdjustAlt = "woolTrees.adjust";
     
-    public static String permPlant    = "wooltrees.plant";
-    public static String permPlantAlt = "woolTrees.plant";
+    public static final String permPlant    = "wooltrees.plant";
+    public static final String permPlantAlt = "woolTrees.plant";
     
-    public static String permIC     = "wooltrees.ignorecost";
-    public static String permICAlt1 = "woolTrees.ignorecost";
-    public static String permICAlt2 = "wooltrees.ignoreCost";
-    public static String permICAlt3 = "woolTrees.ignoreCost";
+    public static final String permIC     = "wooltrees.ignorecost";
+    public static final String permICAlt1 = "woolTrees.ignorecost";
+    public static final String permICAlt2 = "wooltrees.ignoreCost";
+    public static final String permICAlt3 = "woolTrees.ignoreCost";
     
     public static void setPerm(Permission newPerm){
     	perm = newPerm;

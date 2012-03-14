@@ -11,10 +11,10 @@ public class Config {
 	static WoolTrees plugin;
 	
     // Config variables
-    public static FileConfiguration config;
-    public static File configFile;
-    public static FileConfiguration patternConfig;
-    public static File patternConfigFile;
+    private static FileConfiguration config;
+    private static File configFile;
+    private static FileConfiguration patternConfig;
+    private static File patternConfigFile;
     
     private static String cfgTree   = "Tree Spawn %";
     private static String cfgWool   = "Wool Spawn %";
@@ -88,14 +88,11 @@ public class Config {
         	config.set(cfgCost, cost);
         }
         
-        boolean heightCheck = config.getBoolean(cfgHeight, HEIGHT_CHECK_DEFAULT);
-        if (heightCheck != true && heightCheck != false){
-        	config.set(cfgHeight, HEIGHT_CHECK_DEFAULT);
-        	WoolTrees.log.info(warn+"Height Check not true or false. Defaulting to true");
-        } else {
-        	config.set(cfgHeight, heightCheck);
-        }
         
+        if (!config.isSet(cfgHeight)){
+        	config.set(cfgHeight, HEIGHT_CHECK_DEFAULT);
+        }
+       
         int lightLevel = config.getInt(cfgLight, LIGHT_LEVEL_DEFAULT);
         if (lightLevel < 0){
         	config.set(cfgLight, 0);
@@ -107,20 +104,12 @@ public class Config {
         	config.set(cfgLight, lightLevel);
         }
         
-        boolean patternTrees = config.getBoolean(cfgPattern, PATTERN_TREES_DEFAULT);
-        if (patternTrees != true && patternTrees != false){
-        	config.set(cfgPattern, PATTERN_TREES_DEFAULT);
-        	WoolTrees.log.info(warn+"Pattern trees not true or false. Defaulting to true");
-        } else {
-        	config.set(cfgPattern, patternTrees);
+        if (!config.isSet(cfgPattern)){
+        	config.set(cfgPattern, PATTERN_TREES_DEFAULT);	
         }
         
-        boolean woolTrunks = config.getBoolean(cfgWoolTrunk, WOOL_TRUNKS_DEFAULT);
-        if (woolTrunks != true && woolTrunks != false){
+        if (!config.isSet(cfgWoolTrunk)){
         	config.set(cfgWoolTrunk, WOOL_TRUNKS_DEFAULT);
-        	WoolTrees.log.info(warn+"Wool Trunks not true or false. Defaulting to true");
-        } else {
-        	config.set(cfgWoolTrunk, woolTrunks);
         }
         
         saveConfig();

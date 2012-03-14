@@ -20,7 +20,7 @@ import org.bukkit.inventory.PlayerInventory;
 
 public class WTPlayerInteract implements Listener{
 
-    public static WoolTrees plugin;
+    private static WoolTrees plugin;
 
     public WTPlayerInteract(WoolTrees wt) {
         plugin = wt;
