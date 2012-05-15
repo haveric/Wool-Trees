@@ -5,7 +5,7 @@ import net.milkbowl.vault.permission.Permission;
 import org.bukkit.entity.Player;
 
 public class Perms {
-    static Permission perm = null;
+    private static Permission perm = null;
     
     public static final String permAdjust    = "wooltrees.adjust";
     public static final String permAdjustAlt = "woolTrees.adjust";
