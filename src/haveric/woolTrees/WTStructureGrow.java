@@ -5,22 +5,22 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.world.StructureGrowEvent;
 
-public class WTStructureGrow implements Listener{
+public class WTStructureGrow implements Listener {
 
-    private static WoolTrees plugin;
+    //private static WoolTrees plugin;
 
     public WTStructureGrow(WoolTrees wt) {
-        plugin = wt;
+        //plugin = wt;
     }
 
     @EventHandler
-    public void onTreeGrowth(StructureGrowEvent event){
-    	Location l = event.getLocation();
-    	
-    	String patternConfig = event.getWorld().getName() + ":" + l.getBlockX() + "," + l.getBlockY() + "," + l.getBlockZ();
-    	if (Config.getPattern(patternConfig) != null){
-    		Config.setPattern(patternConfig, null);
-    	}
+    public void onTreeGrowth(StructureGrowEvent event) {
+        Location l = event.getLocation();
+
+        String patternConfig = event.getWorld().getName() + ":" + l.getBlockX() + "," + l.getBlockY() + "," + l.getBlockZ();
+        if (Config.getPattern(patternConfig) != null) {
+            Config.setPattern(patternConfig, null);
+        }
     }
 
 }

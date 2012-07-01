@@ -6,24 +6,24 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 
-public class WTBlockBreak implements Listener{
+public class WTBlockBreak implements Listener {
 
-    private static WoolTrees plugin;
+    //private static WoolTrees plugin;
 
     public WTBlockBreak(WoolTrees wt) {
-        plugin = wt;
+        //plugin = wt;
     }
 
     @EventHandler
-    public void onBlockBreak(BlockBreakEvent event){
-    	Block block = event.getBlock();
+    public void onBlockBreak(BlockBreakEvent event) {
+        Block block = event.getBlock();
 
-    	if (block.getType() == Material.SAPLING){
+        if (block.getType() == Material.SAPLING) {
 
-	    	String patternConfig = block.getWorld().getName() + ":" + block.getX() + "," + block.getY() + "," + block.getZ();
-        	if (Config.getPattern(patternConfig) != null){
-        		Config.setPattern(patternConfig, null);
-        	}
-	    }
+            String patternConfig = block.getWorld().getName() + ":" + block.getX() + "," + block.getY() + "," + block.getZ();
+            if (Config.getPattern(patternConfig) != null) {
+                Config.setPattern(patternConfig, null);
+            }
+        }
     }
 }
