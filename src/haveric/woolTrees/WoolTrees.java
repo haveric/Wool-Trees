@@ -12,7 +12,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 
 public class WoolTrees extends JavaPlugin {
-    static final Logger log = Logger.getLogger("Minecraft");
+    static Logger log;
 
     private Commands commands = new Commands(this);
 
@@ -25,6 +25,7 @@ public class WoolTrees extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        log = getLogger();
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(playerInteract, this);
         pm.registerEvents(blockBreak, this);
@@ -50,7 +51,7 @@ public class WoolTrees extends JavaPlugin {
 
     private void setupVault() {
         if (getServer().getPluginManager().getPlugin("Vault") == null) {
-            log.info(String.format("[%s] Vault not found. Permissions and Economy disabled.", getDescription().getName()));
+            log.info("Vault not found. Permissions and Economy disabled.");
             return;
         }
 
