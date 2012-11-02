@@ -1,5 +1,4 @@
-Wool Trees v1.2.1
-Vault is required for Permissions, but is now OPTIONAL.  You can find it here: (http://dev.bukkit.org/server-mods/vault/)
+Vault is optional for Economy.  You can find it here: (http://dev.bukkit.org/server-mods/vault/)
 
 PERMISSIONS: --------------------------------------------------------
 - woolTrees.plant
@@ -8,51 +7,55 @@ PERMISSIONS: --------------------------------------------------------
     Allow a user to plant for free no matter what the cost is.
 - woolTrees.adjust
     Allows in-game commands to adjust config values
-        </wooltrees,/wt,/wt help>       	Brings up the help menu with the commands.
-        </wooltrees,/wt> tree  <0-100>  	% of a wool tree spawning.
-        </wooltrees,/wt> wool  <0-100>  	% of wool blocks not replaced with air.
-        </wooltrees,/wt> big   <0-100>  	% of trees that become big trees.
-        </wooltrees,/wt> cost  <0+>     	Cost to plant a tree.
+        </wooltrees,/wt,/wt help>           Brings up the help menu with the commands.
+        </wooltrees,/wt> tree  <0-100>      % of a wool tree spawning.
+        </wooltrees,/wt> wool  <0-100>      % of wool blocks not replaced with air.
+        </wooltrees,/wt> big   <0-100>      % of trees that become big trees.
+        </wooltrees,/wt> cost  <0+>         Cost to plant a tree.
         </wooltrees,/wt> check <true,false> Height Check. (Checks if the trunk is blocked)
-        </wooltrees,/wt> light <0-15> 		Light Level needed for a tree to spawn.
+        </wooltrees,/wt> light <0-15>       Light Level needed for a tree to spawn.
         </wooltrees,/wt> pattern <true,false> Pattern Trees.
         </wooltrees,/wt> trunk <true,false> Wool Trunks.
         </wooltrees,/wt> here [wool%] [big] [color(s)]
 
 TODO/IDEAS:
-	+ Integrate with actual tree creation
-	+ Add /wt remove [id]
-	+ Add /wt adjust/shift/move/rotate
-	* Look into mixed case permissions (Don't work with PermissionsEx)
+    + Integrate with actual tree creation
+    + Add /wt remove [id]
+    + Add /wt adjust/shift/move/rotate
 
 CHANGE LOG:  --------------------------------------------------------
 
+Version ???
+* Vault is no longer needed for Permissions. Any permission system will do. (It's still needed for economy though)
+* Mixed case permissions are no longer supported. Make sure they are all lowercase.
+* Added Metrics
+
 Version 1.2.1 (3/13/2012)
-	+ Added dev-url
-	* Fixed items being used in creative mode
-	* Made Vault an optional dependency.  If you don't have it, everyone can plant trees, but only op's can adjust values.
+    + Added dev-url
+    * Fixed items being used in creative mode
+    * Made Vault an optional dependency.  If you don't have it, everyone can plant trees, but only op's can adjust values.
 
 Version 1.2 (2/18/12)
-	* Updated to new Events system
-	* Fixed a bug that removed all single stacks of a dye when dying a tree
-	/ Modified commands to remove getters (current values are now shown in /wt)
-	+ Added option for wool trunks.
-	/ Made pattern trees optional
-	+ Added /wt here [wool% 0-100] [big] [color]  (all optional, order doesn't matter)
-	  Uses: /wt here 50 blue green big = big blue/green tree with 50% leaves
-	      : /wt here = small white tree with 100% leaves
-	
+    * Updated to new Events system
+    * Fixed a bug that removed all single stacks of a dye when dying a tree
+    / Modified commands to remove getters (current values are now shown in /wt)
+    + Added option for wool trunks.
+    / Made pattern trees optional
+    + Added /wt here [wool% 0-100] [big] [color]  (all optional, order doesn't matter)
+      Uses: /wt here 50 blue green big = big blue/green tree with 50% leaves
+          : /wt here = small white tree with 100% leaves
+    
 Version 1.1.1 (12/14/11)
-	* Fixed dependency on Vault
-	* Fixed a case when econ was null and still trying to withdraw money
+    * Fixed dependency on Vault
+    * Fixed a case when econ was null and still trying to withdraw money
 
 Version 1.1 (12/12/11)
-	* Updated to use Vault for permissions and economy
-	+ Added optional check for block height (6 for normal trees, 9 for large)
-	+ Added check for light level (0-15)
-	+ Added "pattern" trees. Add multiple colors to a sapling to create multicolored trees
-	/ Altered fully random "multicolored" trees.  Now are created with three specific colors.
-	- Removed versions folders from jar file.. no wonder they were so big
+    * Updated to use Vault for permissions and economy
+    + Added optional check for block height (6 for normal trees, 9 for large)
+    + Added check for light level (0-15)
+    + Added "pattern" trees. Add multiple colors to a sapling to create multicolored trees
+    / Altered fully random "multicolored" trees.  Now are created with three specific colors.
+    - Removed versions folders from jar file.. no wonder they were so big
 
 Version 1.0.6 (9/29/11)
     Op should now have adjust perms always.

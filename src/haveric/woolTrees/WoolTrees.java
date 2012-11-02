@@ -1,9 +1,12 @@
 package haveric.woolTrees;
 
+import haveric.woolTrees.mcstats.Metrics;
+import haveric.woolTrees.mcstats.Metrics.Graph;
+
+import java.io.IOException;
 import java.util.logging.Logger;
 
 import net.milkbowl.vault.economy.Economy;
-import net.milkbowl.vault.permission.Permission;
 
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -22,6 +25,8 @@ public class WoolTrees extends JavaPlugin {
 
     // Vault
     private Economy econ = null;
+
+    private Metrics metrics;
 
     @Override
     public void onEnable() {
@@ -42,6 +47,7 @@ public class WoolTrees extends JavaPlugin {
 
         getCommand(Commands.getMain()).setExecutor(commands);
 
+        setupMetrics();
     }
 
     @Override
@@ -51,13 +57,8 @@ public class WoolTrees extends JavaPlugin {
 
     private void setupVault() {
         if (getServer().getPluginManager().getPlugin("Vault") == null) {
-            log.info("Vault not found. Permissions and Economy disabled.");
+            log.info("Vault not found. Economy disabled.");
             return;
-        }
-
-        RegisteredServiceProvider<Permission> permProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.permission.Permission.class);
-        if (permProvider != null) {
-            Perms.setPerm(permProvider.getProvider());
         }
 
         RegisteredServiceProvider<Economy> econProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
@@ -68,5 +69,27 @@ public class WoolTrees extends JavaPlugin {
 
     public Economy getEcon() {
         return econ;
+    }
+
+    private void setupMetrics() {
+        try {
+            metrics = new Metrics(this);
+
+            // Custom data
+            Graph javaGraph = metrics.createGraph("Java Version");
+            String javaVersion = System.getProperty("java.version");
+            javaGraph.addPlotter(new Metrics.Plotter(javaVersion) {
+                @Override
+                public int getValue() {
+                    return 1;
+                }
+            });
+            metrics.addGraph(javaGraph);
+            // End Custom data
+
+            metrics.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

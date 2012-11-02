@@ -40,7 +40,7 @@ public class Commands implements CommandExecutor {
         ChatColor defColor = ChatColor.WHITE;
         String wtTitle = msgColor + "[" + ChatColor.GRAY + "WoolTrees" + msgColor + "] ";
 
-        if (sender.isOp() || Perms.hasAdjust((Player) sender)) {
+        if (Perms.canAdjust((Player) sender)) {
             if (commandLabel.equalsIgnoreCase(cmdMain) || commandLabel.equalsIgnoreCase(cmdMainAlt)) {
 
                 if (args.length == 0 || (args.length == 1 && args[0].equalsIgnoreCase(cmdHelp))) {

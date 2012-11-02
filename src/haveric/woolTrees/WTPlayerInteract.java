@@ -42,7 +42,7 @@ public class WTPlayerInteract implements Listener {
         boolean patternsEnabled = Config.isPatternEnabled();
 
         // enabled for everyone unless permissions are enabled
-        if (!Perms.permEnabled() || Perms.hasPlant(player)) {
+        if (Perms.canPlant(player)) {
             if (event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getClickedBlock().getType() == Material.SAPLING) {
 
                 int blockX = block.getX();
