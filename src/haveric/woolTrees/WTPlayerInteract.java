@@ -42,14 +42,18 @@ public class WTPlayerInteract implements Listener {
 
         boolean patternsEnabled = Config.isPatternEnabled();
 
-        if (Perms.canPlant(player) && Guard.canPlace(player, block.getLocation())) {
+        if (Perms.canPlant(player)) {
             if (event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getClickedBlock().getType() == Material.SAPLING) {
 
                 int blockX = block.getX();
                 int blockY = block.getY();
                 int blockZ = block.getZ();
 
-
+                if (!Guard.canPlace(player, block.getLocation())) {
+                    player.sendMessage("You are not allowed to create wool trees there.");
+                    return;
+                }
+                
                 if (world.getBlockAt(blockX, blockY+1, blockZ).getLightLevel() < Config.getLight()) {
                     player.sendMessage(ChatColor.RED + "The block above the sapling is too dark.");
                     return;
