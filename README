@@ -1,4 +1,4 @@
-Vault is optional for Economy.  You can find it here: (http://dev.bukkit.org/server-mods/vault/)
+Vault is only needed if you are going to use an Economy plugin.  You can find it here: (http://dev.bukkit.org/server-mods/vault/)
 
 PERMISSIONS: --------------------------------------------------------
 - woolTrees.plant
@@ -18,14 +18,9 @@ PERMISSIONS: --------------------------------------------------------
         </wooltrees,/wt> trunk <true,false> Wool Trunks.
         </wooltrees,/wt> here [wool%] [big] [color(s)]
 
-TODO/IDEAS:
-    + Integrate with actual tree creation
-    + Add /wt remove [id]
-    + Add /wt adjust/shift/move/rotate
-
 CHANGE LOG:  --------------------------------------------------------
 
-Coming Soon*
+Version 1.2.2 (3/23/2013)
 * Vault is no longer needed for Permissions. Any permission system will do. (It's still needed for economy though)
 * Mixed case permissions are no longer supported. Make sure they are all lowercase.
 * Added Metrics
