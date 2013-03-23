@@ -7,11 +7,7 @@ import org.bukkit.event.world.StructureGrowEvent;
 
 public class WTStructureGrow implements Listener {
 
-    //private static WoolTrees plugin;
-
-    public WTStructureGrow(WoolTrees wt) {
-        //plugin = wt;
-    }
+    public WTStructureGrow() {}
 
     @EventHandler
     public void onTreeGrowth(StructureGrowEvent event) {

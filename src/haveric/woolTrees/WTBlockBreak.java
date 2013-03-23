@@ -8,11 +8,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 
 public class WTBlockBreak implements Listener {
 
-    //private static WoolTrees plugin;
-
-    public WTBlockBreak(WoolTrees wt) {
-        //plugin = wt;
-    }
+    public WTBlockBreak() {}
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {

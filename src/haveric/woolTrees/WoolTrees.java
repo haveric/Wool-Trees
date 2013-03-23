@@ -1,7 +1,6 @@
 package haveric.woolTrees;
 
 import haveric.woolTrees.mcstats.Metrics;
-import haveric.woolTrees.mcstats.Metrics.Graph;
 
 import java.io.IOException;
 import java.util.logging.Logger;
@@ -19,10 +18,6 @@ public class WoolTrees extends JavaPlugin {
 
     private Commands commands = new Commands(this);
 
-    private final WTPlayerInteract playerInteract = new WTPlayerInteract(this);
-    private final WTBlockBreak blockBreak = new WTBlockBreak(this);
-    private final WTStructureGrow structureGrow = new WTStructureGrow(this);
-
     // Vault
     private Economy econ = null;
 
@@ -32,9 +27,9 @@ public class WoolTrees extends JavaPlugin {
     public void onEnable() {
         log = getLogger();
         PluginManager pm = getServer().getPluginManager();
-        pm.registerEvents(playerInteract, this);
-        pm.registerEvents(blockBreak, this);
-        pm.registerEvents(structureGrow, this);
+        pm.registerEvents(new WTPlayerInteract(this), this);
+        pm.registerEvents(new WTBlockBreak(), this);
+        pm.registerEvents(new WTStructureGrow(), this);
 
         // create a new config file
         Config.init(this);
@@ -74,18 +69,6 @@ public class WoolTrees extends JavaPlugin {
     private void setupMetrics() {
         try {
             metrics = new Metrics(this);
-
-            // Custom data
-            Graph javaGraph = metrics.createGraph("Java Version");
-            String javaVersion = System.getProperty("java.version");
-            javaGraph.addPlotter(new Metrics.Plotter(javaVersion) {
-                @Override
-                public int getValue() {
-                    return 1;
-                }
-            });
-            metrics.addGraph(javaGraph);
-            // End Custom data
 
             metrics.start();
         } catch (IOException e) {
