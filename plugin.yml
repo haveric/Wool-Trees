@@ -3,7 +3,7 @@ main: haveric.woolTrees.WoolTrees
 version: 1.2.1
 author: haveric
 dev-url: http://dev.bukkit.org/server-mods/wool-trees/
-softdepend: [Vault]
+softdepend: [Vault, WorldGuard]
 description: >
              Create wool trees by dyeing saplings.
 commands:

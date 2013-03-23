@@ -4,6 +4,7 @@ package haveric.woolTrees;
 import java.util.ArrayList;
 
 import net.milkbowl.vault.economy.Economy;
+
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -41,8 +42,7 @@ public class WTPlayerInteract implements Listener {
 
         boolean patternsEnabled = Config.isPatternEnabled();
 
-        // enabled for everyone unless permissions are enabled
-        if (Perms.canPlant(player)) {
+        if (Perms.canPlant(player) && Guard.canPlace(player, block.getLocation())) {
             if (event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getClickedBlock().getType() == Material.SAPLING) {
 
                 int blockX = block.getX();
@@ -69,7 +69,7 @@ public class WTPlayerInteract implements Listener {
                         return; // bonemeal should do nothing!
                     }
                     color = 15 - dur;
-                    
+
                 } else if (holding.getType() == Material.SUGAR) {
                     color = 0;
                 } else {

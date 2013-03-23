@@ -29,6 +29,7 @@ Version ???
 * Vault is no longer needed for Permissions. Any permission system will do. (It's still needed for economy though)
 * Mixed case permissions are no longer supported. Make sure they are all lowercase.
 * Added Metrics
+* Added WorldGuard support. Can only affect trees if you can build there.
 
 Version 1.2.1 (3/13/2012)
     + Added dev-url
