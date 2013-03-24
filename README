@@ -1,11 +1,11 @@
-Vault is only needed if you are going to use an Economy plugin.  You can find it here: (http://dev.bukkit.org/server-mods/vault/)
+Vault is only needed if you are going to use the economy features.  You can find it here: (http://dev.bukkit.org/server-mods/vault/)
 
 PERMISSIONS: --------------------------------------------------------
-- woolTrees.plant
+- wooltrees.plant
     Allows a user to plant wool trees with dye.
-- woolTrees.ignoreCost
+- wooltrees.ignorecost
     Allow a user to plant for free no matter what the cost is.
-- woolTrees.adjust
+- wooltrees.adjust
     Allows in-game commands to adjust config values
         </wooltrees,/wt,/wt help>           Brings up the help menu with the commands.
         </wooltrees,/wt> tree  <0-100>      % of a wool tree spawning.
