@@ -71,7 +71,7 @@ public class WoolTrees extends JavaPlugin {
     private void setupWorldGuard(PluginManager pm) {
         Plugin worldGuard = pm.getPlugin("WorldGuard");
         if (worldGuard == null || !(worldGuard instanceof WorldGuardPlugin)) {
-            log.info(String.format("[%s] WorldGuard not found.", getDescription().getName()));
+            log.info("WorldGuard not found.");
         } else {
             Guard.setWorldGuard((WorldGuardPlugin) worldGuard);
         }

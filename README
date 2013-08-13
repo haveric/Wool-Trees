@@ -22,6 +22,7 @@ CHANGE LOG:  --------------------------------------------------------
 
 Version 1.2.3
 * Updated Metrics to R7
+* Removed extra "[WoolTrees]" being logged
 
 Version 1.2.2 (3/23/2013)
 * Vault is no longer needed for Permissions. Any permission system will do. (It's still needed for economy though)
