@@ -21,7 +21,7 @@ PERMISSIONS: --------------------------------------------------------
 CHANGE LOG:  --------------------------------------------------------
 
 Version 1.2.3
-* Removed Metrics as the service has been discontinued.
+* Updated Metrics to R7
 * Removed extra "[WoolTrees]" being logged
 
 Version 1.2.2 (3/23/2013)
