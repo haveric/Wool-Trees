@@ -53,7 +53,7 @@ public class WTPlayerInteract implements Listener {
                     player.sendMessage("You are not allowed to create wool trees there.");
                     return;
                 }
-                
+
                 if (world.getBlockAt(blockX, blockY+1, blockZ).getLightLevel() < Config.getLight()) {
                     player.sendMessage(ChatColor.RED + "The block above the sapling is too dark.");
                     return;
@@ -275,8 +275,13 @@ public class WTPlayerInteract implements Listener {
                 block.setType(Material.WOOL);
                 block.setData((byte) 12);
             } else {
-                block.setType(Material.LOG);
-                block.setData((byte) type);
+                if (type < 4) {
+                    block.setType(Material.LOG);
+                    block.setData((byte) type);
+                } else {
+                    block.setType(Material.LOG_2);
+                    block.setData((byte) (type - 4));
+                }
             }
         }
     }
