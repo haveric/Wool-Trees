@@ -16,7 +16,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
 
 
 public class WTPlayerInteract implements Listener {
@@ -32,7 +31,6 @@ public class WTPlayerInteract implements Listener {
         Economy econ = plugin.getEcon();
         Player player = event.getPlayer();
 
-        PlayerInventory inventory = player.getInventory();
         World world = player.getWorld();
         Block block = event.getClickedBlock();
 
@@ -112,32 +110,26 @@ public class WTPlayerInteract implements Listener {
                         if (currencyEnabled) {
                             econ.withdrawPlayer(player.getName(), Config.getCost());
                         }
-
-                        // TODO: move to helper method?
-                        // Remove item from hand
-                        if (player.getGameMode() == GameMode.SURVIVAL) {
-                            int amt = holding.getAmount();
-                            if (amt > 1) {
-                                holding.setAmount(--amt);
-                            } else {
-                                inventory.setItemInHand(null);
-                            }
-                        }
-
                     } else {
                         addPattern(world, color, blockX, blockY, blockZ);
-
-                        // Remove item from hand
-                        if (player.getGameMode() == GameMode.SURVIVAL) {
-                            int amt = holding.getAmount();
-                            if (amt > 1) {
-                                holding.setAmount(--amt);
-                            } else {
-                                inventory.setItemInHand(null);
-                            }
-                        }
                     }
+
+                    removeFromHand(player);
                 }
+            }
+        }
+    }
+
+    // Remove one item from hand
+    private void removeFromHand(Player player) {
+        if (player.getGameMode() == GameMode.SURVIVAL) {
+            ItemStack holding = player.getItemInHand();
+
+            int amt = holding.getAmount();
+            if (amt > 1) {
+                holding.setAmount(--amt);
+            } else {
+                player.getInventory().setItemInHand(null);
             }
         }
     }
@@ -195,7 +187,7 @@ public class WTPlayerInteract implements Listener {
                 } else {
                     setColoredBlock(w.getBlockAt(x+i, y+3, z+j), getRandomColor(colorArray), leaves);
                     setColoredBlock(w.getBlockAt(x+i, y+4, z+j), getRandomColor(colorArray), leaves);
-                    // TODO: restructure to be an else if?
+
                     if (i != 2 && i != -2 && j != 2 && j != -2) {
                         setColoredBlock(w.getBlockAt(x+i, y+5, z+j), getRandomColor(colorArray), leaves);
                     }
@@ -233,7 +225,7 @@ public class WTPlayerInteract implements Listener {
                     setColoredBlock(w.getBlockAt(x+i, y+6, z+j), getRandomColor(colorArray), leaves);
                     setColoredBlock(w.getBlockAt(x+i, y+7, z+j), getRandomColor(colorArray), leaves);
                     setColoredBlock(w.getBlockAt(x+i, y+8, z+j), getRandomColor(colorArray), leaves);
-                    // TODO: structure into an else if?
+
                     if ((i == 2 && j == 2) || (i == 2 && j == -2) || (i == -2 && j == 2) || (i == -2 && j == -2)) {
                         // 5x5 corners
                     } else {
