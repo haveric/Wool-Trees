@@ -175,7 +175,7 @@ public class Config {
         return config.getBoolean(cfgWoolTrunk);
     }
 
-    public static void setHeight(String height) {
+    public static void setHeight(boolean height) {
         config.set(cfgHeight, height);
     }
 
@@ -183,7 +183,7 @@ public class Config {
         config.set(cfgPattern, enabled);
     }
 
-    public static void setWoolTrunk(String woolTrunk) {
+    public static void setWoolTrunk(boolean woolTrunk) {
         config.set(cfgWoolTrunk, woolTrunk);
     }
 

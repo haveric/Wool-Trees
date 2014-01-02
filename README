@@ -20,12 +20,12 @@ PERMISSIONS: --------------------------------------------------------
 
 CHANGE LOG:  --------------------------------------------------------
 
-Coming Soon:
-* Handle Acacia and Dark Oak trunks
 
-Version 1.2.3
+Version 1.2.3 (1/1/2014)
 * Updated Metrics to R7
 * Removed extra "[WoolTrees]" being logged
+* Handle Acacia and Dark Oak trunks
+* Fixed config issues with setting wool trunks and height checks using non boolean values.
 
 Version 1.2.2 (3/23/2013)
 * Vault is no longer needed for Permissions. Any permission system will do. (It's still needed for economy though)

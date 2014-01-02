@@ -139,10 +139,10 @@ public class Commands implements CommandExecutor {
                     if (val < 0) {
                         if (val == -1.0 && args[0].equalsIgnoreCase(cmdCheck)) {
                             if (args[1].equalsIgnoreCase("true")) {
-                                Config.setHeight(args[1]);
+                                Config.setHeight(true);
                                 msg = "Height Check set to true ";
                             } else if (args[1].equalsIgnoreCase("false")) {
-                                Config.setHeight(args[1]);
+                                Config.setHeight(false);
                                 msg = "Height Check set to false ";
                             } else {
                                 err = "Value is not true or false";
@@ -159,10 +159,10 @@ public class Commands implements CommandExecutor {
                             }
                         } else if (val == -1.0 && args[0].equalsIgnoreCase(cmdWoolTrunk)) {
                             if (args[1].equalsIgnoreCase("true")) {
-                                Config.setWoolTrunk(args[1]);
+                                Config.setWoolTrunk(true);
                                 msg = "Wool Trunks set to true";
                             } else if (args[1].equalsIgnoreCase("false")) {
-                                Config.setWoolTrunk(args[1]);
+                                Config.setWoolTrunk(false);
                                 msg = "Wool Trunks set to false";
                             } else {
                                 err = "Value is not true or false";
