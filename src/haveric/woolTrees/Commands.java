@@ -111,14 +111,10 @@ public class Commands implements CommandExecutor {
                     if (b.getType() == Material.AIR) {
                         sender.sendMessage(wtTitle + "Out of range. Try getting closer");
                     } else {
-                        if (Guard.canPlace(((Player) sender), b.getLocation())) {
-                            if (big) {
-                                WTPlayerInteract.makeBigTree(((Player) sender).getWorld(), 0, 0, b.getX(), b.getY(), b.getZ(), colorArray, val);
-                            } else {
-                                WTPlayerInteract.makeNormalTree(((Player) sender).getWorld(), 0, 0, b.getX(), b.getY(), b.getZ(), colorArray, val);
-                            }
+                        if (big) {
+                            WTPlayerInteract.makeBigTree(((Player) sender), 0, 0, b.getX(), b.getY(), b.getZ(), colorArray, val);
                         } else {
-                            sender.sendMessage("You are not allowed to create wool trees there.");
+                            WTPlayerInteract.makeNormalTree(((Player) sender), 0, 0, b.getX(), b.getY(), b.getZ(), colorArray, val);
                         }
                     }
                 } else if (args.length == 2) {

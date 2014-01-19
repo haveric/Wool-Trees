@@ -20,6 +20,8 @@
 
 ### Changelog:
 
+#### Version 1.2.4
+* Support for all protection and block logging plugins.
 
 #### Version 1.2.3 (1/1/2014)
 * Updated Metrics to R7

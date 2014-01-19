@@ -7,12 +7,9 @@ import java.util.logging.Logger;
 
 import net.milkbowl.vault.economy.Economy;
 
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
 
 
@@ -40,9 +37,6 @@ public class WoolTrees extends JavaPlugin {
         // Vault
         setupVault();
 
-        // WorldGuard
-        setupWorldGuard(pm);
-
         Config.setupConfig();
         Config.setupPatternConfig();
 
@@ -65,15 +59,6 @@ public class WoolTrees extends JavaPlugin {
         RegisteredServiceProvider<Economy> econProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
         if (econProvider != null) {
             econ = econProvider.getProvider();
-        }
-    }
-
-    private void setupWorldGuard(PluginManager pm) {
-        Plugin worldGuard = pm.getPlugin("WorldGuard");
-        if (worldGuard == null || !(worldGuard instanceof WorldGuardPlugin)) {
-            log.info("WorldGuard not found.");
-        } else {
-            Guard.setWorldGuard((WorldGuardPlugin) worldGuard);
         }
     }
 
