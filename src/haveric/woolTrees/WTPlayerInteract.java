@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import net.milkbowl.vault.economy.Economy;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Effect;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -125,6 +126,7 @@ public class WTPlayerInteract implements Listener {
                             }
                         } else {
                             addPattern(world, color, blockX, blockY, blockZ);
+                            world.playEffect(block.getLocation().add(1, 0, 1), Effect.SMOKE, 0);
                         }
 
                         removeFromHand(player);

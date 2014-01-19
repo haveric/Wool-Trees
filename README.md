@@ -22,6 +22,7 @@
 
 #### Version 1.2.4
 * Support for all protection and block logging plugins.
+* Added smoke effect for adding dye to the sapling
 
 #### Version 1.2.3 (1/1/2014)
 * Updated Metrics to R7
