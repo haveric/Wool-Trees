@@ -25,6 +25,13 @@ public class Config {
     private static String cfgPattern = "Pattern Trees";
     private static String cfgWoolTrunk = "Wool Trunks";
 
+    private static String cfgDefaultGen = "Wool Trees Default Generation";
+    private static String cfgBonemealGen = "Bonemeal Generation of Wool Trees";
+    private static String cfgBonemealType = "Bonemeal Generation Type";
+    private static String cfgNaturalGen = "Natural Generation of Wool Trees";
+    private static String cfgNaturalType = "Natural Generation Type";
+
+
     private static final double TREE_DEFAULT = 20.0;
     private static final double WOOL_DEFAULT = 90.0;
     private static final double BIG_DEFAULT = 10.0;
@@ -33,6 +40,13 @@ public class Config {
     private static final int LIGHT_LEVEL_DEFAULT = 9;
     private static final boolean PATTERN_TREES_DEFAULT = true;
     private static final boolean WOOL_TRUNKS_DEFAULT = true;
+
+    private static final boolean DEFAULT_GEN_DEFAULT = true;
+    private static final boolean BONEMEAL_GEN_DEFAULT = false;
+    private static final boolean NATURAL_GEN_DEFAULT = false;
+    // TODO: Figure out a better way to set generation types.
+    private static final String BONEMEAL_GEN_TYPE = "pattern";
+    private static final String NATURAL_GEN_TYPE = "randomSolid";
 
     public static void init(WoolTrees wt) {
         plugin = wt;
