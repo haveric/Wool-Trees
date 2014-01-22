@@ -122,6 +122,18 @@ public class Config {
             config.set(cfgWoolTrunk, WOOL_TRUNKS_DEFAULT);
         }
 
+        if (!config.isSet(cfgDefaultGen)) {
+            config.set(cfgDefaultGen, DEFAULT_GEN_DEFAULT);
+        }
+
+        if (!config.isSet(cfgBonemealGen)) {
+            config.set(cfgBonemealGen, BONEMEAL_GEN_DEFAULT);
+        }
+
+        if (!config.isSet(cfgNaturalGen)) {
+            config.set(cfgNaturalGen, NATURAL_GEN_DEFAULT);
+        }
+
         saveConfig();
     }
 
@@ -189,6 +201,19 @@ public class Config {
         return config.getBoolean(cfgWoolTrunk);
     }
 
+    public static boolean isDefaultGenEnabled() {
+        return config.getBoolean(cfgDefaultGen);
+    }
+
+    public static boolean isBonemealGenEnabled() {
+        return config.getBoolean(cfgBonemealGen);
+    }
+
+    public static boolean isNaturalGenEnabled() {
+        return config.getBoolean(cfgNaturalGen);
+    }
+
+
     public static void setHeight(boolean height) {
         config.set(cfgHeight, height);
     }
@@ -219,5 +244,17 @@ public class Config {
 
     public static void setLight(int light) {
         config.set(cfgLight, light);
+    }
+
+    public static void setDefaultGen(boolean defaultGen) {
+        config.set(cfgDefaultGen, defaultGen);
+    }
+
+    public static void setBonemealGen(boolean bonemealGen) {
+        config.set(cfgBonemealGen, bonemealGen);
+    }
+
+    public static void setNaturalGen(boolean naturalGen) {
+        config.set(cfgNaturalGen, naturalGen);
     }
 }
