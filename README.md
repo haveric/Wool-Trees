@@ -20,6 +20,10 @@
 
 ### Changelog:
 
+#### Version 1.2.5
+* Added shorthand versions for light colors for the here command.
+
+
 #### Version 1.2.4 (1/19/2014)
 * Support for all protection and block logging plugins.
 * Added smoke effect for adding dye to the sapling

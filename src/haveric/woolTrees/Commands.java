@@ -67,17 +67,17 @@ public class Commands implements CommandExecutor {
                             colorArray.add(1);
                         } else if (args[i].equalsIgnoreCase("magenta")) {
                             colorArray.add(2);
-                        } else if (args[i].equalsIgnoreCase("lightblue")) {
+                        } else if (args[i].equalsIgnoreCase("lightblue") || args[i].equalsIgnoreCase("lblue")) {
                             colorArray.add(3);
                         } else if (args[i].equalsIgnoreCase("yellow")) {
                             colorArray.add(4);
-                        } else if (args[i].equalsIgnoreCase("lightgreen")) {
+                        } else if (args[i].equalsIgnoreCase("lightgreen") || args[i].equalsIgnoreCase("lgreen")) {
                             colorArray.add(5);
                         } else if (args[i].equalsIgnoreCase("pink")) {
                             colorArray.add(6);
                         } else if (args[i].equalsIgnoreCase("gray") || args[i].equalsIgnoreCase("grey")) {
                             colorArray.add(7);
-                        } else if (args[i].equalsIgnoreCase("lightgray") || args[i].equalsIgnoreCase("lightgrey")) {
+                        } else if (args[i].equalsIgnoreCase("lightgray") || args[i].equalsIgnoreCase("lightgrey") || args[i].equalsIgnoreCase("lgray") || args[i].equalsIgnoreCase("lgrey")) {
                             colorArray.add(8);
                         } else if (args[i].equalsIgnoreCase("cyan")) {
                             colorArray.add(9);
