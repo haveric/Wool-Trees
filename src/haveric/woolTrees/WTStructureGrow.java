@@ -8,6 +8,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.TreeType;
 import org.bukkit.block.BlockState;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.world.StructureGrowEvent;
@@ -24,10 +25,11 @@ public class WTStructureGrow implements Listener {
         String patternConfig = event.getWorld().getName() + ":" + l.getBlockX() + "," + l.getBlockY() + "," + l.getBlockZ();
         String colors = Config.getPattern(patternConfig);
 
+        Player player = event.getPlayer();
 
         boolean fromBonemeal = event.isFromBonemeal();
 
-        if ((fromBonemeal && Config.isBonemealGenEnabled()) || (!fromBonemeal && Config.isNaturalGenEnabled())) {
+        if ((fromBonemeal && Config.isBonemealGenEnabled() && (player == null || Perms.canPlant(player))) || (!fromBonemeal && Config.isNaturalGenEnabled())) {
             TreeType treeType = event.getSpecies();
 
             if (isActuallyTree(treeType)) {
