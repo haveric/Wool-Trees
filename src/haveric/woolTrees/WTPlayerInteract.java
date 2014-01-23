@@ -107,7 +107,7 @@ public class WTPlayerInteract implements Listener {
 
                     if (canBuild) {
                         // if a tree will spawn
-                        if (random(100) <= Config.getTree()) {
+                        if (Config.isDefaultGenEnabled() && random(100) <= Config.getTree()) {
                             if (patternsEnabled) {
                                 addPattern(world, color, blockX, blockY, blockZ);
                             }

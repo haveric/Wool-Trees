@@ -22,6 +22,10 @@
 
 #### Version 1.2.5
 * Added shorthand versions for light colors for the here command.
+* Added Default, Bonemeal, and Natural Generation Configs.
+* - Default: Current method of creating trees
+* - Bonemeal: Converts bonemealed tree to a wool tree (Random color if no dyes applied)
+* - Natural: Converts a randomly spawned tree to a wool tree.
 
 
 #### Version 1.2.4 (1/19/2014)
