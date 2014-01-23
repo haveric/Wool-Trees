@@ -339,6 +339,5 @@ public class WTPlayerInteract implements Listener {
             color = array.get((int) (Math.random() * array.size()));
         }
         return color;
-
     }
 }

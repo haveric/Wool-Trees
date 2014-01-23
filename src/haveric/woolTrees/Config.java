@@ -44,9 +44,6 @@ public class Config {
     private static final boolean DEFAULT_GEN_DEFAULT = true;
     private static final boolean BONEMEAL_GEN_DEFAULT = false;
     private static final boolean NATURAL_GEN_DEFAULT = false;
-    // TODO: Figure out a better way to set generation types.
-    private static final String BONEMEAL_GEN_TYPE = "pattern";
-    private static final String NATURAL_GEN_TYPE = "randomSolid";
 
     public static void init(WoolTrees wt) {
         plugin = wt;
@@ -166,7 +163,11 @@ public class Config {
     }
 
     public static String getPattern(String loc) {
-        return patternConfig.getString(loc);
+        String pattern = patternConfig.getString(loc);
+        if (pattern == null) {
+            pattern = "";
+        }
+        return pattern;
     }
 
     public static double getTree() {
