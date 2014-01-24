@@ -8,12 +8,15 @@
 * wooltrees.adjust
     - Allows in-game commands to adjust config values
         * </wooltrees,/wt,/wt help>           Brings up the help menu with the commands.
-        * </wooltrees,/wt> tree  <0-100>      % of a wool tree spawning.
+        * </wooltrees,/wt> defgen <true,false> Default Generation (Old WoolTrees method)
+        *   </wooltrees,/wt> tree  <0-100>      % of a wool tree spawning.
+        *   </wooltrees,/wt> big   <0-100>      % of trees that become big trees.
+        *   </wooltrees,/wt> cost  <0+>         Cost to plant a tree.
+        *   </wooltrees,/wt> check <true,false> Height Check. (Checks if the trunk is blocked)
+        *   </wooltrees,/wt> light <0-15>       Light Level needed for a tree to spawn.
+        * </wooltrees,/wt> bonegen <true,false> Bonemeal Generation
+        * </wooltrees,/wt> natgen <true,false> Natural Generation (Random tree spawns)
         * </wooltrees,/wt> wool  <0-100>      % of wool blocks not replaced with air.
-        * </wooltrees,/wt> big   <0-100>      % of trees that become big trees.
-        * </wooltrees,/wt> cost  <0+>         Cost to plant a tree.
-        * </wooltrees,/wt> check <true,false> Height Check. (Checks if the trunk is blocked)
-        * </wooltrees,/wt> light <0-15>       Light Level needed for a tree to spawn.
         * </wooltrees,/wt> pattern <true,false> Pattern Trees.
         * </wooltrees,/wt> trunk <true,false> Wool Trunks.
         * </wooltrees,/wt> here [wool%] [big] [color(s)]
@@ -26,6 +29,10 @@
 * - Default: Current method of creating trees
 * - Bonemeal: Converts bonemealed tree to a wool tree (Random color if no dyes applied)
 * - Natural: Converts a randomly spawned tree to a wool tree.
+* Added new commands:
+* </wooltrees,/wt> defgen <true,false> Default Generation (Old WoolTrees method)
+* </wooltrees,/wt> bonegen <true,false> Bonemeal Generation
+* </wooltrees,/wt> natgen <true,false> Natural Generation (Random tree spawns)
 
 
 #### Version 1.2.4 (1/19/2014)

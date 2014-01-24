@@ -27,6 +27,9 @@ public class Commands implements CommandExecutor {
     private String cmdPattern = "pattern";
     private String cmdWoolTrunk = "trunk";
     private String cmdHere = "here";
+    private String cmdDefaultGen = "defgen";
+    private String cmdBonemealGen = "bonegen";
+    private String cmdNaturalGen = "natgen";
 
     private WoolTrees plugin;
 
@@ -44,13 +47,19 @@ public class Commands implements CommandExecutor {
             if (commandLabel.equalsIgnoreCase(cmdMain) || commandLabel.equalsIgnoreCase(cmdMainAlt)) {
 
                 if (args.length == 0 || (args.length == 1 && args[0].equalsIgnoreCase(cmdHelp))) {
+                    boolean defaultGenEnabled = Config.isDefaultGenEnabled();
+                    sender.sendMessage("");
                     sender.sendMessage(wtTitle + "github.com/haveric/wool-trees - v" + plugin.getDescription().getVersion());
-                    sender.sendMessage("/" + cmdMain + " " + cmdTree  + " <0-100> (" + valColor + Config.getTree() + defColor + ") - " + msgColor + "% of a wool tree spawning.");
+                    sender.sendMessage("/" + cmdMain + " " + cmdDefaultGen + " <true,false> (" + valColor + defaultGenEnabled + defColor + ") - " + msgColor + "Default Generation");
+                    sender.sendMessage("  /" + cmdMain + " " + cmdTree  + " <0-100> (" + valColor + Config.getTree() + defColor + ") - " + msgColor + "% of a wool tree spawning.");
+                    sender.sendMessage("  /" + cmdMain + " " + cmdBig   + " <0-100> (" + valColor + Config.getBig() + defColor + ") - " + msgColor + "% big trees.");
+                    sender.sendMessage("  /" + cmdMain + " " + cmdCost  + " <0+> ("    + valColor + Config.getCost() + defColor + ") - " + msgColor + "Cost to plant a tree.");
+                    sender.sendMessage("  /" + cmdMain + " " + cmdCheck + " <true,false> (" + valColor + Config.isHeightEnabled() + defColor + ") - " + msgColor + "Height Check.");
+                    sender.sendMessage("  /" + cmdMain + " " + cmdLight + " <0-15> ("  + valColor + Config.getLight() + defColor + ") - " + msgColor + "Light Level.");
+
+                    sender.sendMessage("/" + cmdMain + " " + cmdBonemealGen + " <true,false> (" + valColor + Config.isBonemealGenEnabled() + defColor + ") - " + msgColor + "Bonemeal Generation");
+                    sender.sendMessage("/" + cmdMain + " " + cmdNaturalGen + " <true,false> (" + valColor + Config.isNaturalGenEnabled() + defColor + ") - " + msgColor + "Natural Generation");
                     sender.sendMessage("/" + cmdMain + " " + cmdWool  + " <0-100> (" + valColor + Config.getWool() + defColor + ") - " + msgColor + "% wool blocks kept.");
-                    sender.sendMessage("/" + cmdMain + " " + cmdBig   + " <0-100> (" + valColor + Config.getBig() + defColor + ") - " + msgColor + "% big trees.");
-                    sender.sendMessage("/" + cmdMain + " " + cmdCost  + " <0+> ("    + valColor + Config.getCost() + defColor + ") - " + msgColor + "Cost to plant a tree.");
-                    sender.sendMessage("/" + cmdMain + " " + cmdCheck + " <true,false> (" + valColor + Config.isHeightEnabled() + defColor + ") - " + msgColor + "Height Check.");
-                    sender.sendMessage("/" + cmdMain + " " + cmdLight + " <0-15> ("  + valColor + Config.getLight() + defColor + ") - " + msgColor + "Light Level.");
                     sender.sendMessage("/" + cmdMain + " " + cmdPattern + " <true,false> (" + valColor + Config.isPatternEnabled() + defColor + ") - " + msgColor + "Pattern Trees.");
                     sender.sendMessage("/" + cmdMain + " " + cmdWoolTrunk + " <true,false> (" + valColor + Config.isWoolTrunksEnabled() + defColor + ") - " + msgColor + "Wool Trunks.");
                     sender.sendMessage("/" + cmdMain + " " + cmdHere + " [wool%] [big] [color]" + defColor + " - " + msgColor + "Create Tree at Mouse.");
@@ -160,6 +169,36 @@ public class Commands implements CommandExecutor {
                             } else if (args[1].equalsIgnoreCase("false")) {
                                 Config.setWoolTrunk(false);
                                 msg = "Wool Trunks set to false";
+                            } else {
+                                err = "Value is not true or false";
+                            }
+                        } else if (val == -1.0 && args[0].equalsIgnoreCase(cmdDefaultGen)) {
+                            if (args[1].equalsIgnoreCase("true")) {
+                                Config.setDefaultGen(true);
+                                msg = "Default generation set to true";
+                            } else if (args[1].equalsIgnoreCase("false")) {
+                                Config.setDefaultGen(false);
+                                msg = "Default generation set to false";
+                            } else {
+                                err = "Value is not true or false";
+                            }
+                        } else if (val == -1.0 && args[0].equalsIgnoreCase(cmdBonemealGen)) {
+                            if (args[1].equalsIgnoreCase("true")) {
+                                Config.setBonemealGen(true);
+                                msg = "Bonemeal generation set to true";
+                            } else if (args[1].equalsIgnoreCase("false")) {
+                                Config.setBonemealGen(false);
+                                msg = "Bonemeal generation set to false";
+                            } else {
+                                err = "Value is not true or false";
+                            }
+                        } else if (val == -1.0 && args[0].equalsIgnoreCase(cmdNaturalGen)) {
+                            if (args[1].equalsIgnoreCase("true")) {
+                                Config.setNaturalGen(true);
+                                msg = "Natural generation set to true";
+                            } else if (args[1].equalsIgnoreCase("false")) {
+                                Config.setNaturalGen(false);
+                                msg = "Natural generation set to false";
                             } else {
                                 err = "Value is not true or false";
                             }

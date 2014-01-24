@@ -27,9 +27,7 @@ public class Config {
 
     private static String cfgDefaultGen = "Wool Trees Default Generation";
     private static String cfgBonemealGen = "Bonemeal Generation of Wool Trees";
-    private static String cfgBonemealType = "Bonemeal Generation Type";
     private static String cfgNaturalGen = "Natural Generation of Wool Trees";
-    private static String cfgNaturalType = "Natural Generation Type";
 
 
     private static final double TREE_DEFAULT = 20.0;
