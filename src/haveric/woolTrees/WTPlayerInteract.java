@@ -34,17 +34,12 @@ public class WTPlayerInteract implements Listener {
         Economy econ = plugin.getEcon();
         Player player = event.getPlayer();
 
-        World world = player.getWorld();
-        Block block = event.getClickedBlock();
-
-        ItemStack holding = player.getItemInHand();
-
-        boolean currencyEnabled = true;
-
-        boolean patternsEnabled = Config.isPatternEnabled();
-
         if (Perms.canPlant(player)) {
+            Block block = event.getClickedBlock();
+
             if (event.getAction() == Action.RIGHT_CLICK_BLOCK && block.getType() == Material.SAPLING) {
+                World world = player.getWorld();
+
                 int woodType = block.getData();
 
                 int blockX = block.getX();
@@ -56,12 +51,15 @@ public class WTPlayerInteract implements Listener {
                     return;
                 }
 
+                boolean currencyEnabled = true;
                 if (econ == null || Perms.hasIC(player)) {
                     currencyEnabled = false; // doesn't cost anything so we don't need economy.
                 } else if (!econ.has(player.getName(), Config.getCost())) {
                     player.sendMessage(ChatColor.RED + "Not enough money to plant a wool tree. Need " + Config.getCost());
                     return;
                 }
+
+                ItemStack holding = player.getItemInHand();
 
                 int color = 0;
                 if (holding.getType() == Material.INK_SACK) {
@@ -108,6 +106,8 @@ public class WTPlayerInteract implements Listener {
                     if (canBuild) {
                         // if a tree will spawn
                         if (Config.isDefaultGenEnabled() && random(100) <= Config.getTree()) {
+                            boolean patternsEnabled = Config.isPatternEnabled();
+
                             if (patternsEnabled) {
                                 addPattern(world, color, blockX, blockY, blockZ);
                             }
@@ -175,13 +175,13 @@ public class WTPlayerInteract implements Listener {
     }
 
     public static void makeNormalTree(Player player, int wood, int color, int x, int y, int z, ArrayList<Integer> colorArray, double leaves) {
-        World w = player.getWorld();
+        World world = player.getWorld();
         if (colorArray == null) {
             colorArray = new ArrayList<Integer>();
 
             // if patterns enabled
             if (Config.isPatternEnabled()) {
-                String colors = Config.getPattern(w.getName() + ":" + x + "," + y + "," + z);
+                String colors = Config.getPattern(world.getName() + ":" + x + "," + y + "," + z);
 
                 for (int i = -2; i <= 15; i ++) {
                     if (colors.contains("(" + i + ")")) {
@@ -193,7 +193,7 @@ public class WTPlayerInteract implements Listener {
             }
         }
 
-        Block block = w.getBlockAt(x, y, z);
+        Block block = world.getBlockAt(x, y, z);
         BlockState state = block.getState();
 
         setLog(block, wood);
@@ -206,7 +206,7 @@ public class WTPlayerInteract implements Listener {
             state.update(true);
         } else {
             for (int i = 1; i < 6; i++) {
-                setLog(w.getBlockAt(x, y + i, z), wood);
+                setLog(world.getBlockAt(x, y + i, z), wood);
             }
 
 
@@ -215,28 +215,28 @@ public class WTPlayerInteract implements Listener {
                     if (i == 0 && j == 0) {
                         // trunk is here
                     } else {
-                        setColoredBlock(w.getBlockAt(x+i, y+3, z+j), getRandomColor(colorArray), leaves);
-                        setColoredBlock(w.getBlockAt(x+i, y+4, z+j), getRandomColor(colorArray), leaves);
+                        setColoredBlock(world.getBlockAt(x+i, y+3, z+j), getRandomColor(colorArray), leaves);
+                        setColoredBlock(world.getBlockAt(x+i, y+4, z+j), getRandomColor(colorArray), leaves);
 
                         if (i != 2 && i != -2 && j != 2 && j != -2) {
-                            setColoredBlock(w.getBlockAt(x+i, y+5, z+j), getRandomColor(colorArray), leaves);
+                            setColoredBlock(world.getBlockAt(x+i, y+5, z+j), getRandomColor(colorArray), leaves);
                         }
                     }
                 }
             }
-            setColoredBlock(w.getBlockAt(x, y+6, z),getRandomColor(colorArray), leaves);
+            setColoredBlock(world.getBlockAt(x, y+6, z),getRandomColor(colorArray), leaves);
         }
     }
 
     public static void makeBigTree(Player player, int wood, int color, int x, int y, int z, ArrayList<Integer> colorArray, double leaves) {
-        World w = player.getWorld();
+        World world = player.getWorld();
 
         if (colorArray == null) {
             colorArray = new ArrayList<Integer>();
 
             // if patterns enabled
             if (Config.isPatternEnabled()) {
-                String colors = Config.getPattern(w.getName() + ":" + x + "," + y + "," + z);
+                String colors = Config.getPattern(world.getName() + ":" + x + "," + y + "," + z);
 
                 for (int i = -2; i <= 15; i ++) {
                     if (colors.contains("(" + i + ")")) {
@@ -249,7 +249,7 @@ public class WTPlayerInteract implements Listener {
         }
 
 
-        Block block = w.getBlockAt(x, y, z);
+        Block block = world.getBlockAt(x, y, z);
         BlockState state = block.getState();
 
         setLog(block, wood);
@@ -263,26 +263,26 @@ public class WTPlayerInteract implements Listener {
         } else {
             // Make rest of tree
             for (int i = 1; i < 10; i ++) {
-                setLog(w.getBlockAt(x, y + i, z), wood);
+                setLog(world.getBlockAt(x, y + i, z), wood);
             }
             for (int i = -2; i <= 2; i ++) {
                 for (int j = -2; j <= 2; j ++) {
                     if (i == 0 && j == 0) {
                         // trunk is here
                     } else {
-                        setColoredBlock(w.getBlockAt(x+i, y+6, z+j), getRandomColor(colorArray), leaves);
-                        setColoredBlock(w.getBlockAt(x+i, y+7, z+j), getRandomColor(colorArray), leaves);
-                        setColoredBlock(w.getBlockAt(x+i, y+8, z+j), getRandomColor(colorArray), leaves);
+                        setColoredBlock(world.getBlockAt(x+i, y+6, z+j), getRandomColor(colorArray), leaves);
+                        setColoredBlock(world.getBlockAt(x+i, y+7, z+j), getRandomColor(colorArray), leaves);
+                        setColoredBlock(world.getBlockAt(x+i, y+8, z+j), getRandomColor(colorArray), leaves);
 
                         if ((i == 2 && j == 2) || (i == 2 && j == -2) || (i == -2 && j == 2) || (i == -2 && j == -2)) {
                             // 5x5 corners
                         } else {
-                            setColoredBlock(w.getBlockAt(x+i, y+5, z+j), getRandomColor(colorArray), leaves);
-                            setColoredBlock(w.getBlockAt(x+i, y+9, z+j), getRandomColor(colorArray), leaves);
+                            setColoredBlock(world.getBlockAt(x+i, y+5, z+j), getRandomColor(colorArray), leaves);
+                            setColoredBlock(world.getBlockAt(x+i, y+9, z+j), getRandomColor(colorArray), leaves);
                         }
                         if (i != 2 && i != -2 && j != 2 && j != -2) { // 3x3
-                            setColoredBlock(w.getBlockAt(x+i, y+4, z+j), getRandomColor(colorArray), leaves);
-                            setColoredBlock(w.getBlockAt(x+i, y+10, z+j), getRandomColor(colorArray), leaves);
+                            setColoredBlock(world.getBlockAt(x+i, y+4, z+j), getRandomColor(colorArray), leaves);
+                            setColoredBlock(world.getBlockAt(x+i, y+10, z+j), getRandomColor(colorArray), leaves);
                         }
                     }
                 }
