@@ -138,7 +138,7 @@ public class WTPlayerInteract implements Listener {
 
     // Remove one item from hand
     private void removeFromHand(Player player) {
-        if (player.getGameMode() == GameMode.SURVIVAL) {
+        if (player.getGameMode() != GameMode.CREATIVE) {
             ItemStack holding = player.getItemInHand();
 
             int amt = holding.getAmount();

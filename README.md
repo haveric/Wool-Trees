@@ -33,6 +33,7 @@
 * </wooltrees,/wt> defgen <true,false> Default Generation (Old WoolTrees method)
 * </wooltrees,/wt> bonegen <true,false> Bonemeal Generation
 * </wooltrees,/wt> natgen <true,false> Natural Generation (Random tree spawns)
+* Remove items from all non-creative GameModes and not just survival
 
 
 #### Version 1.2.4 (1/19/2014)
