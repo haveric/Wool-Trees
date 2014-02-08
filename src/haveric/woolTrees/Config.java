@@ -45,8 +45,8 @@ public class Config {
 
     public static void init(WoolTrees wt) {
         plugin = wt;
-        configFile = new File(plugin.getDataFolder() + "/config.yml");
-        patternConfigFile = new File(plugin.getDataFolder() + "/patterns.yml");
+        configFile = new File(plugin.getDataFolder() + File.separator + "config.yml");
+        patternConfigFile = new File(plugin.getDataFolder() + File.separator + "patterns.yml");
     }
 
     public static void setupConfig() {
