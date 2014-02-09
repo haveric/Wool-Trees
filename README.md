@@ -23,7 +23,7 @@
 
 ### Changelog:
 
-#### Version 1.2.5
+#### Version 1.2.5 (2/8/2014)
 * Added shorthand versions for light colors for the here command.
 * Added Default, Bonemeal, and Natural Generation Configs.
 * - Default: Current method of creating trees
