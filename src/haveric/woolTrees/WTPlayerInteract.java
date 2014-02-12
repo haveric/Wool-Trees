@@ -31,16 +31,14 @@ public class WTPlayerInteract implements Listener {
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
-        Economy econ = plugin.getEcon();
         Player player = event.getPlayer();
 
         if (Perms.canPlant(player)) {
             Block block = event.getClickedBlock();
 
             if (event.getAction() == Action.RIGHT_CLICK_BLOCK && block.getType() == Material.SAPLING) {
+                Economy econ = plugin.getEcon();
                 World world = player.getWorld();
-
-                int woodType = block.getData();
 
                 int blockX = block.getX();
                 int blockY = block.getY();
@@ -87,6 +85,7 @@ public class WTPlayerInteract implements Listener {
                 if (!Config.isHeightEnabled() || (bigTree && !treeBlocked(world, player, blockX, blockY, blockZ, 10))
                     || (!bigTree && !treeBlocked(world, player, blockX, blockY, blockZ, 6))) {
 
+                    int woodType = block.getData();
                     boolean canBuild = false;
                     BlockState state = block.getState();
                     setLog(player.getWorld().getBlockAt(blockX, blockY, blockY), woodType);
@@ -209,7 +208,6 @@ public class WTPlayerInteract implements Listener {
                 setLog(world.getBlockAt(x, y + i, z), wood);
             }
 
-
             for (int i = -2; i <= 2; i ++) {
                 for (int j = -2; j <= 2; j ++) {
                     if (i == 0 && j == 0) {
@@ -289,7 +287,6 @@ public class WTPlayerInteract implements Listener {
             }
         }
     }
-
 
     private static void setColoredBlock(Block block, int color, double leaves) {
         int wool = random(100);
