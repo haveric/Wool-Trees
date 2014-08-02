@@ -23,6 +23,9 @@
 
 ### Changelog:
 
+#### Coming Soon:
+* Updated Metrics to work with updated getOnlinePlayers
+
 #### Version 1.2.5 (2/8/2014)
 * Added shorthand versions for light colors for the here command.
 * Added Default, Bonemeal, and Natural Generation Configs.
