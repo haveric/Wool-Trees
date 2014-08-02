@@ -24,6 +24,7 @@
 ### Changelog:
 
 #### Coming Soon:
+* Improved default command to make it more compact and easier to read.
 * Updated Metrics to work with updated getOnlinePlayers
 
 #### Version 1.2.5 (2/8/2014)

@@ -31,6 +31,10 @@ public class Commands implements CommandExecutor {
     private String cmdBonemealGen = "bonegen";
     private String cmdNaturalGen = "natgen";
 
+    private static ChatColor msgColor = ChatColor.DARK_AQUA;
+    private static ChatColor valColor = ChatColor.GOLD;
+    private static ChatColor defColor = ChatColor.WHITE;
+
     private WoolTrees plugin;
 
     public Commands(WoolTrees wt) {
@@ -38,9 +42,6 @@ public class Commands implements CommandExecutor {
     }
 
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-        ChatColor msgColor = ChatColor.DARK_AQUA;
-        ChatColor valColor = ChatColor.GOLD;
-        ChatColor defColor = ChatColor.WHITE;
         String wtTitle = msgColor + "[" + ChatColor.GRAY + "WoolTrees" + msgColor + "] ";
 
         if (Perms.canAdjust((Player) sender)) {
@@ -50,18 +51,18 @@ public class Commands implements CommandExecutor {
                     boolean defaultGenEnabled = Config.isDefaultGenEnabled();
                     sender.sendMessage("");
                     sender.sendMessage(wtTitle + "github.com/haveric/wool-trees - v" + plugin.getDescription().getVersion());
-                    sender.sendMessage("/" + cmdMain + " " + cmdDefaultGen + " <true,false> (" + valColor + defaultGenEnabled + defColor + ") - " + msgColor + "Default Generation");
-                    sender.sendMessage("  /" + cmdMain + " " + cmdTree  + " <0-100> (" + valColor + Config.getTree() + defColor + ") - " + msgColor + "% of a wool tree spawning.");
-                    sender.sendMessage("  /" + cmdMain + " " + cmdBig   + " <0-100> (" + valColor + Config.getBig() + defColor + ") - " + msgColor + "% big trees.");
-                    sender.sendMessage("  /" + cmdMain + " " + cmdCost  + " <0+> ("    + valColor + Config.getCost() + defColor + ") - " + msgColor + "Cost to plant a tree.");
-                    sender.sendMessage("  /" + cmdMain + " " + cmdCheck + " <true,false> (" + valColor + Config.isHeightEnabled() + defColor + ") - " + msgColor + "Height Check.");
-                    sender.sendMessage("  /" + cmdMain + " " + cmdLight + " <0-15> ("  + valColor + Config.getLight() + defColor + ") - " + msgColor + "Light Level.");
+                    sender.sendMessage("/" + cmdMain + " " + cmdDefaultGen + getTFString(defaultGenEnabled) + " - " + msgColor + "Default Generation");
+                    sender.sendMessage("  /" + cmdMain + " " + cmdTree  + " <0-100> " + valColor + Config.getTree() + defColor + " - " + msgColor + "% of a wool tree spawning.");
+                    sender.sendMessage("  /" + cmdMain + " " + cmdBig   + " <0-100> " + valColor + Config.getBig() + defColor + " - " + msgColor + "% big trees.");
+                    sender.sendMessage("  /" + cmdMain + " " + cmdCost  + " <0+> "    + valColor + Config.getCost() + defColor + " - " + msgColor + "Cost to plant a tree.");
+                    sender.sendMessage("  /" + cmdMain + " " + cmdCheck + getTFString(Config.isHeightEnabled()) + " - " + msgColor + "Height Check.");
+                    sender.sendMessage("  /" + cmdMain + " " + cmdLight + " <0-15> "  + valColor + Config.getLight() + defColor + " - " + msgColor + "Light Level.");
 
-                    sender.sendMessage("/" + cmdMain + " " + cmdBonemealGen + " <true,false> (" + valColor + Config.isBonemealGenEnabled() + defColor + ") - " + msgColor + "Bonemeal Generation");
-                    sender.sendMessage("/" + cmdMain + " " + cmdNaturalGen + " <true,false> (" + valColor + Config.isNaturalGenEnabled() + defColor + ") - " + msgColor + "Natural Generation");
-                    sender.sendMessage("/" + cmdMain + " " + cmdWool  + " <0-100> (" + valColor + Config.getWool() + defColor + ") - " + msgColor + "% wool blocks kept.");
-                    sender.sendMessage("/" + cmdMain + " " + cmdPattern + " <true,false> (" + valColor + Config.isPatternEnabled() + defColor + ") - " + msgColor + "Pattern Trees.");
-                    sender.sendMessage("/" + cmdMain + " " + cmdWoolTrunk + " <true,false> (" + valColor + Config.isWoolTrunksEnabled() + defColor + ") - " + msgColor + "Wool Trunks.");
+                    sender.sendMessage("/" + cmdMain + " " + cmdBonemealGen + getTFString(Config.isBonemealGenEnabled()) + " - " + msgColor + "Bonemeal Generation");
+                    sender.sendMessage("/" + cmdMain + " " + cmdNaturalGen + getTFString(Config.isNaturalGenEnabled()) + " - " + msgColor + "Natural Generation");
+                    sender.sendMessage("/" + cmdMain + " " + cmdWool  + " <0-100> " + valColor + Config.getWool() + defColor + " - " + msgColor + "% wool blocks kept.");
+                    sender.sendMessage("/" + cmdMain + " " + cmdPattern + getTFString(Config.isPatternEnabled()) + " - " + msgColor + "Pattern Trees.");
+                    sender.sendMessage("/" + cmdMain + " " + cmdWoolTrunk + getTFString(Config.isWoolTrunksEnabled()) + " - " + msgColor + "Wool Trunks.");
                     sender.sendMessage("/" + cmdMain + " " + cmdHere + " [wool%] [big] [color]" + defColor + " - " + msgColor + "Create Tree at Mouse.");
                 } else if (args.length >= 1 && args[0].equalsIgnoreCase(cmdHere)) {
                     boolean big = false;
@@ -271,6 +272,17 @@ public class Commands implements CommandExecutor {
         return false;
     }
 
+    public static String getTFString(boolean bool) {
+        String msg = "";
+
+        if (bool) {
+            msg = " <" + valColor + "true" + defColor + ",false>";
+        } else {
+            msg = " <true," + valColor + "false" + defColor + ">";
+        }
+
+        return msg;
+    }
     public static String getMain() {
         return cmdMain;
     }
