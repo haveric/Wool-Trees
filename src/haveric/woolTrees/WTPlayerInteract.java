@@ -173,14 +173,13 @@ public class WTPlayerInteract implements Listener {
         return blocked;
     }
 
-    public static void makeNormalTree(Player player, int wood, int color, int x, int y, int z, ArrayList<Integer> colorArray, double leaves) {
-        World world = player.getWorld();
+    private static ArrayList<Integer> updateColorArray(ArrayList<Integer> colorArray, int color, String patternString) {
         if (colorArray == null) {
             colorArray = new ArrayList<Integer>();
 
             // if patterns enabled
             if (Config.isPatternEnabled()) {
-                String colors = Config.getPattern(world.getName() + ":" + x + "," + y + "," + z);
+                String colors = Config.getPattern(patternString);
 
                 for (int i = -2; i <= 15; i ++) {
                     if (colors.contains("(" + i + ")")) {
@@ -191,6 +190,13 @@ public class WTPlayerInteract implements Listener {
                 colorArray.add(color);
             }
         }
+        return colorArray;
+    }
+    public static void makeNormalTree(Player player, int wood, int color, int x, int y, int z, ArrayList<Integer> colorArray, double leaves) {
+        World world = player.getWorld();
+
+        String patternString = world.getName() + ":" + x + "," + y + "," + z;
+        colorArray = updateColorArray(colorArray, color, patternString);
 
         Block block = world.getBlockAt(x, y, z);
         BlockState state = block.getState();
@@ -229,23 +235,8 @@ public class WTPlayerInteract implements Listener {
     public static void makeBigTree(Player player, int wood, int color, int x, int y, int z, ArrayList<Integer> colorArray, double leaves) {
         World world = player.getWorld();
 
-        if (colorArray == null) {
-            colorArray = new ArrayList<Integer>();
-
-            // if patterns enabled
-            if (Config.isPatternEnabled()) {
-                String colors = Config.getPattern(world.getName() + ":" + x + "," + y + "," + z);
-
-                for (int i = -2; i <= 15; i ++) {
-                    if (colors.contains("(" + i + ")")) {
-                        colorArray.add(i);
-                    }
-                }
-            } else {
-                colorArray.add(color);
-            }
-        }
-
+        String patternString = world.getName() + ":" + x + "," + y + "," + z;
+        colorArray = updateColorArray(colorArray, color, patternString);
 
         Block block = world.getBlockAt(x, y, z);
         BlockState state = block.getState();
