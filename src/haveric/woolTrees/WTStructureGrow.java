@@ -65,9 +65,9 @@ public class WTStructureGrow implements Listener {
                             int color = getRandomColor(colorArray);
                             if (color == -1) {
                                 color = (int) (Math.random() * 16); // 0-15
-                            } else if (color > -1) {
-                                state.setRawData((byte) color);
                             }
+
+                            state.setRawData((byte) color);
                         } else {
                             state.setType(Material.AIR);
                         }
