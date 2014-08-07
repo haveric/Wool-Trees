@@ -14,7 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 
 public class WoolTrees extends JavaPlugin {
-    static Logger log;
+    public Logger log;
 
     private Commands commands = new Commands(this);
 

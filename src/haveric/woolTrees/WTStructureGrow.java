@@ -76,10 +76,7 @@ public class WTStructureGrow implements Listener {
             }
         }
 
-        if (Config.getPattern(patternConfig) != null) {
-            Config.setPattern(patternConfig, null);
-        }
-
+        Config.setPattern(patternConfig, null);
     }
 
     private int random(int num) {
@@ -103,6 +100,8 @@ public class WTStructureGrow implements Listener {
             case BROWN_MUSHROOM:
             case RED_MUSHROOM:
                 isTree = false;
+                break;
+            default:
                 break;
         }
         return isTree;

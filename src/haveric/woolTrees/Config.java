@@ -56,10 +56,10 @@ public class Config {
 
         if (treeSpawnPercentage < 0) {
             config.set(cfgTree, 0.0);
-            WoolTrees.log.warning("Tree Spawn % below 0.  Defaulting to 0.");
+            plugin.log.warning("Tree Spawn % below 0.  Defaulting to 0.");
         } else if (treeSpawnPercentage > 100) {
             config.set(cfgTree, 100.0);
-            WoolTrees.log.warning("Tree Spawn % above 100.  Defaulting to 100");
+            plugin.log.warning("Tree Spawn % above 100.  Defaulting to 100");
         } else {
             config.set(cfgTree, treeSpawnPercentage);
         }
@@ -67,10 +67,10 @@ public class Config {
         double woolSpawnPercentage = config.getDouble(cfgWool, WOOL_DEFAULT);
         if (woolSpawnPercentage < 0) {
             config.set(cfgWool, 0.0);
-            WoolTrees.log.warning("Wool Spawn % below 0. Defaulting to 0.");
+            plugin.log.warning("Wool Spawn % below 0. Defaulting to 0.");
         } else if (woolSpawnPercentage > 100) {
             config.set(cfgWool, 100.0);
-            WoolTrees.log.warning("Wool Spawn % above 100. Defaulting to 100");
+            plugin.log.warning("Wool Spawn % above 100. Defaulting to 100");
         } else {
             config.set(cfgWool, woolSpawnPercentage);
         }
@@ -78,10 +78,10 @@ public class Config {
         double bigChance = config.getDouble(cfgBig, BIG_DEFAULT);
         if (bigChance < 0) {
             config.set(cfgBig, 0.0);
-            WoolTrees.log.warning("Big Tree Spawn % below 0. Defaulting to 0.");
+            plugin.log.warning("Big Tree Spawn % below 0. Defaulting to 0.");
         } else if (bigChance > 100) {
             config.set(cfgBig, 100.0);
-            WoolTrees.log.warning("Big Tree Spawn % above 100. Defaulting to 100.");
+            plugin.log.warning("Big Tree Spawn % above 100. Defaulting to 100.");
         } else {
             config.set(cfgBig, bigChance);
         }
@@ -89,7 +89,7 @@ public class Config {
         double cost = config.getDouble(cfgCost, COST_DEFAULT);
         if (cost < 0) {
             config.set(cfgCost, 0.0);
-            WoolTrees.log.warning("Cost below 0. Defaulting to 0.");
+            plugin.log.warning("Cost below 0. Defaulting to 0.");
         } else {
             config.set(cfgCost, cost);
         }
@@ -101,10 +101,10 @@ public class Config {
         int lightLevel = config.getInt(cfgLight, LIGHT_LEVEL_DEFAULT);
         if (lightLevel < 0) {
             config.set(cfgLight, 0);
-            WoolTrees.log.warning("Light Level too low. Defaulting to 0");
+            plugin.log.warning("Light Level too low. Defaulting to 0");
         } else if (lightLevel > 15) {
             config.set(cfgLight, 15);
-            WoolTrees.log.warning("Light Level too high. Defaulting to 15");
+            plugin.log.warning("Light Level too high. Defaulting to 15");
         } else {
             config.set(cfgLight, lightLevel);
         }

@@ -152,11 +152,8 @@ public class WTPlayerInteract implements Listener {
     private void addPattern(World w, int color, int blockX, int blockY, int blockZ) {
         String colors = Config.getPattern(w.getName() + ":" + blockX + "," + blockY + "," + blockZ);
 
-        if (colors != null && !colors.contains("(" + color + ")")) {
+        if (!colors.contains("(" + color + ")")) {
             colors += "(" + color + ")";
-            Config.setPattern(w.getName() + ":" + blockX + "," + blockY + "," + blockZ, colors);
-        } else if (colors == null) {
-            colors = "(" + color + ")";
             Config.setPattern(w.getName() + ":" + blockX + "," + blockY + "," + blockZ, colors);
         }
     }
