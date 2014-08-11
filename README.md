@@ -27,6 +27,7 @@
 * Improved default command to make it more compact and easier to read.
 * Updated Metrics to work with updated getOnlinePlayers
 * Fixed random multicolored leaves with natural generation
+* Switched commands to the alias /wt instead of /wooltrees
 
 #### Version 1.2.5 (2/8/2014)
 * Added shorthand versions for light colors for the here command.

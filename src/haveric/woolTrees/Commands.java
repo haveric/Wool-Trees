@@ -51,19 +51,19 @@ public class Commands implements CommandExecutor {
                     boolean defaultGenEnabled = Config.isDefaultGenEnabled();
                     sender.sendMessage("");
                     sender.sendMessage(wtTitle + "github.com/haveric/wool-trees - v" + plugin.getDescription().getVersion());
-                    sender.sendMessage("/" + cmdMain + " " + cmdDefaultGen + getTFString(defaultGenEnabled) + " - " + msgColor + "Default Generation");
-                    sender.sendMessage("  /" + cmdMain + " " + cmdTree  + " <0-100> " + valColor + Config.getTree() + defColor + " - " + msgColor + "% of a wool tree spawning.");
-                    sender.sendMessage("  /" + cmdMain + " " + cmdBig   + " <0-100> " + valColor + Config.getBig() + defColor + " - " + msgColor + "% big trees.");
-                    sender.sendMessage("  /" + cmdMain + " " + cmdCost  + " <0+> "    + valColor + Config.getCost() + defColor + " - " + msgColor + "Cost to plant a tree.");
-                    sender.sendMessage("  /" + cmdMain + " " + cmdCheck + getTFString(Config.isHeightEnabled()) + " - " + msgColor + "Height Check.");
-                    sender.sendMessage("  /" + cmdMain + " " + cmdLight + " <0-15> "  + valColor + Config.getLight() + defColor + " - " + msgColor + "Light Level.");
+                    sender.sendMessage("/" + cmdMainAlt + " " + cmdDefaultGen + getTFString(defaultGenEnabled) + " - " + msgColor + "Default Generation");
+                    sender.sendMessage("  /" + cmdMainAlt + " " + cmdTree  + " <0-100> " + valColor + Config.getTree() + defColor + " - " + msgColor + "% of a wool tree spawning.");
+                    sender.sendMessage("  /" + cmdMainAlt + " " + cmdBig   + " <0-100> " + valColor + Config.getBig() + defColor + " - " + msgColor + "% big trees.");
+                    sender.sendMessage("  /" + cmdMainAlt + " " + cmdCost  + " <0+> "    + valColor + Config.getCost() + defColor + " - " + msgColor + "Cost to plant a tree.");
+                    sender.sendMessage("  /" + cmdMainAlt + " " + cmdCheck + getTFString(Config.isHeightEnabled()) + " - " + msgColor + "Height Check.");
+                    sender.sendMessage("  /" + cmdMainAlt + " " + cmdLight + " <0-15> "  + valColor + Config.getLight() + defColor + " - " + msgColor + "Light Level.");
 
-                    sender.sendMessage("/" + cmdMain + " " + cmdBonemealGen + getTFString(Config.isBonemealGenEnabled()) + " - " + msgColor + "Bonemeal Generation");
-                    sender.sendMessage("/" + cmdMain + " " + cmdNaturalGen + getTFString(Config.isNaturalGenEnabled()) + " - " + msgColor + "Natural Generation");
-                    sender.sendMessage("/" + cmdMain + " " + cmdWool  + " <0-100> " + valColor + Config.getWool() + defColor + " - " + msgColor + "% wool blocks kept.");
-                    sender.sendMessage("/" + cmdMain + " " + cmdPattern + getTFString(Config.isPatternEnabled()) + " - " + msgColor + "Pattern Trees.");
-                    sender.sendMessage("/" + cmdMain + " " + cmdWoolTrunk + getTFString(Config.isWoolTrunksEnabled()) + " - " + msgColor + "Wool Trunks.");
-                    sender.sendMessage("/" + cmdMain + " " + cmdHere + " [wool%] [big] [color]" + defColor + " - " + msgColor + "Create Tree at Mouse.");
+                    sender.sendMessage("/" + cmdMainAlt + " " + cmdBonemealGen + getTFString(Config.isBonemealGenEnabled()) + " - " + msgColor + "Bonemeal Generation");
+                    sender.sendMessage("/" + cmdMainAlt + " " + cmdNaturalGen + getTFString(Config.isNaturalGenEnabled()) + " - " + msgColor + "Natural Generation");
+                    sender.sendMessage("/" + cmdMainAlt + " " + cmdWool  + " <0-100> " + valColor + Config.getWool() + defColor + " - " + msgColor + "% wool blocks kept.");
+                    sender.sendMessage("/" + cmdMainAlt + " " + cmdPattern + getTFString(Config.isPatternEnabled()) + " - " + msgColor + "Pattern Trees.");
+                    sender.sendMessage("/" + cmdMainAlt + " " + cmdWoolTrunk + getTFString(Config.isWoolTrunksEnabled()) + " - " + msgColor + "Wool Trunks.");
+                    sender.sendMessage("/" + cmdMainAlt + " " + cmdHere + " [wool%] [big] [color]" + defColor + " - " + msgColor + "Create Tree at Mouse.");
                 } else if (args.length >= 1 && args[0].equalsIgnoreCase(cmdHere)) {
                     boolean big = false;
                     ArrayList<Integer> colorArray = new ArrayList<Integer>();
@@ -283,6 +283,7 @@ public class Commands implements CommandExecutor {
 
         return msg;
     }
+
     public static String getMain() {
         return cmdMain;
     }
