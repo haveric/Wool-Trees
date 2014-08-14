@@ -1,6 +1,6 @@
 name: WoolTrees
 main: haveric.woolTrees.WoolTrees
-version: 1.2.5
+version: 1.2.6
 author: haveric
 dev-url: http://dev.bukkit.org/server-mods/wool-trees/
 softdepend: [Vault]

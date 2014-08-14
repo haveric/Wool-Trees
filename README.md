@@ -23,7 +23,7 @@
 
 ### Changelog:
 
-#### Coming Soon:
+#### Version 1.2.6 (8/13/2014)
 * Improved default command to make it more compact and easier to read.
 * Updated Metrics to work with updated getOnlinePlayers
 * Fixed random multicolored leaves with natural generation
