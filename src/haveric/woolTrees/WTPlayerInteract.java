@@ -37,7 +37,25 @@ public class WTPlayerInteract implements Listener {
             Block block = event.getClickedBlock();
 
             if (event.getAction() == Action.RIGHT_CLICK_BLOCK && block.getType() == Material.SAPLING) {
-                Economy econ = plugin.getEcon();
+                ItemStack holding = player.getItemInHand();
+
+                // colors
+                // 0, 7, 15 = multi
+                // 0 = sugar = white wool
+                // 1-15 = normal colors
+                int color = 0;
+                if (holding.getType() == Material.INK_SACK) {
+                    int dur = holding.getDurability();
+                    if (dur == 15) {
+                        return; // bonemeal should do nothing!
+                    }
+                    color = 15 - dur;
+                } else if (holding.getType() == Material.SUGAR) {
+                    color = 0;
+                } else {
+                    return; // Any other items should not work.
+                }
+
                 World world = player.getWorld();
 
                 int blockX = block.getX();
@@ -49,6 +67,7 @@ public class WTPlayerInteract implements Listener {
                     return;
                 }
 
+                Economy econ = plugin.getEcon();
                 boolean currencyEnabled = true;
                 if (econ == null || Perms.hasIC(player)) {
                     currencyEnabled = false; // doesn't cost anything so we don't need economy.
@@ -57,29 +76,7 @@ public class WTPlayerInteract implements Listener {
                     return;
                 }
 
-                ItemStack holding = player.getItemInHand();
-
-                int color = 0;
-                if (holding.getType() == Material.INK_SACK) {
-                    int dur = holding.getDurability();
-                    if (dur == 15) {
-                        return; // bonemeal should do nothing!
-                    }
-                    color = 15 - dur;
-
-                } else if (holding.getType() == Material.SUGAR) {
-                    color = 0;
-                } else {
-                    return; // Any other items should not work.
-                }
-
                 boolean bigTree = (random(100) <= Config.getBig());
-
-
-                // colors
-                // 0, 7, 15 = multi
-                // 0 = sugar = white wool
-                // 1-15 = normal colors
 
                 // if not blocked
                 if (!Config.isHeightEnabled() || (bigTree && !treeBlocked(world, player, blockX, blockY, blockZ, 10))

@@ -25,6 +25,7 @@
 
 #### Coming Soon
 * Updated Metrics to handle old getOnlinePlayers (provides backward support for old versions of CraftBukkit)
+* Only trigger light warnings when holding a dye
 
 #### Version 1.2.6 (8/13/2014)
 * Improved default command to make it more compact and easier to read.

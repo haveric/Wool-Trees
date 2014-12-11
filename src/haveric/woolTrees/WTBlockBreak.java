@@ -15,7 +15,6 @@ public class WTBlockBreak implements Listener {
         Block block = event.getBlock();
 
         if (block.getType() == Material.SAPLING) {
-
             String patternConfig = block.getWorld().getName() + ":" + block.getX() + "," + block.getY() + "," + block.getZ();
 
             Config.setPattern(patternConfig, null);
