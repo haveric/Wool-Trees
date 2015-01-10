@@ -16,7 +16,7 @@ import org.bukkit.event.world.StructureGrowEvent;
 public class WTStructureGrow implements Listener {
 
 
-    public WTStructureGrow() {}
+    public WTStructureGrow() { }
 
     @EventHandler
     public void onTreeGrowth(StructureGrowEvent event) {
@@ -40,18 +40,18 @@ public class WTStructureGrow implements Listener {
 
                 // if patterns enabled
                 if (Config.isPatternEnabled()) {
-                    for (int i = -2; i <= 15; i ++) {
+                    for (int i = -2; i <= 15; i++) {
                         if (colors.contains("(" + i + ")")) {
                             colorArray.add(i);
                         }
                     }
                 }
                 if (colorArray.size() == 0) {
-                    colorArray.add((int) (Math.random()*15));
+                    colorArray.add((int) (Math.random() * 15));
                 }
 
 
-                while(iter.hasNext()) {
+                while (iter.hasNext()) {
                     BlockState state = iter.next();
                     Material mat = state.getType();
 

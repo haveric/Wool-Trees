@@ -8,7 +8,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 
 public class WTBlockBreak implements Listener {
 
-    public WTBlockBreak() {}
+    public WTBlockBreak() { }
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {

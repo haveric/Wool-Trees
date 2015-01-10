@@ -62,7 +62,7 @@ public class WTPlayerInteract implements Listener {
                 int blockY = block.getY();
                 int blockZ = block.getZ();
 
-                if (world.getBlockAt(blockX, blockY+1, blockZ).getLightLevel() < Config.getLight()) {
+                if (world.getBlockAt(blockX, blockY + 1, blockZ).getLightLevel() < Config.getLight()) {
                     player.sendMessage(ChatColor.RED + "The block above the sapling is too dark.");
                     return;
                 }
@@ -175,7 +175,7 @@ public class WTPlayerInteract implements Listener {
             if (Config.isPatternEnabled()) {
                 String colors = Config.getPattern(patternString);
 
-                for (int i = -2; i <= 15; i ++) {
+                for (int i = -2; i <= 15; i++) {
                     if (colors.contains("(" + i + ")")) {
                         colorArray.add(i);
                     }
@@ -208,21 +208,21 @@ public class WTPlayerInteract implements Listener {
                 setLog(world.getBlockAt(x, y + i, z), wood);
             }
 
-            for (int i = -2; i <= 2; i ++) {
-                for (int j = -2; j <= 2; j ++) {
+            for (int i = -2; i <= 2; i++) {
+                for (int j = -2; j <= 2; j++) {
                     if (i == 0 && j == 0) {
                         // trunk is here
                     } else {
-                        setColoredBlock(world.getBlockAt(x+i, y+3, z+j), getRandomColor(colorArray), leaves);
-                        setColoredBlock(world.getBlockAt(x+i, y+4, z+j), getRandomColor(colorArray), leaves);
+                        setColoredBlock(world.getBlockAt(x + i, y + 3, z + j), getRandomColor(colorArray), leaves);
+                        setColoredBlock(world.getBlockAt(x + i, y + 4, z + j), getRandomColor(colorArray), leaves);
 
                         if (i != 2 && i != -2 && j != 2 && j != -2) {
-                            setColoredBlock(world.getBlockAt(x+i, y+5, z+j), getRandomColor(colorArray), leaves);
+                            setColoredBlock(world.getBlockAt(x + i, y + 5, z + j), getRandomColor(colorArray), leaves);
                         }
                     }
                 }
             }
-            setColoredBlock(world.getBlockAt(x, y+6, z),getRandomColor(colorArray), leaves);
+            setColoredBlock(world.getBlockAt(x, y + 6, z), getRandomColor(colorArray), leaves);
         }
     }
 
@@ -245,27 +245,27 @@ public class WTPlayerInteract implements Listener {
             state.update(true);
         } else {
             // Make rest of tree
-            for (int i = 1; i < 10; i ++) {
+            for (int i = 1; i < 10; i++) {
                 setLog(world.getBlockAt(x, y + i, z), wood);
             }
-            for (int i = -2; i <= 2; i ++) {
-                for (int j = -2; j <= 2; j ++) {
+            for (int i = -2; i <= 2; i++) {
+                for (int j = -2; j <= 2; j++) {
                     if (i == 0 && j == 0) {
                         // trunk is here
                     } else {
-                        setColoredBlock(world.getBlockAt(x+i, y+6, z+j), getRandomColor(colorArray), leaves);
-                        setColoredBlock(world.getBlockAt(x+i, y+7, z+j), getRandomColor(colorArray), leaves);
-                        setColoredBlock(world.getBlockAt(x+i, y+8, z+j), getRandomColor(colorArray), leaves);
+                        setColoredBlock(world.getBlockAt(x + i, y + 6, z + j), getRandomColor(colorArray), leaves);
+                        setColoredBlock(world.getBlockAt(x + i, y + 7, z + j), getRandomColor(colorArray), leaves);
+                        setColoredBlock(world.getBlockAt(x + i, y + 8, z + j), getRandomColor(colorArray), leaves);
 
                         if ((i == 2 && j == 2) || (i == 2 && j == -2) || (i == -2 && j == 2) || (i == -2 && j == -2)) {
                             // 5x5 corners
                         } else {
-                            setColoredBlock(world.getBlockAt(x+i, y+5, z+j), getRandomColor(colorArray), leaves);
-                            setColoredBlock(world.getBlockAt(x+i, y+9, z+j), getRandomColor(colorArray), leaves);
+                            setColoredBlock(world.getBlockAt(x + i, y + 5, z + j), getRandomColor(colorArray), leaves);
+                            setColoredBlock(world.getBlockAt(x + i, y + 9, z + j), getRandomColor(colorArray), leaves);
                         }
                         if (i != 2 && i != -2 && j != 2 && j != -2) { // 3x3
-                            setColoredBlock(world.getBlockAt(x+i, y+4, z+j), getRandomColor(colorArray), leaves);
-                            setColoredBlock(world.getBlockAt(x+i, y+10, z+j), getRandomColor(colorArray), leaves);
+                            setColoredBlock(world.getBlockAt(x + i, y + 4, z + j), getRandomColor(colorArray), leaves);
+                            setColoredBlock(world.getBlockAt(x + i, y + 10, z + j), getRandomColor(colorArray), leaves);
                         }
                     }
                 }
