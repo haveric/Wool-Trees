@@ -1,7 +1,7 @@
 package haveric.woolTrees;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 import org.bukkit.ChatColor;
@@ -120,8 +120,9 @@ public class Commands implements CommandExecutor {
                         colorArray.add(0);
                     }
 
-                    Set<Material> emptySet = Collections.emptySet();
-                    Block b = ((Player) sender).getTargetBlock(emptySet, 100);
+                    Set<Material> airBlocks = new HashSet<Material>();
+                    airBlocks.add(Material.AIR);
+                    Block b = ((Player) sender).getTargetBlock(airBlocks, 100);
                     if (b.getType() == Material.AIR) {
                         sender.sendMessage(wtTitle + "Out of range. Try getting closer");
                     } else {
