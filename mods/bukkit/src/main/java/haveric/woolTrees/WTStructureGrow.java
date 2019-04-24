@@ -55,19 +55,17 @@ public class WTStructureGrow implements Listener {
                     BlockState state = iter.next();
                     Material mat = state.getType();
 
-                    if (mat == Material.LOG || mat == Material.LOG_2 && Config.isWoolTrunksEnabled()) {
-                        state.setType(Material.WOOL);
-                        state.setRawData((byte) 12);
-                    } else if (mat == Material.LEAVES || mat == Material.LEAVES_2) {
+                    if (WTTools.isLog(mat) && Config.isWoolTrunksEnabled()) {
+                        state.setType(Material.BROWN_WOOL);
+                    } else if (WTTools.isLeaves(mat)) {
                         int wool = random(100);
                         if (wool < Config.getWool()) {
-                            state.setType(Material.WOOL);
                             int color = getRandomColor(colorArray);
                             if (color == -1) {
                                 color = (int) (Math.random() * 16); // 0-15
                             }
 
-                            state.setRawData((byte) color);
+                            state.setType(WTTools.getWool(color));
                         } else {
                             state.setType(Material.AIR);
                         }

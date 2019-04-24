@@ -1,4 +1,4 @@
-##### Vault is only needed if you are going to use the economy features.  You can find it here: (http://dev.bukkit.org/server-mods/vault/)
+##### Vault is only needed if you are going to use the economy features.  You can find it here: (https://dev.bukkit.org/projects/vault)
 
 ### Permissions:
 * wooltrees.plant
@@ -23,9 +23,11 @@
 
 ### Changelog:
 
-#### Coming Soon
-* Updated Metrics to handle old getOnlinePlayers (provides backward support for old versions of CraftBukkit)
+#### Version 1.3.0
+* 1.14 Support (uses actual dyes now)
 * Only trigger light warnings when holding a dye
+* Hide cost command if Vault not found
+* Removed metrics
 
 #### Version 1.2.6 (8/13/2014)
 * Improved default command to make it more compact and easier to read.

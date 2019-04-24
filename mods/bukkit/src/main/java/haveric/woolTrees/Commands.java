@@ -56,7 +56,10 @@ public class Commands implements CommandExecutor {
                     sender.sendMessage("/" + cmdMainAlt + " " + cmdDefaultGen + getTFString(defaultGenEnabled) + " - " + msgColor + "Default Generation");
                     sender.sendMessage("  /" + cmdMainAlt + " " + cmdTree  + " <0-100> " + valColor + Config.getTree() + defColor + " - " + msgColor + "% of a wool tree spawning.");
                     sender.sendMessage("  /" + cmdMainAlt + " " + cmdBig   + " <0-100> " + valColor + Config.getBig() + defColor + " - " + msgColor + "% big trees.");
-                    sender.sendMessage("  /" + cmdMainAlt + " " + cmdCost  + " <0+> "    + valColor + Config.getCost() + defColor + " - " + msgColor + "Cost to plant a tree.");
+
+                    if (plugin.getEcon() != null) {
+                        sender.sendMessage("  /" + cmdMainAlt + " " + cmdCost + " <0+> " + valColor + Config.getCost() + defColor + " - " + msgColor + "Cost to plant a tree.");
+                    }
                     sender.sendMessage("  /" + cmdMainAlt + " " + cmdCheck + getTFString(Config.isHeightEnabled()) + " - " + msgColor + "Height Check.");
                     sender.sendMessage("  /" + cmdMainAlt + " " + cmdLight + " <0-15> "  + valColor + Config.getLight() + defColor + " - " + msgColor + "Light Level.");
 
@@ -66,7 +69,7 @@ public class Commands implements CommandExecutor {
                     sender.sendMessage("/" + cmdMainAlt + " " + cmdPattern + getTFString(Config.isPatternEnabled()) + " - " + msgColor + "Pattern Trees.");
                     sender.sendMessage("/" + cmdMainAlt + " " + cmdWoolTrunk + getTFString(Config.isWoolTrunksEnabled()) + " - " + msgColor + "Wool Trunks.");
                     sender.sendMessage("/" + cmdMainAlt + " " + cmdHere + " [wool%] [big] [color]" + defColor + " - " + msgColor + "Create Tree at Mouse.");
-                } else if (args.length >= 1 && args[0].equalsIgnoreCase(cmdHere)) {
+                } else if (args[0].equalsIgnoreCase(cmdHere)) {
                     boolean big = false;
                     ArrayList<Integer> colorArray = new ArrayList<Integer>();
                     Double val = 100.0;
@@ -127,9 +130,9 @@ public class Commands implements CommandExecutor {
                         sender.sendMessage(wtTitle + "Out of range. Try getting closer");
                     } else {
                         if (big) {
-                            WTPlayerInteract.makeBigTree(((Player) sender), 0, 0, b.getX(), b.getY(), b.getZ(), colorArray, val);
+                            WTPlayerInteract.makeBigTree(((Player) sender), Material.OAK_LOG, 0, b.getX(), b.getY(), b.getZ(), colorArray, val);
                         } else {
-                            WTPlayerInteract.makeNormalTree(((Player) sender), 0, 0, b.getX(), b.getY(), b.getZ(), colorArray, val);
+                            WTPlayerInteract.makeNormalTree(((Player) sender), Material.OAK_LOG, 0, b.getX(), b.getY(), b.getZ(), colorArray, val);
                         }
                     }
                 } else if (args.length == 2) {
@@ -246,13 +249,13 @@ public class Commands implements CommandExecutor {
 
                     Config.saveConfig();
 
-                    if (msg != "") {
+                    if (!msg.equals("")) {
                         if (val != -1.0) {
                             sender.sendMessage(wtTitle + ChatColor.WHITE + msg + msgColor + val);
                         } else {
                             sender.sendMessage(wtTitle + ChatColor.WHITE + msg);
                         }
-                    } else if (err != "") {
+                    } else if (!err.equals("")) {
                         sender.sendMessage(wtTitle + ChatColor.RED + err);
                     }
                 }
@@ -278,7 +281,7 @@ public class Commands implements CommandExecutor {
     }
 
     public static String getTFString(boolean bool) {
-        String msg = "";
+        String msg;
 
         if (bool) {
             msg = " <" + valColor + "true" + defColor + ",false>";

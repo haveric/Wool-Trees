@@ -1,10 +1,11 @@
 name: WoolTrees
 main: haveric.woolTrees.WoolTrees
-version: 1.2.6
+version: 1.3.0
 author: haveric
-website: http://dev.bukkit.org/server-mods/wool-trees/
-dev-url: http://dev.bukkit.org/server-mods/wool-trees/
+website: https://dev.bukkit.org/projects/wool-trees
+dev-url: https://dev.bukkit.org/projects/wool-trees
 softdepend: [Vault]
+api-version: 1.14
 description: >
              Create wool trees by dyeing saplings.
 commands:

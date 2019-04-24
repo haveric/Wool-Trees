@@ -5,10 +5,14 @@
 .settings
 reports
 build.xml
+bin
 downloads/*/dev
-
 
 # Gradle
 .gradle
 build/
 /build/
+
+# Intellij
+*.iml
+.idea/

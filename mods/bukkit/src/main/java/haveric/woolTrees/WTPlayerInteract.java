@@ -18,6 +18,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 
 
@@ -36,22 +37,16 @@ public class WTPlayerInteract implements Listener {
         if (Perms.canPlant(player)) {
             Block block = event.getClickedBlock();
 
-            if (event.getAction() == Action.RIGHT_CLICK_BLOCK && block.getType() == Material.SAPLING) {
-                ItemStack holding = player.getItemInHand();
+            if (event.getAction() == Action.RIGHT_CLICK_BLOCK && block != null && WTTools.isSapling(block.getType())) {
+                ItemStack holding = player.getInventory().getItemInMainHand();
+                Material holdingType = holding.getType();
 
                 // colors
                 // 0, 7, 15 = multi
-                // 0 = sugar = white wool
                 // 1-15 = normal colors
-                int color = 0;
-                if (holding.getType() == Material.INK_SACK) {
-                    int dur = holding.getDurability();
-                    if (dur == 15) {
-                        return; // bonemeal should do nothing!
-                    }
-                    color = 15 - dur;
-                } else if (holding.getType() == Material.SUGAR) {
-                    color = 0;
+                int color;
+                if (WTTools.isDye(holdingType)) {
+                    color = WTTools.getId(holdingType);
                 } else {
                     return; // Any other items should not work.
                 }
@@ -71,7 +66,7 @@ public class WTPlayerInteract implements Listener {
                 boolean currencyEnabled = true;
                 if (econ == null || Perms.hasIC(player)) {
                     currencyEnabled = false; // doesn't cost anything so we don't need economy.
-                } else if (!econ.has(player.getName(), Config.getCost())) {
+                } else if (!econ.has(player, Config.getCost())) {
                     player.sendMessage(ChatColor.RED + "Not enough money to plant a wool tree. Need " + Config.getCost());
                     return;
                 }
@@ -82,13 +77,13 @@ public class WTPlayerInteract implements Listener {
                 if (!Config.isHeightEnabled() || (bigTree && !treeBlocked(world, player, blockX, blockY, blockZ, 10))
                     || (!bigTree && !treeBlocked(world, player, blockX, blockY, blockZ, 6))) {
 
-                    int woodType = block.getData();
+                    Material woodMaterial = WTTools.getLogType(block.getType());
                     boolean canBuild = false;
                     BlockState state = block.getState();
-                    setLog(player.getWorld().getBlockAt(blockX, blockY, blockY), woodType);
+                    setLog(player.getWorld().getBlockAt(blockX, blockY, blockY), woodMaterial);
 
                     // Check to see if the player is allowed to build here.
-                    BlockPlaceEvent placeEvent = new BlockPlaceEvent(state.getBlock(), state, block, player.getItemInHand(), player, true);
+                    BlockPlaceEvent placeEvent = new BlockPlaceEvent(state.getBlock(), state, block, player.getInventory().getItemInMainHand(), player, true, EquipmentSlot.HAND);
                     plugin.getServer().getPluginManager().callEvent(placeEvent);
 
                     if (placeEvent.isCancelled()) {
@@ -109,16 +104,16 @@ public class WTPlayerInteract implements Listener {
                             }
 
                             if (bigTree) {
-                                makeBigTree(player, woodType, color, blockX, blockY, blockZ, null, -1);
+                                makeBigTree(player, woodMaterial, color, blockX, blockY, blockZ, null, -1);
                             } else {
-                                makeNormalTree(player, woodType, color, blockX, blockY, blockZ, null, -1);
+                                makeNormalTree(player, woodMaterial, color, blockX, blockY, blockZ, null, -1);
                             }
 
                             if (patternsEnabled) {
                                 Config.setPattern(world.getName() + ":" + blockX + "," + blockY + "," + blockZ, null);
                             }
                             if (currencyEnabled) {
-                                econ.withdrawPlayer(player.getName(), Config.getCost());
+                                econ.withdrawPlayer(player, Config.getCost());
                             }
                         } else {
                             addPattern(world, color, blockX, blockY, blockZ);
@@ -135,13 +130,13 @@ public class WTPlayerInteract implements Listener {
     // Remove one item from hand
     private void removeFromHand(Player player) {
         if (player.getGameMode() != GameMode.CREATIVE) {
-            ItemStack holding = player.getItemInHand();
+            ItemStack holding = player.getInventory().getItemInMainHand();
 
             int amt = holding.getAmount();
             if (amt > 1) {
                 holding.setAmount(--amt);
             } else {
-                player.getInventory().setItemInHand(null);
+                player.getInventory().setItemInMainHand(null);
             }
         }
     }
@@ -186,7 +181,7 @@ public class WTPlayerInteract implements Listener {
         }
         return colorArray;
     }
-    public static void makeNormalTree(Player player, int wood, int color, int x, int y, int z, ArrayList<Integer> colorArray, double leaves) {
+    public static void makeNormalTree(Player player, Material woodMaterial, int color, int x, int y, int z, ArrayList<Integer> colorArray, double leaves) {
         World world = player.getWorld();
 
         String patternString = world.getName() + ":" + x + "," + y + "," + z;
@@ -195,17 +190,17 @@ public class WTPlayerInteract implements Listener {
         Block block = world.getBlockAt(x, y, z);
         BlockState state = block.getState();
 
-        setLog(block, wood);
+        setLog(block, woodMaterial);
 
         // Check to see if the player is allowed to build here.
-        BlockPlaceEvent placeEvent = new BlockPlaceEvent(state.getBlock(), state, block, player.getItemInHand(), player, true);
+        BlockPlaceEvent placeEvent = new BlockPlaceEvent(state.getBlock(), state, block, player.getInventory().getItemInMainHand(), player, true, EquipmentSlot.HAND);
         plugin.getServer().getPluginManager().callEvent(placeEvent);
 
         if (placeEvent.isCancelled()) {
             state.update(true);
         } else {
             for (int i = 1; i < 6; i++) {
-                setLog(world.getBlockAt(x, y + i, z), wood);
+                setLog(world.getBlockAt(x, y + i, z), woodMaterial);
             }
 
             for (int i = -2; i <= 2; i++) {
@@ -226,7 +221,7 @@ public class WTPlayerInteract implements Listener {
         }
     }
 
-    public static void makeBigTree(Player player, int wood, int color, int x, int y, int z, ArrayList<Integer> colorArray, double leaves) {
+    public static void makeBigTree(Player player, Material woodMaterial, int color, int x, int y, int z, ArrayList<Integer> colorArray, double leaves) {
         World world = player.getWorld();
 
         String patternString = world.getName() + ":" + x + "," + y + "," + z;
@@ -235,10 +230,10 @@ public class WTPlayerInteract implements Listener {
         Block block = world.getBlockAt(x, y, z);
         BlockState state = block.getState();
 
-        setLog(block, wood);
+        setLog(block, woodMaterial);
 
         // Check to see if the player is allowed to build here.
-        BlockPlaceEvent placeEvent = new BlockPlaceEvent(state.getBlock(), state, block, player.getItemInHand(), player, true);
+        BlockPlaceEvent placeEvent = new BlockPlaceEvent(state.getBlock(), state, block, player.getInventory().getItemInMainHand(), player, true, EquipmentSlot.HAND);
         plugin.getServer().getPluginManager().callEvent(placeEvent);
 
         if (placeEvent.isCancelled()) {
@@ -246,7 +241,7 @@ public class WTPlayerInteract implements Listener {
         } else {
             // Make rest of tree
             for (int i = 1; i < 10; i++) {
-                setLog(world.getBlockAt(x, y + i, z), wood);
+                setLog(world.getBlockAt(x, y + i, z), woodMaterial);
             }
             for (int i = -2; i <= 2; i++) {
                 for (int j = -2; j <= 2; j++) {
@@ -280,31 +275,23 @@ public class WTPlayerInteract implements Listener {
                 if (color == -1) {
                     color = (int) (Math.random() * 16); // 0-15
                 }
-                block.setType(Material.WOOL);
-                block.setData((byte) color);
+
+                block.setType(WTTools.getWool(color));
             }
         } else if (wool < leaves && block.getType() == Material.AIR) {
             if (color == -1) {
                 color = (int) (Math.random() * 16); // 0-15
             }
-            block.setType(Material.WOOL);
-            block.setData((byte) color);
+            block.setType(WTTools.getWool(color));
         }
     }
 
-    private static void setLog(Block block, int type) {
-        if (block.getType() == Material.AIR || block.getType() == Material.SAPLING) {
+    private static void setLog(Block block, Material woodMaterial) {
+        if (block.getType() == Material.AIR || WTTools.isSapling(block.getType())) {
             if (Config.isWoolTrunksEnabled()) {
-                block.setType(Material.WOOL);
-                block.setData((byte) 12);
+                block.setType(Material.BROWN_WOOL);
             } else {
-                if (type < 4) {
-                    block.setType(Material.LOG);
-                    block.setData((byte) type);
-                } else {
-                    block.setType(Material.LOG_2);
-                    block.setData((byte) (type - 4));
-                }
+                block.setType(woodMaterial);
             }
         }
     }
