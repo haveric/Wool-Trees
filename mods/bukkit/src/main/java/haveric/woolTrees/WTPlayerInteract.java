@@ -37,7 +37,7 @@ public class WTPlayerInteract implements Listener {
         if (Perms.canPlant(player)) {
             Block block = event.getClickedBlock();
 
-            if (event.getAction() == Action.RIGHT_CLICK_BLOCK && block != null && WTTools.isSapling(block.getType())) {
+            if (event.getHand() == EquipmentSlot.HAND && event.getAction() == Action.RIGHT_CLICK_BLOCK && block != null && WTTools.isSapling(block.getType())) {
                 ItemStack holding = player.getInventory().getItemInMainHand();
                 Material holdingType = holding.getType();
 
@@ -74,8 +74,7 @@ public class WTPlayerInteract implements Listener {
                 boolean bigTree = (random(100) <= Config.getBig());
 
                 // if not blocked
-                if (!Config.isHeightEnabled() || (bigTree && !treeBlocked(world, player, blockX, blockY, blockZ, 10))
-                    || (!bigTree && !treeBlocked(world, player, blockX, blockY, blockZ, 6))) {
+                if (!Config.isHeightEnabled() || (bigTree && !treeBlocked(world, player, blockX, blockY, blockZ, 10)) || (!bigTree && !treeBlocked(world, player, blockX, blockY, blockZ, 6))) {
 
                     Material woodMaterial = WTTools.getLogType(block.getType());
                     boolean canBuild = false;
@@ -164,7 +163,7 @@ public class WTPlayerInteract implements Listener {
 
     private static ArrayList<Integer> updateColorArray(ArrayList<Integer> colorArray, int color, String patternString) {
         if (colorArray == null) {
-            colorArray = new ArrayList<Integer>();
+            colorArray = new ArrayList<>();
 
             // if patterns enabled
             if (Config.isPatternEnabled()) {
@@ -301,7 +300,7 @@ public class WTPlayerInteract implements Listener {
     }
 
     private static int getRandomColor(ArrayList<Integer> array) {
-        int color = 0;
+        int color;
         if (array.contains(0) && array.contains(15) && array.contains(7)) {
             color = -1;
         } else {
