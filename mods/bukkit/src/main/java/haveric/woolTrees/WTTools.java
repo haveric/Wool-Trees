@@ -222,4 +222,8 @@ public class WTTools {
                 return 15;
         }
     }
+
+    public static int random(int num) {
+        return 1 + (int) (Math.random() * num);
+    }
 }

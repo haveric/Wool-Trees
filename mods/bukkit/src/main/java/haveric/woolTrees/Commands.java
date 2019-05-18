@@ -71,7 +71,7 @@ public class Commands implements CommandExecutor {
                     sender.sendMessage("/" + cmdMainAlt + " " + cmdHere + " [wool%] [big] [color]" + defColor + " - " + msgColor + "Create Tree at Mouse.");
                 } else if (args[0].equalsIgnoreCase(cmdHere)) {
                     boolean big = false;
-                    ArrayList<Integer> colorArray = new ArrayList<Integer>();
+                    ArrayList<Integer> colorArray = new ArrayList<>();
                     Double val = 100.0;
                     for (int i = 1; i < args.length; i++) {
                         if (args[i].equalsIgnoreCase("big")) {
@@ -123,7 +123,7 @@ public class Commands implements CommandExecutor {
                         colorArray.add(0);
                     }
 
-                    Set<Material> airBlocks = new HashSet<Material>();
+                    Set<Material> airBlocks = new HashSet<>();
                     airBlocks.add(Material.AIR);
                     Block b = ((Player) sender).getTargetBlock(airBlocks, 100);
                     if (b.getType() == Material.AIR) {

@@ -71,7 +71,7 @@ public class WTPlayerInteract implements Listener {
                     return;
                 }
 
-                boolean bigTree = (random(100) <= Config.getBig());
+                boolean bigTree = (WTTools.random(100) <= Config.getBig());
 
                 // if not blocked
                 if (!Config.isHeightEnabled() || (bigTree && !treeBlocked(world, player, blockX, blockY, blockZ, 10)) || (!bigTree && !treeBlocked(world, player, blockX, blockY, blockZ, 6))) {
@@ -95,7 +95,7 @@ public class WTPlayerInteract implements Listener {
 
                     if (canBuild) {
                         // if a tree will spawn
-                        if (Config.isDefaultGenEnabled() && random(100) <= Config.getTree()) {
+                        if (Config.isDefaultGenEnabled() && WTTools.random(100) <= Config.getTree()) {
                             boolean patternsEnabled = Config.isPatternEnabled();
 
                             if (patternsEnabled) {
@@ -268,7 +268,7 @@ public class WTPlayerInteract implements Listener {
     }
 
     private static void setColoredBlock(Block block, int color, double leaves) {
-        int wool = random(100);
+        int wool = WTTools.random(100);
         if (leaves == -1) {
             if (wool < Config.getWool() && block.getType() == Material.AIR) {
                 if (color == -1) {
@@ -293,10 +293,6 @@ public class WTPlayerInteract implements Listener {
                 block.setType(woodMaterial);
             }
         }
-    }
-
-    private static int random(int num) {
-        return 1 + (int) (Math.random() * num);
     }
 
     private static int getRandomColor(ArrayList<Integer> array) {

@@ -36,7 +36,7 @@ public class WTStructureGrow implements Listener {
                 List<BlockState> blockStates = event.getBlocks();
                 ListIterator<BlockState> iter = blockStates.listIterator();
 
-                ArrayList<Integer> colorArray = new ArrayList<Integer>();
+                ArrayList<Integer> colorArray = new ArrayList<>();
 
                 // if patterns enabled
                 if (Config.isPatternEnabled()) {
@@ -58,7 +58,7 @@ public class WTStructureGrow implements Listener {
                     if (WTTools.isLog(mat) && Config.isWoolTrunksEnabled()) {
                         state.setType(Material.BROWN_WOOL);
                     } else if (WTTools.isLeaves(mat)) {
-                        int wool = random(100);
+                        int wool = WTTools.random(100);
                         if (wool < Config.getWool()) {
                             int color = getRandomColor(colorArray);
                             if (color == -1) {
@@ -77,12 +77,8 @@ public class WTStructureGrow implements Listener {
         Config.setPattern(patternConfig, null);
     }
 
-    private int random(int num) {
-        return 1 + (int) (Math.random() * num);
-    }
-
     private int getRandomColor(ArrayList<Integer> array) {
-        int color = 0;
+        int color;
         if (array.contains(0) && array.contains(15) && array.contains(7)) {
             color = -1;
         } else {
