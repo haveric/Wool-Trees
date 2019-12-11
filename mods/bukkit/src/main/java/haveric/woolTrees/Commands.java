@@ -136,7 +136,7 @@ public class Commands implements CommandExecutor {
                         }
                     }
                 } else if (args.length == 2) {
-                    Double val;
+                    double val;
                     String msg = "";
                     String err = "";
 
@@ -240,7 +240,7 @@ public class Commands implements CommandExecutor {
                         msg = "Cost set to: ";
                     } else if (args[0].equalsIgnoreCase(cmdLight)) {
                         if (val >= 0 && val <= 15) {
-                            Config.setLight(val.intValue());
+                            Config.setLight((int) val);
                             msg = "Light Level set to: ";
                         } else {
                             err = "Value is less than 0 or above 15.";

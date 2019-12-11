@@ -56,10 +56,9 @@ public class WTTools {
                 return Material.DARK_OAK_LOG;
             case JUNGLE_SAPLING:
                 return Material.JUNGLE_LOG;
-            case OAK_SAPLING:
-                return Material.OAK_LOG;
             case SPRUCE_SAPLING:
                 return Material.SPRUCE_LOG;
+            case OAK_SAPLING:
             default:
                 return Material.OAK_LOG;
         }
@@ -123,7 +122,6 @@ public class WTTools {
             case 14:
                 return Material.RED_WOOL;
             case 15:
-                return Material.BLACK_WOOL;
             default:
                 return Material.BLACK_WOOL;
         }
@@ -162,7 +160,6 @@ public class WTTools {
             case 14:
                 return Material.RED_DYE;
             case 15:
-                return Material.BLACK_DYE;
             default:
                 return Material.BLACK_DYE;
         }
@@ -217,7 +214,6 @@ public class WTTools {
                 return 14;
             case BLACK_WOOL:
             case BLACK_DYE:
-                return 15;
             default:
                 return 15;
         }
