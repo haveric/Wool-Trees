@@ -72,7 +72,7 @@ public class Commands implements CommandExecutor {
                 } else if (args[0].equalsIgnoreCase(cmdHere)) {
                     boolean big = false;
                     ArrayList<Integer> colorArray = new ArrayList<>();
-                    Double val = 100.0;
+                    double val = 100.0;
                     for (int i = 1; i < args.length; i++) {
                         if (args[i].equalsIgnoreCase("big")) {
                             big = true;
