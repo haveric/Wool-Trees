@@ -41,11 +41,6 @@ public class WoolTrees extends JavaPlugin {
         getCommand(Commands.getMain()).setExecutor(commands);
     }
 
-    @Override
-    public void onDisable() {
-
-    }
-
     private void setupVault() {
         if (getServer().getPluginManager().getPlugin("Vault") == null) {
             log.info("Vault not found. Economy disabled.");
