@@ -21,6 +21,9 @@ public class WoolTrees extends JavaPlugin {
     @Override
     public void onEnable() {
         log = getLogger();
+
+        Supports.init();
+
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(new WTPlayerInteract(this), this);
         pm.registerEvents(new WTBlockBreak(), this);

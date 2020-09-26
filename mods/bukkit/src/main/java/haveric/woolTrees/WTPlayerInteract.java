@@ -75,7 +75,6 @@ public class WTPlayerInteract implements Listener {
 
                 // if not blocked
                 if (!Config.isHeightEnabled() || (bigTree && !treeBlocked(world, player, blockX, blockY, blockZ, 10)) || (!bigTree && !treeBlocked(world, player, blockX, blockY, blockZ, 6))) {
-
                     Material woodMaterial = WTTools.getLogType(block.getType());
                     boolean canBuild = false;
                     BlockState state = block.getState();
@@ -120,6 +119,10 @@ public class WTPlayerInteract implements Listener {
                         }
 
                         removeFromHand(player);
+
+                        if (Supports.swingHand()) {
+                            player.swingMainHand();
+                        }
                     }
                 }
             }
