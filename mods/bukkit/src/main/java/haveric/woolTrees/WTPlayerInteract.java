@@ -115,7 +115,7 @@ public class WTPlayerInteract implements Listener {
                             }
                         } else {
                             addPattern(world, color, blockX, blockY, blockZ);
-                            world.playEffect(block.getLocation().add(1, 0, 1), Effect.SMOKE, 0);
+                            world.playEffect(block.getLocation().add(0, 1, 0), Effect.SMOKE, 0);
                         }
 
                         removeFromHand(player);
