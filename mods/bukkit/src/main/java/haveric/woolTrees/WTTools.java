@@ -126,7 +126,7 @@ public class WTTools {
                 return Material.BLACK_WOOL;
         }
     }
-
+/*
     public static Material getDye(int dyeId) {
         switch(dyeId) {
             case 0:
@@ -164,7 +164,7 @@ public class WTTools {
                 return Material.BLACK_DYE;
         }
     }
-
+*/
     public static int getId(Material material) {
         switch(material) {
             case WHITE_WOOL:

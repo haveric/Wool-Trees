@@ -16,12 +16,12 @@ public class Config {
     private static FileConfiguration patternConfig;
     private static File patternConfigFile;
 
-    private static String cfgTree   = "Tree Spawn %";
-    private static String cfgWool   = "Wool Spawn %";
-    private static String cfgBig    = "Big Tree Spawn %";
-    private static String cfgCost   = "Cost to plant";
+    private static String cfgTree = "Tree Spawn %";
+    private static String cfgWool = "Wool Spawn %";
+    private static String cfgBig = "Big Tree Spawn %";
+    private static String cfgCost = "Cost to plant";
     private static String cfgHeight = "Height Check";
-    private static String cfgLight  = "Light Level";
+    private static String cfgLight = "Light Level";
     private static String cfgPattern = "Pattern Trees";
     private static String cfgWoolTrunk = "Wool Trunks";
 
