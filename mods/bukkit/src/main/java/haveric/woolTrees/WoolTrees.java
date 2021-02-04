@@ -56,4 +56,8 @@ public class WoolTrees extends JavaPlugin {
     public Economy getEcon() {
         return econ;
     }
+
+    public boolean hasEcon() {
+        return econ != null;
+    }
 }

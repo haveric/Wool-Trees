@@ -57,7 +57,7 @@ public class Commands implements CommandExecutor {
                     sender.sendMessage("  /" + cmdMainAlt + " " + cmdTree  + " <0-100> " + valColor + Config.getTree() + defColor + " - " + msgColor + "% of a wool tree spawning.");
                     sender.sendMessage("  /" + cmdMainAlt + " " + cmdBig   + " <0-100> " + valColor + Config.getBig() + defColor + " - " + msgColor + "% big trees.");
 
-                    if (plugin.getEcon() != null) {
+                    if (plugin.hasEcon()) {
                         sender.sendMessage("  /" + cmdMainAlt + " " + cmdCost + " <0+> " + valColor + Config.getCost() + defColor + " - " + msgColor + "Cost to plant a tree.");
                     }
                     sender.sendMessage("  /" + cmdMainAlt + " " + cmdCheck + getTFString(Config.isHeightEnabled()) + " - " + msgColor + "Height Check.");
@@ -266,7 +266,7 @@ public class Commands implements CommandExecutor {
                 sender.sendMessage("Dye saplings to grow wool trees.");
                 sender.sendMessage("Each sapling has a " + valColor + Config.getTree() + "% " + defColor + "chance to spawn");
                 sender.sendMessage("Each tree will have " + valColor + Config.getWool() + "% " + defColor + "wool leaves");
-                if (plugin.getEcon() != null) {
+                if (plugin.hasEcon()) {
                     if (Perms.hasIC((Player) sender)) {
                         sender.sendMessage("Each successful tree costs " + valColor + "nothing!");
                     } else {
