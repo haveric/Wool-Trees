@@ -1,0 +1,31 @@
+name: WoolTrees
+main: haveric.woolTrees.WoolTrees
+version: 1.3.1
+author: haveric
+website: https://dev.bukkit.org/projects/wool-trees
+dev-url: https://dev.bukkit.org/projects/wool-trees
+softdepend: [Vault]
+api-version: 1.14
+description: >
+             Create wool trees by dyeing saplings.
+commands:
+    wooltrees:
+        aliases: [wt]
+        description: Adjust config values for Wool Trees
+        usage:
+permissions:
+    wooltrees.*:
+        description: Gives access to all WoolTrees Permissions
+        children:
+            wooltrees.adjust: true
+            wooltrees.plant: true
+            wooltrees.ignorecost: true
+    wooltrees.adjust:
+        description: Allows user to adjust global settings
+        default: false
+    wooltrees.plant:
+        description: Allows user to plant a wool tree
+        default: false
+    wooltrees.ignorecost:
+        description: Allows user to plant trees without paying the normal cost
+        default: false

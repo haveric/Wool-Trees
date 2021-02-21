@@ -1,0 +1,23 @@
+repositories {
+    mavenCentral()
+    maven {
+        name 'Spigot/Bukkit maven repo'
+        url 'https://hub.spigotmc.org/nexus/content/groups/public/'
+    }
+    maven {
+        name 'Vault'
+        url 'http://nexus.hc.to/content/repositories/pub_releases'
+    }
+}
+
+dependencies {
+    implementation 'org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT'
+    implementation "net.milkbowl.vault:VaultAPI:1.7"
+}
+
+task copyJar(type: Copy) {
+    from jar
+    into '../build/libs/bukkit/'
+}
+
+build.dependsOn copyJar
