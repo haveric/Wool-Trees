@@ -6,13 +6,13 @@ repositories {
     }
     maven {
         name 'Vault'
-        url 'https://nexus.hc.to/content/repositories/pub_releases'
+        url 'https://jitpack.io'
     }
 }
 
 dependencies {
-    implementation 'org.spigotmc:spigot-api:1.18.2-R0.1-SNAPSHOT'
-    implementation "net.milkbowl.vault:VaultAPI:1.7"
+    implementation 'org.spigotmc:spigot-api:1.19-R0.1-SNAPSHOT'
+    implementation "com.github.MilkBowl:VaultAPI:1.7.1"
 }
 
 task copyJar(type: Copy) {
