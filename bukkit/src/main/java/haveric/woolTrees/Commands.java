@@ -15,27 +15,27 @@ import org.bukkit.entity.Player;
 public class Commands implements CommandExecutor {
 
     // Commands
-    private static String cmdMain    = "wooltrees";
-    private String cmdMainAlt = "wt";
+    private static final String cmdMain = "wooltrees";
+    private final String cmdMainAlt = "wt";
 
-    private String cmdHelp = "help";
+    private final String cmdHelp = "help";
 
-    private String cmdTree  = "tree";
-    private String cmdWool  = "wool";
-    private String cmdBig   = "big";
-    private String cmdCost  = "cost";
-    private String cmdCheck = "check";
-    private String cmdLight = "light";
-    private String cmdPattern = "pattern";
-    private String cmdWoolTrunk = "trunk";
-    private String cmdHere = "here";
-    private String cmdDefaultGen = "defgen";
-    private String cmdBonemealGen = "bonegen";
-    private String cmdNaturalGen = "natgen";
+    private final String cmdTree = "tree";
+    private final String cmdWool = "wool";
+    private final String cmdBig = "big";
+    private final String cmdCost = "cost";
+    private final String cmdCheck = "check";
+    private final String cmdLight = "light";
+    private final String cmdPattern = "pattern";
+    private final String cmdWoolTrunk = "trunk";
+    private final String cmdHere = "here";
+    private final String cmdDefaultGen = "defgen";
+    private final String cmdBonemealGen = "bonegen";
+    private final String cmdNaturalGen = "natgen";
 
-    private static ChatColor msgColor = ChatColor.DARK_AQUA;
-    private static ChatColor valColor = ChatColor.GOLD;
-    private static ChatColor defColor = ChatColor.WHITE;
+    private static final ChatColor msgColor = ChatColor.DARK_AQUA;
+    private static final ChatColor valColor = ChatColor.GOLD;
+    private static final ChatColor defColor = ChatColor.WHITE;
 
     private WoolTrees plugin;
 
@@ -249,13 +249,13 @@ public class Commands implements CommandExecutor {
 
                     Config.saveConfig();
 
-                    if (!msg.equals("")) {
+                    if (!msg.isEmpty()) {
                         if (val != -1.0) {
                             sender.sendMessage(wtTitle + ChatColor.WHITE + msg + msgColor + val);
                         } else {
                             sender.sendMessage(wtTitle + ChatColor.WHITE + msg);
                         }
-                    } else if (!err.equals("")) {
+                    } else if (!err.isEmpty()) {
                         sender.sendMessage(wtTitle + ChatColor.RED + err);
                     }
                 }

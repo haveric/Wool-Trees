@@ -16,18 +16,18 @@ public class Config {
     private static FileConfiguration patternConfig;
     private static File patternConfigFile;
 
-    private static String cfgTree = "Tree Spawn %";
-    private static String cfgWool = "Wool Spawn %";
-    private static String cfgBig = "Big Tree Spawn %";
-    private static String cfgCost = "Cost to plant";
-    private static String cfgHeight = "Height Check";
-    private static String cfgLight = "Light Level";
-    private static String cfgPattern = "Pattern Trees";
-    private static String cfgWoolTrunk = "Wool Trunks";
+    private static final String cfgTree = "Tree Spawn %";
+    private static final String cfgWool = "Wool Spawn %";
+    private static final String cfgBig = "Big Tree Spawn %";
+    private static final String cfgCost = "Cost to plant";
+    private static final String cfgHeight = "Height Check";
+    private static final String cfgLight = "Light Level";
+    private static final String cfgPattern = "Pattern Trees";
+    private static final String cfgWoolTrunk = "Wool Trunks";
 
-    private static String cfgDefaultGen = "Wool Trees Default Generation";
-    private static String cfgBonemealGen = "Bonemeal Generation of Wool Trees";
-    private static String cfgNaturalGen = "Natural Generation of Wool Trees";
+    private static final String cfgDefaultGen = "Wool Trees Default Generation";
+    private static final String cfgBonemealGen = "Bonemeal Generation of Wool Trees";
+    private static final String cfgNaturalGen = "Natural Generation of Wool Trees";
 
 
     private static final double TREE_DEFAULT = 20.0;

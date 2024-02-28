@@ -3,9 +3,9 @@ package haveric.woolTrees;
 import org.bukkit.entity.Player;
 
 public class Perms {
-    private static String permAdjust = "wooltrees.adjust";
-    private static String permPlant = "wooltrees.plant";
-    private static String permIC = "wooltrees.ignorecost";
+    private static final String permAdjust = "wooltrees.adjust";
+    private static final String permPlant = "wooltrees.plant";
+    private static final String permIC = "wooltrees.ignorecost";
 
     public static boolean canAdjust(Player player) {
         return player.hasPermission(permAdjust);

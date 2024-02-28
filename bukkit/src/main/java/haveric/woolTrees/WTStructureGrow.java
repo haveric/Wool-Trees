@@ -46,7 +46,7 @@ public class WTStructureGrow implements Listener {
                         }
                     }
                 }
-                if (colorArray.size() == 0) {
+                if (colorArray.isEmpty()) {
                     colorArray.add((int) (Math.random() * 15));
                 }
 
